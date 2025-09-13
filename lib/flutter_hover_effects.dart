@@ -1,5 +1,5 @@
 /// Flutter Hover Effects Package
-///
+/// test
 /// A comprehensive collection of beautiful hover effects and animations
 /// for Flutter web and desktop applications.
 library flutter_hover_effects;
