@@ -6,7 +6,7 @@ import 'models/holographic_card_theme.dart';
 ///
 /// This painter draws the base card and an animated, rotated gradient that
 /// sweeps across the card to create a shimmering effect, controlled by the
-/// `shineAnimationValue`.
+/// `shineAnimationValue`. It's designed to work with any card size.
 class HolographicCardPainter extends CustomPainter {
   /// The current value of the shine animation (0.0 to 1.0).
   final double shineAnimationValue;
@@ -21,12 +21,13 @@ class HolographicCardPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final cardRect = Rect.fromLTWH(0, 0, size.width, size.height);
-    final cardRRect = theme.borderRadius.toRRect(cardRect);
+    // The painter assumes it's being clipped by a parent widget (like Material),
+    // so it doesn't handle clipping itself.
 
     // 1. Draw the base card background
-    final backgroundPaint = Paint()..color = theme.backgroundColor;
-    canvas.drawRRect(cardRRect, backgroundPaint);
+    final backgroundPaint = Paint()..color = theme.backgroundColor!;
+    final cardRect = Rect.fromLTWH(0, 0, size.width, size.height);
+    canvas.drawRect(cardRect, backgroundPaint);
 
     // 2. Draw the animated holographic shine
     if (shineAnimationValue > 0) {
@@ -37,25 +38,24 @@ class HolographicCardPainter extends CustomPainter {
           stops: const [0.0, 0.5, 1.0],
           colors: [
             Colors.transparent,
-            theme.shineColor,
+            theme.shineColor!,
             Colors.transparent,
           ],
         ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
 
       // We need to draw a much larger rectangle and rotate it to get the
-      // sweeping diagonal effect.
+      // sweeping diagonal effect. The size must be dynamic.
       final double largerDimension =
           math.sqrt(size.width * size.width + size.height * size.height);
-      final double angle = -45 * (math.pi / 180.0); // -45 degrees in radians
+      const double angle = -45 * (math.pi / 180.0); // -45 degrees in radians
 
-      // The total distance the shine needs to travel diagonally
+      // The total distance the shine needs to travel diagonally to cross the card.
       final totalTravelDistance = largerDimension * 2;
       final currentTravel = shineAnimationValue * totalTravelDistance;
 
       canvas.save();
 
-      // Clip the canvas to the card's shape so the shine doesn't spill out.
-      canvas.clipRRect(cardRRect);
+      // We don't clip here, assuming the parent does. We just perform the transform.
 
       // Center the rotation point
       canvas.translate(size.width / 2, size.height / 2);
@@ -63,10 +63,11 @@ class HolographicCardPainter extends CustomPainter {
       // Un-center the rotation point
       canvas.translate(-size.width / 2, -size.height / 2);
 
-      // Draw the shine rectangle, moving it across the canvas
+      // Draw the shine rectangle, moving it across the canvas based on the animation value.
       final shineRect = Rect.fromLTWH(
         currentTravel - largerDimension,
-        -largerDimension / 2, // Center it vertically
+        -largerDimension /
+            2, // Center it vertically relative to the rotated canvas
         largerDimension,
         largerDimension * 2, // Make it tall enough to cover the card
       );
@@ -79,6 +80,8 @@ class HolographicCardPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant HolographicCardPainter oldDelegate) {
-    return oldDelegate.shineAnimationValue != shineAnimationValue;
+    // Repaint only if the animation value or theme changes.
+    return oldDelegate.shineAnimationValue != shineAnimationValue ||
+        oldDelegate.theme != theme;
   }
 }

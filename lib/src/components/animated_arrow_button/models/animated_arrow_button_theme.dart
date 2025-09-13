@@ -1,22 +1,44 @@
 import 'package:flutter/material.dart';
 
+/// Defines the visual properties for the [AnimatedArrowButton] widget's arrows.
+@immutable
+class ArrowTheme {
+  /// The base color of the arrow assembly.
+  final Color color;
+
+  /// The list of colors for the arrows to cycle through on hover.
+  /// Must contain at least 3 colors.
+  final List<Color> hoverColors;
+
+  /// The height of the arrow assembly. The width will be scaled proportionally.
+  final double size;
+
+  const ArrowTheme({
+    this.color = Colors.white,
+    this.hoverColors = const [
+      Color(0xFFFBC638),
+      Color(0xFFFBC638),
+      Color(0xFFFBC638)
+    ],
+    this.size = 24.0,
+  });
+}
+
 /// Defines the visual properties for the [AnimatedArrowButton] widget.
 @immutable
 class AnimatedArrowButtonTheme {
-  /// The background color of the button in its normal state.
-  final Color backgroundColor;
+  /// The decoration of the button in its normal state.
+  /// Provides full control over background, border, gradient, etc.
+  final BoxDecoration decoration;
 
-  /// The color of the text on the button.
-  final Color textColor;
+  /// The decoration of the button when hovered.
+  final BoxDecoration hoverDecoration;
 
-  /// The color of the shadow.
+  /// The color of the button's shadow.
   final Color shadowColor;
 
-  /// The color of the shadow on hover.
+  /// The color of the button's shadow on hover.
   final Color hoverShadowColor;
-
-  /// The text style for the button's label.
-  final TextStyle textStyle;
 
   /// The initial offset for the button's shadow.
   final Offset shadowOffset;
@@ -24,23 +46,40 @@ class AnimatedArrowButtonTheme {
   /// The shadow offset when the button is hovered.
   final Offset hoverShadowOffset;
 
-  /// The skew factor for the button's shape.
+  /// The default text style for the button's child widget.
+  final TextStyle? textStyle;
+
+  /// The inner padding of the button.
+  final EdgeInsetsGeometry padding;
+
+  /// The skew factor for the button's shape in degrees.
   final double skew;
 
-  /// Creates a theme for the animated arrow button.
+  /// The horizontal spacing between the child widget and the arrow assembly.
+  final double spacing;
+
+  /// The duration of the hover animations.
+  final Duration animationDuration;
+
+  /// The theme for the arrow elements.
+  final ArrowTheme arrowTheme;
+
   const AnimatedArrowButtonTheme({
-    this.backgroundColor = const Color(0xFF6225E6),
-    this.textColor = Colors.white,
+    this.decoration = const BoxDecoration(
+      color: Color(0xFF6225E6),
+    ),
+    this.hoverDecoration = const BoxDecoration(
+      color: Color(0xFF7b41f2),
+    ),
     this.shadowColor = Colors.black,
     this.hoverShadowColor = const Color(0xFFFBC638),
-    this.textStyle = const TextStyle(
-      fontFamily: 'Poppins',
-      fontSize: 40,
-      fontWeight: FontWeight.w900,
-      fontStyle: FontStyle.italic,
-    ),
     this.shadowOffset = const Offset(6, 6),
     this.hoverShadowOffset = const Offset(10, 10),
-    this.skew = -15.0, // Degrees
+    this.textStyle,
+    this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+    this.skew = -15.0,
+    this.spacing = 16.0,
+    this.animationDuration = const Duration(milliseconds: 500),
+    this.arrowTheme = const ArrowTheme(),
   });
 }

@@ -1,10 +1,12 @@
-/// Flutter Hover Effects Package
-/// test
-/// A comprehensive collection of beautiful hover effects and animations
-/// for Flutter web and desktop applications.
-library flutter_hover_effects;
+// Copyright (c) 2025 YourName. All rights reserved.
+// Use of this source code is governed by a MIT-style license that can be
+// found in the LICENSE file.
 
-// Core hover effects
+/// A collection of beautiful and customizable UI components with stunning
+/// hover and animation effects.
+library hover_effects;
+
+// Export previous components...
 export 'src/components/button_3d/button_3d_widget.dart';
 export 'src/components/button_3d/models/button_3d_theme.dart';
 export 'src/components/holographic_card/holographic_card_widget.dart';
@@ -45,6 +47,7 @@ export 'src/components/paper_card/paper_card_widget.dart';
 export 'src/components/paper_card/models/paper_card_theme.dart';
 export 'src/components/cursor_showcase_box/cursor_showcase_box_widget.dart';
 export 'src/components/cursor_showcase_box/models/cursor_showcase_box_theme.dart';
+
 // Export the Scotch Showcase component
 export 'src/components/scotch_showcase/scotch_showcase_widget.dart';
 export 'src/components/scotch_showcase/models/scotch_showcase_theme.dart';

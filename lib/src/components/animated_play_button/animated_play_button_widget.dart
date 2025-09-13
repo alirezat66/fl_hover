@@ -1,112 +1,90 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
+import 'animated_play_button_painter.dart';
 import 'models/animated_play_button_theme.dart';
 
-/// A play/pause button that morphs on hover.
+/// A play/pause button that morphs on hover, now fully customizable.
 class AnimatedPlayButton extends StatefulWidget {
   final VoidCallback onPressed;
-  final AnimatedPlayButtonTheme theme;
-  final Duration animationDuration;
+  final AnimatedPlayButtonTheme? theme;
 
   const AnimatedPlayButton({
     Key? key,
     required this.onPressed,
-    this.theme = const AnimatedPlayButtonTheme(),
-    this.animationDuration = const Duration(milliseconds: 400),
+    this.theme,
   }) : super(key: key);
 
   @override
   State<AnimatedPlayButton> createState() => _AnimatedPlayButtonState();
 }
 
-class _AnimatedPlayButtonState extends State<AnimatedPlayButton> {
-  bool _isHovering = false;
+class _AnimatedPlayButtonState extends State<AnimatedPlayButton>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _hoverController;
+  late AnimatedPlayButtonTheme _theme;
+
+  @override
+  void initState() {
+    super.initState();
+    _hoverController = AnimationController(vsync: this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _theme = widget.theme ?? const AnimatedPlayButtonTheme();
+    _hoverController.duration = _theme.animationDuration;
+  }
+
+  @override
+  void dispose() {
+    _hoverController.dispose();
+    super.dispose();
+  }
 
   void _onHover(bool isHovering) {
-    setState(() {
-      _isHovering = isHovering;
-    });
+    if (isHovering) {
+      _hoverController.forward();
+    } else {
+      _hoverController.reverse();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = widget.theme;
     return MouseRegion(
       onEnter: (_) => _onHover(true),
       onExit: (_) => _onHover(false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: widget.onPressed,
-        child: Container(
-          width: theme.size,
-          height: theme.size,
-          decoration: BoxDecoration(
-            color: theme.backgroundColor,
-            shape: BoxShape.circle,
-            boxShadow: [theme.shadow],
-          ),
-          child: Center(
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                _buildBar(isLeft: true),
-                _buildBar(isLeft: false),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+        child: AnimatedBuilder(
+          animation: _hoverController,
+          builder: (context, child) {
+            final currentDecoration = BoxDecoration.lerp(
+              _theme.decoration,
+              _theme.hoverDecoration,
+              _hoverController.value,
+            );
+            final currentShadow = BoxShadow.lerp(
+              _theme.shadow,
+              _theme.hoverShadow,
+              _hoverController.value,
+            );
 
-  Widget _buildBar({required bool isLeft}) {
-    final theme = widget.theme;
-    final angle = isLeft ? 45.0 : -45.0;
-    final circleEndMargin = theme.size * 0.52;
-
-    return Transform.rotate(
-      angle: angle * (math.pi / 180),
-      child: AnimatedContainer(
-        duration: widget.animationDuration,
-        curve: Curves.easeInOut,
-        width: theme.size * 0.64,
-        height: theme.size * 0.12,
-        decoration: BoxDecoration(
-          color: _isHovering ? theme.hoverBarColor : theme.barColor,
-          borderRadius: BorderRadius.circular(theme.size * 0.06),
-        ),
-        child: Stack(
-          children: [
-            _buildCircle(
-              isCircleLeft: true,
-              endMargin: _isHovering ? circleEndMargin : 0,
-            ),
-            _buildCircle(
-              isCircleLeft: false,
-              endMargin: _isHovering ? 0 : circleEndMargin,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildCircle({required bool isCircleLeft, required double endMargin}) {
-    final theme = widget.theme;
-    return AnimatedPositioned(
-      duration: widget.animationDuration,
-      curve: Curves.easeInOut,
-      left: isCircleLeft ? endMargin : null,
-      right: !isCircleLeft ? endMargin : null,
-      top: 0,
-      bottom: 0,
-      child: AnimatedContainer(
-        duration: widget.animationDuration,
-        width: theme.size * 0.12,
-        height: theme.size * 0.12,
-        decoration: BoxDecoration(
-          color: _isHovering ? theme.hoverCircleColor : theme.circleColor,
-          shape: BoxShape.circle,
+            return Container(
+              width: _theme.size,
+              height: _theme.size,
+              decoration: currentDecoration?.copyWith(
+                boxShadow: currentShadow != null ? [currentShadow] : null,
+              ),
+              child: CustomPaint(
+                painter: AnimatedPlayButtonPainter(
+                  hoverAnimation: _hoverController,
+                  theme: _theme,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

@@ -2,11 +2,11 @@ import 'package:example/showcase_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const HoverEffectsShowcaseApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class HoverEffectsShowcaseApp extends StatelessWidget {
+  const HoverEffectsShowcaseApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +14,10 @@ class MyApp extends StatelessWidget {
       title: 'Hover Effects Showcase',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF1C1C1E),
         primarySwatch: Colors.blue,
-        scaffoldBackgroundColor:
-            const Color(0xFFF6F1D1), // Original CSS --backgroundColor
-        textTheme: const TextTheme(
-          headlineSmall: TextStyle(
-            color: Color(0xFF444444),
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
+        fontFamily: 'Inter',
       ),
       home: const ShowcaseScreen(),
     );

@@ -129,6 +129,7 @@ class _Button3DState extends State<Button3D> with TickerProviderStateMixin {
               height: widget.height +
                   widget.theme.depth, // Total height including depth
               child: Stack(
+                alignment: Alignment.center, // Align non-positioned children
                 children: [
                   Positioned.fill(
                     child: CustomPaint(
@@ -139,17 +140,17 @@ class _Button3DState extends State<Button3D> with TickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: pressDepth,
-                    left: 0,
-                    right: 0,
-                    height: widget.height,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: DefaultTextStyle(
-                        style: widget.theme.textStyle,
-                        child: child!,
-                      ),
+                  // This widget is NOT positioned. This allows the Stack to size
+                  // itself to this child's content when no width is provided.
+                  // We use Padding to handle the vertical "press" animation.
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: pressDepth,
+                      bottom: widget.theme.depth - pressDepth,
+                    ),
+                    child: DefaultTextStyle(
+                      style: widget.theme.textStyle,
+                      child: child!,
                     ),
                   ),
                 ],
