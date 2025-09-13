@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hover_effects/hover_effects.dart';
+import 'package:flutter_hover_effects/hover_effects.dart';
 import '../../models/showcase_item.dart';
 
 /// A list of card widgets, correctly wrapped in ShowcaseItem objects

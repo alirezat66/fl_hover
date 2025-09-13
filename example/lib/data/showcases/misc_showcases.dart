@@ -1,6 +1,6 @@
 import 'package:example/models/showcase_item.dart';
 import 'package:flutter/material.dart';
-import 'package:hover_effects/hover_effects.dart';
+import 'package:flutter_hover_effects/hover_effects.dart';
 
 final List<ShowcaseItem> miscShowcases = [
   ShowcaseItem(
