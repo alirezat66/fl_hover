@@ -1,19 +1,53 @@
 import 'package:flutter/material.dart';
 import 'models/sliding_nav_menu_item.dart';
+import 'models/sliding_nav_menu_theme.dart';
+
+/// A vertical navigation menu where items reveal a colored background that
+/// slides in from a specified direction on hover.
+class SlidingNavMenu extends StatelessWidget {
+  /// The list of items to display in the menu.
+  final List<SlidingNavMenuItem> items;
+
+  /// The visual theme of the menu.
+  final SlidingNavMenuTheme theme;
+
+  /// The total width of the menu.
+  final double width;
+
+  const SlidingNavMenu({
+    Key? key,
+    required this.items,
+    this.theme = const SlidingNavMenuTheme(),
+    this.width = 300.0,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      decoration: theme.menuDecoration,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: items.map((item) {
+          return _SlidingNavMenuItemWidget(
+            item: item,
+            theme: theme,
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
 
 /// An individual item widget for [SlidingNavMenu].
 class _SlidingNavMenuItemWidget extends StatefulWidget {
   final SlidingNavMenuItem item;
-  final double itemHeight;
-  final TextStyle textStyle;
-  final Duration duration;
+  final SlidingNavMenuTheme theme;
 
   const _SlidingNavMenuItemWidget({
     Key? key,
     required this.item,
-    required this.itemHeight,
-    required this.textStyle,
-    required this.duration,
+    required this.theme,
   }) : super(key: key);
 
   @override
@@ -30,100 +64,71 @@ class __SlidingNavMenuItemWidgetState extends State<_SlidingNavMenuItemWidget> {
     });
   }
 
+  Alignment _getAlignment() {
+    switch (widget.theme.slideDirection) {
+      case AxisDirection.right:
+        return Alignment.centerRight;
+      case AxisDirection.up:
+        return Alignment.topCenter;
+      case AxisDirection.down:
+        return Alignment.bottomCenter;
+      case AxisDirection.left:
+      default:
+        return Alignment.centerLeft;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final theme = widget.theme;
+    final highlightColor = widget.item.highlightColor;
+    final isHorizontal = theme.slideDirection == AxisDirection.left ||
+        theme.slideDirection == AxisDirection.right;
+
     return MouseRegion(
       onEnter: (_) => _onHover(true),
       onExit: (_) => _onHover(false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
         onTap: widget.item.onTap,
-        child: Container(
-          height: widget.itemHeight,
-          decoration: BoxDecoration(
-            border: Border(
-              left: BorderSide(color: widget.item.highlightColor, width: 5),
-            ),
-          ),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return Stack(
+        child: SizedBox(
+          height: theme.itemHeight,
+          child: Stack(
+            alignment: _getAlignment(),
+            children: [
+              // Sliding background, animated with AnimatedContainer.
+              // It now animates between the `peekSize` and the full size.
+              LayoutBuilder(builder: (context, constraints) {
+                return AnimatedContainer(
+                  duration: theme.animationDuration,
+                  curve: Curves.easeOut,
+                  width: isHorizontal
+                      ? (_isHovering ? constraints.maxWidth : theme.peekSize)
+                      : null,
+                  height: !isHorizontal
+                      ? (_isHovering ? constraints.maxHeight : theme.peekSize)
+                      : null,
+                  color: highlightColor,
+                );
+              }),
+
+              // Text content with animated style, positioned to always be on top.
+              Align(
                 alignment: Alignment.centerLeft,
-                children: [
-                  // Sliding background
-                  AnimatedContainer(
-                    duration: widget.duration,
-                    // Animate between 0 and the actual measured width.
-                    width: _isHovering ? constraints.maxWidth : 0,
-                    color: widget.item.highlightColor,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: AnimatedDefaultTextStyle(
+                    duration: theme.animationDuration,
+                    style: _isHovering
+                        ? theme.itemHoverTextStyle!
+                        : theme.itemTextStyle!,
+                    child: Text(widget.item.title),
                   ),
-                  // Text
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: AnimatedDefaultTextStyle(
-                      duration: widget.duration,
-                      style: _isHovering
-                          ? widget.textStyle.copyWith(color: Colors.white)
-                          : widget.textStyle,
-                      child: Text(widget.item.title),
-                    ),
-                  ),
-                ],
-              );
-            },
+                ),
+              ),
+            ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-/// A vertical navigation menu where items reveal a colored background that
-/// slides in from the left on hover.
-class SlidingNavMenu extends StatelessWidget {
-  /// The list of items to display in the menu.
-  final List<SlidingNavMenuItem> items;
-
-  /// The width of the menu.
-  final double width;
-
-  /// The height of each individual menu item.
-  final double itemHeight;
-
-  /// The background color of the menu container.
-  final Color backgroundColor;
-
-  /// The text style for the menu item titles.
-  final TextStyle textStyle;
-
-  /// The duration of the slide animation.
-  final Duration animationDuration;
-
-  const SlidingNavMenu({
-    Key? key,
-    required this.items,
-    this.width = 300.0,
-    this.itemHeight = 60.0,
-    this.backgroundColor = const Color(0xFFEEEEEE),
-    this.textStyle = const TextStyle(color: Color(0xFF444444), fontSize: 16),
-    this.animationDuration = const Duration(milliseconds: 300),
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      color: backgroundColor,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: items.map((item) {
-          return _SlidingNavMenuItemWidget(
-            item: item,
-            itemHeight: itemHeight,
-            textStyle: textStyle,
-            duration: animationDuration,
-          );
-        }).toList(),
       ),
     );
   }
