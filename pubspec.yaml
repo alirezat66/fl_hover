@@ -1,0 +1,31 @@
+name: flutter_hover_effects
+description: A comprehensive Flutter package providing beautiful hover effects and animations for web and desktop applications.
+version: 1.0.0
+homepage: https://github.com/alirezat66/flutter_hover_effects
+repository: https://github.com/alirezat66/flutter_hover_effects
+issue_tracker: https://github.com/alirezat66/flutter_hover_effects/issues
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+topics:
+  - animation
+  - hover
+  - web
+  - flutter
+
+platforms:
+  web:
+  windows:
+  linux:
+  macos:

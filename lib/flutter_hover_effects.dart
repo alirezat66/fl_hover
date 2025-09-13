@@ -1,0 +1,50 @@
+/// Flutter Hover Effects Package
+///
+/// A comprehensive collection of beautiful hover effects and animations
+/// for Flutter web and desktop applications.
+library flutter_hover_effects;
+
+// Core hover effects
+export 'src/components/button_3d/button_3d_widget.dart';
+export 'src/components/button_3d/models/button_3d_theme.dart';
+export 'src/components/holographic_card/holographic_card_widget.dart';
+export 'src/components/holographic_card/models/holographic_card_theme.dart';
+export 'src/components/flip_card/flip_card_widget.dart';
+export 'src/components/flip_card/models/flip_card_theme.dart';
+export 'src/components/liquid_morph/liquid_morph_widget.dart';
+export 'src/components/liquid_morph/models/liquid_morph_theme.dart';
+export 'src/components/animated_arrow_button/animated_arrow_button_widget.dart';
+export 'src/components/animated_arrow_button/models/animated_arrow_button_theme.dart';
+export 'src/components/rotating_cube/rotating_cube_widget.dart';
+export 'src/components/rotating_cube/models/rotating_cube_theme.dart';
+export 'src/components/card_slide/card_slide_widget.dart';
+export 'src/components/card_slide/models/card_slide_theme.dart';
+export 'src/components/card_face/card_face_widget.dart';
+export 'src/components/card_face/models/card_face_theme.dart';
+export 'src/components/card_skew/card_skew_widget.dart';
+export 'src/components/card_skew/models/card_skew_theme.dart';
+export 'src/components/card_hover/card_hover_widget.dart';
+export 'src/components/card_hover/models/card_hover_theme.dart';
+export 'src/components/social_icon_button/social_icon_button_widget.dart';
+export 'src/components/social_icon_button/models/social_icon_theme.dart';
+export 'src/components/animated_play_button/animated_play_button_widget.dart';
+export 'src/components/animated_play_button/models/animated_play_button_theme.dart';
+export 'src/components/animated_icon/animated_icon_widget.dart';
+export 'src/components/animated_icon/models/animated_icon_theme.dart';
+export 'src/components/button_3d_social/button_3d_social_widget.dart';
+export 'src/components/button_3d_social/models/button_3d_social_theme.dart';
+export 'src/components/animated_nav_menu/animated_nav_menu_widget.dart';
+export 'src/components/animated_nav_menu/models/animated_nav_menu_item.dart';
+export 'src/components/sliding_nav_menu/sliding_nav_menu_widget.dart';
+export 'src/components/sliding_nav_menu/models/sliding_nav_menu_item.dart';
+export 'src/components/animated_underline_nav/animated_underline_nav_widget.dart';
+export 'src/components/animated_underline_nav/models/animated_underline_nav_item.dart';
+export 'src/components/hover_underline/hover_underline_widget.dart';
+export 'src/components/hover_underline/models/hover_underline_theme.dart';
+export 'src/components/paper_card/paper_card_widget.dart';
+export 'src/components/paper_card/models/paper_card_theme.dart';
+export 'src/components/cursor_showcase_box/cursor_showcase_box_widget.dart';
+export 'src/components/cursor_showcase_box/models/cursor_showcase_box_theme.dart';
+// Export the Scotch Showcase component
+export 'src/components/scotch_showcase/scotch_showcase_widget.dart';
+export 'src/components/scotch_showcase/models/scotch_showcase_theme.dart';
