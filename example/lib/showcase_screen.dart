@@ -30,7 +30,6 @@ class ShowcaseScreen extends StatelessWidget {
         child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            HolographicButton(width: 600, height: 200,),
             SizedBox(
               child: HolographicEffect(
                 child: Text(
@@ -50,12 +49,19 @@ class ShowcaseScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: HolographicEffect(
-                      child: Text(
-                        'HOLOGRAM',
-                        style: TextStyle(
-                          color: Color(0xFF00FFFF), // Cyan color like CSS
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
+                      theme: HolographicEffectTheme(
+                        glowColor: Color(0x99FF00FF),
+                        shineColor: Color(0x66FF00FF),
+                        shineDuration: Duration(seconds: 2),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'HOLOGRAM',
+                          style: TextStyle(
+                            color: Color(0xFF00FFFF), // Cyan color like CSS
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),

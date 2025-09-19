@@ -54,13 +54,15 @@ class _HolographicEffectState extends State<HolographicEffect>
 
     // Animation controller for the gradient movement
     _hoverController = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(
+          milliseconds: 500), // Will be updated in didChangeDependencies
       vsync: this,
     );
 
     // Animation controller for scale effect
     _scaleController = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(
+          milliseconds: 500), // Will be updated in didChangeDependencies
       vsync: this,
     );
 
@@ -87,6 +89,12 @@ class _HolographicEffectState extends State<HolographicEffect>
   void didChangeDependencies() {
     super.didChangeDependencies();
     _updateTheme();
+
+    // Update animation controller durations based on theme
+    _hoverController.duration =
+        _finalTheme.shineDuration ?? const Duration(milliseconds: 500);
+    _scaleController.duration =
+        _finalTheme.animationDuration ?? const Duration(milliseconds: 500);
   }
 
   @override
@@ -143,12 +151,13 @@ class _HolographicEffectState extends State<HolographicEffect>
               scale: _scaleAnimation.value,
               child: Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF111111),
+                  color: theme.backgroundColor ?? const Color(0xFF111111),
                   borderRadius: theme.borderRadius,
                   boxShadow: _isHovered
                       ? [
                           BoxShadow(
-                            color: const Color(0xFF00FFFF).withOpacity(0.5),
+                            color: (theme.glowColor ?? const Color(0xFF00FFFF))
+                                .withOpacity(0.5),
                             blurRadius: 20,
                             spreadRadius: 0,
                           ),
@@ -186,17 +195,18 @@ class _HolographicEffectState extends State<HolographicEffect>
                                         1200, // Much larger size for thicker effect
                                     height:
                                         1200, // Much larger size for thicker effect
-                                    decoration: const BoxDecoration(
+                                    decoration: BoxDecoration(
                                       gradient: LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
                                         colors: [
                                           Colors.transparent,
                                           Colors.transparent,
-                                          Color(
-                                              0x4D00FFFF), // rgba(0, 255, 255, 0.3)
+                                          theme.shineColor ??
+                                              const Color(
+                                                  0x4D00FFFF), // Shine color from theme
                                         ],
-                                        stops: [
+                                        stops: const [
                                           0.0,
                                           0.3,
                                           1.0
