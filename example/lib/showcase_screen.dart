@@ -30,10 +30,8 @@ class ShowcaseScreen extends StatelessWidget {
         child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            HolographicButton(),
+            HolographicButton(width: 600, height: 200,),
             SizedBox(
-              width: 300,
-              height: 200,
               child: HolographicEffect(
                 child: Text(
                   'HOLOGRAM',

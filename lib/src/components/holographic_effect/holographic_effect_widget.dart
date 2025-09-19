@@ -141,87 +141,78 @@ class _HolographicEffectState extends State<HolographicEffect>
           builder: (context, child) {
             return Transform.scale(
               scale: _scaleAnimation.value,
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  // Get the actual container dimensions
-                  final containerWidth = constraints.maxWidth;
-                  final containerHeight = constraints.maxHeight;
-
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF111111),
-                      borderRadius: theme.borderRadius,
-                      boxShadow: _isHovered
-                          ? [
-                              BoxShadow(
-                                color: const Color(0xFF00FFFF).withOpacity(0.5),
-                                blurRadius: 20,
-                                spreadRadius: 0,
-                              ),
-                            ]
-                          : [],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: theme.borderRadius!,
-                      child: Stack(
-                        children: [
-                          // Child content - always visible
-                          Padding(
-                            padding: theme.padding!,
-                            child: widget.child,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF111111),
+                  borderRadius: theme.borderRadius,
+                  boxShadow: _isHovered
+                      ? [
+                          BoxShadow(
+                            color: const Color(0xFF00FFFF).withOpacity(0.5),
+                            blurRadius: 20,
+                            spreadRadius: 0,
                           ),
-                          // Animated gradient overlay - exactly like button implementation
-                          Positioned(
-                            top: -containerHeight * 0.5, // -50% like CSS
-                            left: -containerWidth * 0.5, // -50% like CSS
-                            child: AnimatedBuilder(
-                              animation: _gradientAnimation,
-                              builder: (context, child) {
-                                return Transform.rotate(
-                                  angle: -0.785398, // -45 degrees in radians
-                                  child: Transform.translate(
-                                    offset: Offset(
-                                      0,
-                                      _gradientAnimation.value *
-                                          containerHeight *
-                                          2, // translateY(100%) of 200% height
-                                    ),
-                                    child: Opacity(
-                                      opacity: _opacityAnimation.value,
-                                      child: Container(
-                                        width: containerWidth *
-                                            2, // 200% width like CSS
-                                        height: containerHeight *
-                                            2, // 200% height like CSS
-                                        decoration: const BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topCenter,
-                                            end: Alignment.bottomCenter,
-                                            colors: [
-                                              Colors.transparent,
-                                              Colors.transparent,
-                                              Color(
-                                                  0x4D00FFFF), // rgba(0, 255, 255, 0.3)
-                                            ],
-                                            stops: [
-                                              0.0,
-                                              0.3,
-                                              1.0
-                                            ], // Exact CSS stops
-                                          ),
-                                        ),
+                        ]
+                      : [],
+                ),
+                child: ClipRRect(
+                  borderRadius: theme.borderRadius!,
+                  child: Stack(
+                    children: [
+                      // Child content - always visible
+                      Padding(
+                        padding: theme.padding!,
+                        child: widget.child,
+                      ),
+                      // Animated gradient overlay - using large size with proper positioning for thicker effect
+                      Positioned(
+                        top: -400, // Start well above the container
+                        left: -400, // Start well to the left of the container
+                        child: AnimatedBuilder(
+                          animation: _gradientAnimation,
+                          builder: (context, child) {
+                            return Transform.rotate(
+                              angle: -0.785398, // -45 degrees in radians
+                              child: Transform.translate(
+                                offset: Offset(
+                                  0,
+                                  _gradientAnimation.value *
+                                      1200, // Large sweep distance
+                                ),
+                                child: Opacity(
+                                  opacity: _opacityAnimation.value,
+                                  child: Container(
+                                    width:
+                                        1200, // Much larger size for thicker effect
+                                    height:
+                                        1200, // Much larger size for thicker effect
+                                    decoration: const BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.transparent,
+                                          Colors.transparent,
+                                          Color(
+                                              0x4D00FFFF), // rgba(0, 255, 255, 0.3)
+                                        ],
+                                        stops: [
+                                          0.0,
+                                          0.3,
+                                          1.0
+                                        ], // Exact CSS stops
                                       ),
                                     ),
                                   ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  );
-                },
+                    ],
+                  ),
+                ),
               ),
             );
           },
