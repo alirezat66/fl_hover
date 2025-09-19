@@ -1,10 +1,14 @@
 import 'package:example/data/showcase_data.dart';
+import 'package:example/widgets/glow_card.dart';
+import 'package:example/widgets/holographic_button.dart';
+import 'package:example/widgets/holographic_card.dart';
 import 'package:example/widgets/showcase_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hover_effects/hover_effects.dart';
 
 /// The main screen that displays a grid of all showcased widgets.
 class ShowcaseScreen extends StatelessWidget {
-  const ShowcaseScreen({Key? key}) : super(key: key);
+  const ShowcaseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,96 @@ class ShowcaseScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: LayoutBuilder(
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            HolographicButton(),
+            SizedBox(
+              width: 300,
+              height: 200,
+              child: HolographicEffect(
+                child: Text(
+                  'HOLOGRAM',
+                  style: TextStyle(
+                    color: Color(0xFF00FFFF), // Cyan color like CSS
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(32),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: HolographicEffect(
+                      child: Text(
+                        'HOLOGRAM',
+                        style: TextStyle(
+                          color: Color(0xFF00FFFF), // Cyan color like CSS
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 24),
+                  Expanded(
+                    child: HolographicEffect(
+                      child: Text(
+                        'HOLOGRAM',
+                        style: TextStyle(
+                          color: Color(0xFF00FFFF), // Cyan color like CSS
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(32),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: GlowCard(
+                      borderColor: Colors.white,
+                      child: Text(
+                        'HOLOGRAM',
+                        style: TextStyle(
+                          color: Color(0xFF00FFFF), // Cyan color like CSS
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 24),
+                  Expanded(
+                    child: GlowCard(
+                      child: Text(
+                        'HOLOGRAM',
+                        style: TextStyle(
+                          color: Color(0xFF00FFFF), // Cyan color like CSS
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ) /* LayoutBuilder(
         builder: (context, constraints) {
           // Determine the number of columns based on screen width
           final crossAxisCount =
@@ -42,7 +135,8 @@ class ShowcaseScreen extends StatelessWidget {
             },
           );
         },
-      ),
+      ) */
+      ,
     );
   }
 }

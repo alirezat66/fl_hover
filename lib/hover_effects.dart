@@ -52,3 +52,7 @@ export 'src/components/cursor_showcase_box/models/cursor_showcase_box_theme.dart
 // Export the Scotch Showcase component
 export 'src/components/scotch_showcase/scotch_showcase_widget.dart';
 export 'src/components/scotch_showcase/models/scotch_showcase_theme.dart';
+
+// Export the Holographic Effect component
+export 'src/components/holographic_effect/holographic_effect_widget.dart';
+export 'src/components/holographic_effect/models/holographic_effect_theme.dart';
