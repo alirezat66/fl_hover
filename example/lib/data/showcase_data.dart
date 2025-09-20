@@ -28,7 +28,7 @@ class ShowcaseData {
     ShowcaseItem(
       name: 'HolographicEffect',
       category: ShowcaseCategory.card,
-      widgetBuilder: () => const HolographicEffect(
+      widgetBuilder: () => const HolographicCard(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
           child: Text('Holographic Effect'),

@@ -9,7 +9,7 @@ import 'models/holographic_effect_theme.dart';
 /// - Scale animation (1.05x)
 /// - Animated gradient sweep with exact same timing and easing (500ms easeInOut)
 /// - Uses two separate animation controllers like the button
-class HolographicEffect extends StatefulWidget {
+class HolographicCard extends StatefulWidget {
   /// The content to display inside the card.
   final Widget child;
 
@@ -23,7 +23,7 @@ class HolographicEffect extends StatefulWidget {
   /// Optional callback when the card is no longer hovered.
   final VoidCallback? onHoverExit;
 
-  const HolographicEffect({
+  const HolographicCard({
     Key? key,
     required this.child,
     this.theme,
@@ -32,10 +32,10 @@ class HolographicEffect extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<HolographicEffect> createState() => _HolographicEffectState();
+  State<HolographicCard> createState() => _HolographicCardState();
 }
 
-class _HolographicEffectState extends State<HolographicEffect>
+class _HolographicCardState extends State<HolographicCard>
     with TickerProviderStateMixin {
   late AnimationController _hoverController;
   late AnimationController _scaleController;
@@ -98,7 +98,7 @@ class _HolographicEffectState extends State<HolographicEffect>
   }
 
   @override
-  void didUpdateWidget(HolographicEffect oldWidget) {
+  void didUpdateWidget(HolographicCard oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.theme != oldWidget.theme) {
       _updateTheme();

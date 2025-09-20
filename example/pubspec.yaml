@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_colorpicker: ^1.1.0
   flutter_hover_effects:
     path: ../
   go_router: ^16.2.2
