@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   flutter_hover_effects:
     path: ../
+  go_router: ^16.2.2
 
 dev_dependencies:
   flutter_test:
