@@ -19,11 +19,11 @@ class HolographicCard extends StatefulWidget {
 
   /// Optional callback when the card is hovered.
   final VoidCallback? onHover;
-                                                                                
+
   /// Optional callback when the card is no longer hovered.
   final VoidCallback? onHoverExit;
 
-                                                                                      const HolographicCard({
+  const HolographicCard({
     Key? key,
     required this.child,
     this.theme,
@@ -74,7 +74,7 @@ class _HolographicCardState extends State<HolographicCard>
       CurvedAnimation(parent: _hoverController, curve: Curves.easeInOut),
     );
 
-    // Scale animation (1.0 to 1.05)
+    // Scale animation (1.0 to scaleFactor from theme)
     _scaleAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
       CurvedAnimation(parent: _scaleController, curve: Curves.easeInOut),
     );
@@ -95,6 +95,12 @@ class _HolographicCardState extends State<HolographicCard>
         _finalTheme.shineDuration ?? const Duration(milliseconds: 500);
     _scaleController.duration =
         _finalTheme.animationDuration ?? const Duration(milliseconds: 500);
+
+    // Update scale animation based on theme
+    _scaleAnimation =
+        Tween<double>(begin: 1.0, end: _finalTheme.scaleFactor ?? 1.05).animate(
+      CurvedAnimation(parent: _scaleController, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -102,6 +108,19 @@ class _HolographicCardState extends State<HolographicCard>
     super.didUpdateWidget(oldWidget);
     if (widget.theme != oldWidget.theme) {
       _updateTheme();
+
+      // Update animation controller durations when theme changes
+      _hoverController.duration =
+          _finalTheme.shineDuration ?? const Duration(milliseconds: 500);
+      _scaleController.duration =
+          _finalTheme.animationDuration ?? const Duration(milliseconds: 500);
+
+      // Update scale animation based on theme
+      _scaleAnimation =
+          Tween<double>(begin: 1.0, end: _finalTheme.scaleFactor ?? 1.05)
+              .animate(
+        CurvedAnimation(parent: _scaleController, curve: Curves.easeInOut),
+      );
     }
   }
 
@@ -160,9 +179,18 @@ class _HolographicCardState extends State<HolographicCard>
                                 .withOpacity(0.5),
                             blurRadius: 20,
                             spreadRadius: 0,
+                            offset: Offset(0, theme.hoverElevation ?? 0),
                           ),
                         ]
-                      : [],
+                      : [
+                          if ((theme.elevation ?? 0) > 0)
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: (theme.elevation ?? 0) * 2,
+                              spreadRadius: 0,
+                              offset: Offset(0, theme.elevation ?? 0),
+                            ),
+                        ],
                 ),
                 child: ClipRRect(
                   borderRadius: theme.borderRadius!,

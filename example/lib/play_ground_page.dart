@@ -379,8 +379,18 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         ),
         Slider(
           value: currentValue,
-          min: property.min ?? 0.0,
-          max: property.max ?? 100.0,
+          min: property.label == 'Scale Factor'
+              ? 1.0
+              : (property.label == 'Elevation' ||
+                      property.label == 'Hover Elevation'
+                  ? 0.0
+                  : property.min ?? 0.0),
+          max: property.label == 'Scale Factor'
+              ? 2.0
+              : (property.label == 'Elevation' ||
+                      property.label == 'Hover Elevation'
+                  ? 20.0
+                  : property.max ?? 100.0),
           onChanged: property.onChanged,
         ),
       ],
@@ -460,7 +470,8 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(4),
           ),
-          child: Text('${property.label}: ${currentValue.toInt()} ms',
+          child: Text(
+              '${property.label}: ${(currentValue / 1000).toStringAsFixed(1)}s',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -470,8 +481,8 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         Slider(
           value: currentValue,
           min: 100,
-          max: 2000,
-          divisions: 19,
+          max: 5000,
+          divisions: 49,
           onChanged: (newValue) {
             property.onChanged(Duration(milliseconds: newValue.toInt()));
           },
@@ -680,8 +691,18 @@ class PlaygroundWidget extends StatelessWidget {
         ),
         Slider(
           value: currentValue,
-          min: property.min ?? 0.0,
-          max: property.max ?? 100.0,
+          min: property.label == 'Scale Factor'
+              ? 1.0
+              : (property.label == 'Elevation' ||
+                      property.label == 'Hover Elevation'
+                  ? 0.0
+                  : property.min ?? 0.0),
+          max: property.label == 'Scale Factor'
+              ? 2.0
+              : (property.label == 'Elevation' ||
+                      property.label == 'Hover Elevation'
+                  ? 20.0
+                  : property.max ?? 100.0),
           onChanged: property.onChanged,
         ),
       ],
@@ -761,7 +782,8 @@ class PlaygroundWidget extends StatelessWidget {
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(4),
           ),
-          child: Text('${property.label}: ${currentValue.toInt()} ms',
+          child: Text(
+              '${property.label}: ${(currentValue / 1000).toStringAsFixed(1)}s',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -771,8 +793,8 @@ class PlaygroundWidget extends StatelessWidget {
         Slider(
           value: currentValue,
           min: 100,
-          max: 2000,
-          divisions: 19,
+          max: 5000,
+          divisions: 49,
           onChanged: (newValue) {
             property.onChanged(Duration(milliseconds: newValue.toInt()));
           },
