@@ -116,52 +116,57 @@ class HolographicEffectTheme extends ThemeExtension<HolographicEffectTheme>
       EditableProperty(
         label: 'Background Color',
         value: backgroundColor,
-        onChanged: (value) => onUpdate(copyWith(backgroundColor: value)),
+        onChanged: (value) =>
+            onUpdate(copyWith(backgroundColor: value as Color?)),
       ),
       EditableProperty(
         label: 'Shine Color',
         value: shineColor,
-        onChanged: (value) => onUpdate(copyWith(shineColor: value)),
+        onChanged: (value) => onUpdate(copyWith(shineColor: value as Color?)),
       ),
       EditableProperty(
         label: 'Glow Color',
         value: glowColor,
-        onChanged: (value) => onUpdate(copyWith(glowColor: value)),
+        onChanged: (value) => onUpdate(copyWith(glowColor: value as Color?)),
       ),
       EditableProperty(
         label: 'Border Radius',
         value: borderRadius,
-        onChanged: (value) => onUpdate(copyWith(borderRadius: value)),
+        onChanged: (value) =>
+            onUpdate(copyWith(borderRadius: value as BorderRadius?)),
       ),
       EditableProperty(
         label: 'Padding',
         value: padding,
-        onChanged: (value) => onUpdate(copyWith(padding: value)),
+        onChanged: (value) => onUpdate(copyWith(padding: value as EdgeInsets?)),
       ),
       EditableProperty(
         label: 'Elevation',
         value: elevation,
-        onChanged: (value) => onUpdate(copyWith(elevation: value)),
+        onChanged: (value) => onUpdate(copyWith(elevation: value as double?)),
       ),
       EditableProperty(
         label: 'Hover Elevation',
         value: hoverElevation,
-        onChanged: (value) => onUpdate(copyWith(hoverElevation: value)),
+        onChanged: (value) =>
+            onUpdate(copyWith(hoverElevation: value as double?)),
       ),
       EditableProperty(
         label: 'Scale Factor',
         value: scaleFactor,
-        onChanged: (value) => onUpdate(copyWith(scaleFactor: value)),
+        onChanged: (value) => onUpdate(copyWith(scaleFactor: value as double?)),
       ),
       EditableProperty(
         label: 'Animation Duration',
         value: animationDuration,
-        onChanged: (value) => onUpdate(copyWith(animationDuration: value)),
+        onChanged: (value) =>
+            onUpdate(copyWith(animationDuration: value as Duration?)),
       ),
       EditableProperty(
         label: 'Shine Duration',
         value: shineDuration,
-        onChanged: (value) => onUpdate(copyWith(shineDuration: value)),
+        onChanged: (value) =>
+            onUpdate(copyWith(shineDuration: value as Duration?)),
       ),
     ];
   }

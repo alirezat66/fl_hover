@@ -26,5 +26,72 @@ HolographicEffect(
 """,
       initialTheme: const HolographicEffectTheme(),
     ),
+    ShowcaseItem(
+      name: 'FlipCard',
+      category: ShowcaseCategory.card,
+      widgetBuilder: (theme) => Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: FlipCard(
+          theme: theme as FlipCardTheme,
+          front: const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.credit_card, size: 48, color: Colors.white),
+                SizedBox(height: 16),
+                Text(
+                  'Front Side',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Hover to flip',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          back: const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.info_outline, size: 48, color: Colors.white),
+                SizedBox(height: 16),
+                Text(
+                  'Back Side',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Flip card effect',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      defaultCode: """
+FlipCard(
+  front: Container(child: Text('Front')),
+  back: Container(child: Text('Back')),
+)
+""",
+      initialTheme: const FlipCardTheme(),
+    ),
   ];
 }

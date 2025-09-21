@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class EditableProperty<T> {
   final String label;
   final T value;
-  final ValueChanged<T> onChanged;
+  final Function(dynamic) onChanged;
   final double? min;
   final double? max;
 

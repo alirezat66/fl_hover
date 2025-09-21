@@ -1,11 +1,9 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'models/flip_card_theme.dart';
+import 'package:flutter_hover_effects/src/components/flip_card/models/flip_card_theme.dart';
 
-/// A card that flips on hover to reveal content on its back side.
-///
-/// This widget uses a 3D rotation transform to create a smooth and
-/// physically plausible flipping animation.
+/// A widget that creates a flip card effect with customizable front and back sides.
+/// The card flips when hovered over.
 class FlipCard extends StatefulWidget {
   /// The widget to display on the front of the card.
   final Widget front;
@@ -13,27 +11,15 @@ class FlipCard extends StatefulWidget {
   /// The widget to display on the back of the card.
   final Widget back;
 
-  /// The visual theme of the card.
-  final FlipCardTheme theme;
-
-  /// The width of the card.
-  final double width;
-
-  /// The height of the card.
-  final double height;
-
-  /// The duration of the flip animation.
-  final Duration animationDuration;
+  /// Optional theme for customizing the flip card appearance and behavior.
+  final FlipCardTheme? theme;
 
   const FlipCard({
-    Key? key,
+    super.key,
     required this.front,
     required this.back,
-    this.theme = const FlipCardTheme(),
-    this.width = 300,
-    this.height = 200,
-    this.animationDuration = const Duration(milliseconds: 600),
-  }) : super(key: key);
+    this.theme,
+  });
 
   @override
   State<FlipCard> createState() => _FlipCardState();
@@ -42,21 +28,47 @@ class FlipCard extends StatefulWidget {
 class _FlipCardState extends State<FlipCard>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  late final Animation<double> _animation;
+  late FlipCardTheme _finalTheme;
 
   @override
   void initState() {
     super.initState();
+
+    // Initialize with default theme - no context access in initState
+    _finalTheme = const FlipCardTheme();
+
     _controller = AnimationController(
       vsync: this,
-      duration: widget.animationDuration,
+      duration:
+          _finalTheme.animationDuration ?? const Duration(milliseconds: 600),
     );
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.easeInOut,
-      ),
-    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Now we can safely access context
+    final themeFromContext = Theme.of(context).extension<FlipCardTheme>();
+    _finalTheme = widget.theme ?? themeFromContext ?? const FlipCardTheme();
+
+    // Update animation controller when theme changes
+    _controller.duration =
+        _finalTheme.animationDuration ?? const Duration(milliseconds: 600);
+  }
+
+  @override
+  void didUpdateWidget(FlipCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.theme != oldWidget.theme) {
+      // Update theme from widget or context
+      final themeFromContext = Theme.of(context).extension<FlipCardTheme>();
+      _finalTheme = widget.theme ?? themeFromContext ?? const FlipCardTheme();
+
+      // Update animation controller when theme changes
+      _controller.duration =
+          _finalTheme.animationDuration ?? const Duration(milliseconds: 600);
+    }
   }
 
   @override
@@ -65,8 +77,18 @@ class _FlipCardState extends State<FlipCard>
     super.dispose();
   }
 
-  void _onHover(bool isHovering) {
-    if (isHovering) {
+  // Create animation getter that uses current theme
+  Animation<double> get _animation {
+    return Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: _finalTheme.animationCurve ?? Curves.easeInOut,
+      ),
+    );
+  }
+
+  void _onHover(bool isHovered) {
+    if (isHovered) {
       _controller.forward();
     } else {
       _controller.reverse();
@@ -75,13 +97,15 @@ class _FlipCardState extends State<FlipCard>
 
   @override
   Widget build(BuildContext context) {
+    final theme = _finalTheme;
+
     return MouseRegion(
       onEnter: (_) => _onHover(true),
       onExit: (_) => _onHover(false),
       cursor: SystemMouseCursors.click,
       child: SizedBox(
-        width: widget.width,
-        height: widget.height,
+        width: theme.width ?? 300.0,
+        height: theme.height ?? 200.0,
         child: AnimatedBuilder(
           animation: _animation,
           builder: (context, child) {
@@ -91,16 +115,17 @@ class _FlipCardState extends State<FlipCard>
 
             return Transform(
               transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001) // Add perspective
+                ..setEntry(3, 2, theme.perspective ?? 0.001) // Add perspective
                 ..rotateY(angle),
               alignment: Alignment.center,
               child: isFrontVisible
-                  ? _buildCardFace(widget.front)
+                  ? _buildCardFace(widget.front, theme.frontBackgroundColor)
                   : Transform(
                       // This inner transform flips the back content to face the user
                       transform: Matrix4.identity()..rotateY(math.pi),
                       alignment: Alignment.center,
-                      child: _buildCardFace(widget.back),
+                      child: _buildCardFace(
+                          widget.back, theme.backBackgroundColor),
                     ),
             );
           },
@@ -109,15 +134,21 @@ class _FlipCardState extends State<FlipCard>
     );
   }
 
-  Widget _buildCardFace(Widget child) {
+  Widget _buildCardFace(Widget child, Color? backgroundColor) {
+    final theme = _finalTheme;
+
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: theme.width ?? 300.0,
+      height: theme.height ?? 200.0,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        borderRadius: widget.theme.borderRadius,
+        color: backgroundColor,
+        borderRadius: theme.borderRadius,
       ),
-      child: child,
+      child: Padding(
+        padding: theme.padding ?? const EdgeInsets.all(16.0),
+        child: child,
+      ),
     );
   }
 }

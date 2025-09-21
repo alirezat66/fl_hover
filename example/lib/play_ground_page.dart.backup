@@ -305,24 +305,30 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                           'Properties',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: Colors.grey.shade700,
+                            color: Colors.grey.shade800,
                           ),
                         ),
                       ],
                     ),
                   ),
                   Expanded(
-                    child: ListView.separated(
-                      padding: const EdgeInsets.all(16.0),
-                      itemCount: _properties.length,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 16),
-                      itemBuilder: (context, index) {
-                        return _buildControlForProperty(
-                            context, _properties[index]);
-                      },
-                    ),
+                    child: _properties.isEmpty
+                        ? const Center(
+                            child: Text(
+                              'No properties available',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          )
+                        : ListView.separated(
+                            padding: const EdgeInsets.all(16.0),
+                            itemCount: _properties.length,
+                            itemBuilder: (context, index) {
+                              return _buildControlForProperty(
+                                  context, _properties[index]);
+                            },
+                            separatorBuilder: (context, index) =>
+                                const Divider(height: 24),
+                          ),
                   ),
                 ],
               ),
@@ -334,6 +340,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
   }
 
   /// This method handles building controls for different property types
+  /// Uses a more flexible approach that doesn't require type casting
   Widget _buildControlForProperty(
       BuildContext context, EditableProperty property) {
     final value = property.value;
@@ -371,7 +378,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
 
   Widget _buildColorControl(
       BuildContext context, EditableProperty property, Color? color) {
-    final currentColor = color ?? Colors.blue;
+    final currentColor = color ?? Colors.transparent;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -392,22 +399,12 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         GestureDetector(
           onTap: () => _showColorPicker(context, property, currentColor),
           child: Container(
+            width: double.infinity,
             height: 40,
             decoration: BoxDecoration(
               color: currentColor,
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.grey.shade300),
-            ),
-            child: Center(
-              child: Text(
-                'Tap to change',
-                style: TextStyle(
-                  color: currentColor.computeLuminance() > 0.5
-                      ? Colors.black
-                      : Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
             ),
           ),
         ),
@@ -447,11 +444,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                       property.label == 'Hover Elevation'
                   ? 20.0
                   : property.max ?? 100.0),
-          onChanged: (newValue) {
-            // Create a wrapper function to handle the type conversion
-            final callback = property.onChanged;
-            callback(newValue);
-          },
+          onChanged: (newValue) => property.onChanged(newValue),
         ),
       ],
     );
@@ -478,14 +471,284 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         ),
         Slider(
           value: currentValue,
+          min: 0,
+          max: 50,
+          onChanged: (newValue) {
+            property.onChanged(BorderRadius.circular(newValue));
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildEdgeInsetsControl(
+      EditableProperty property, EdgeInsets? padding) {
+    final currentValue = padding?.left ?? 0.0;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text('${property.label}: ${currentValue.toStringAsFixed(1)}',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black87,
+              )),
+        ),
+        Slider(
+          value: currentValue,
+          min: 0,
+          max: 100,
+          onChanged: (newValue) {
+            property.onChanged(EdgeInsets.all(newValue));
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDurationControl(EditableProperty property, Duration? duration) {
+    final currentValue = (duration?.inMilliseconds ?? 0).toDouble();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text(
+              '${property.label}: ${(currentValue / 1000).toStringAsFixed(1)}s',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black87,
+              )),
+        ),
+        Slider(
+          value: currentValue,
+          min: 100,
+          max: 5000,
+          divisions: 49,
+          onChanged: (newValue) {
+            property.onChanged(Duration(milliseconds: newValue.toInt()));
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildFallbackControl(EditableProperty property) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Colors.red.shade50,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.red.shade200),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Unsupported Property',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.red.shade700,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Type: ${property.value.runtimeType}',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.red.shade600,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Label: ${property.label}',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.red.shade600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showColorPicker(
+      BuildContext context, EditableProperty property, Color currentColor) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        Color pickerColor = currentColor;
+        return AlertDialog(
+          title: Text('Select ${property.label}'),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: pickerColor,
+              onColorChanged: (color) => pickerColor = color,
+              pickerAreaHeightPercent: 0.8,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Done'),
+              onPressed: () {
+                property.onChanged(pickerColor);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+/// A reusable widget that shows a widget with editable properties
+/// This can be used as a standalone widget for simpler use cases
+class PlaygroundWidget extends StatelessWidget {
+  final Widget child;
+  final List<EditableProperty> properties;
+
+  const PlaygroundWidget({
+    super.key,
+    required this.child,
+    required this.properties,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 3,
+          child: Center(child: child),
+        ),
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.white,
+            child: ListView.separated(
+              padding: const EdgeInsets.all(16.0),
+              itemCount: properties.length,
+              itemBuilder: (context, index) {
+                return _buildControlForProperty(context, properties[index]);
+              },
+              separatorBuilder: (context, index) => const Divider(height: 24),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// This method handles building controls for different property types
+  /// Uses a more flexible approach that doesn't require type casting
+  Widget _buildControlForProperty(
+      BuildContext context, EditableProperty property) {
+    final value = property.value;
+
+    // Handle Color properties
+    if (value is Color?) {
+      return _buildColorControl(context, property, value);
+    }
+
+    // Handle double properties
+    if (value is double?) {
+      return _buildSliderControl(property, value);
+    }
+
+    // Handle BorderRadius properties
+    if (value is BorderRadius?) {
+      return _buildBorderRadiusControl(property, value);
+    }
+
+    // Handle EdgeInsets properties
+    if (value is EdgeInsets?) {
+      return _buildEdgeInsetsControl(property, value);
+    }
+
+    // Handle Duration properties
+    if (value is Duration?) {
+      return _buildDurationControl(property, value);
+    }
+
+    // Fallback for any unsupported types
+    return _buildFallbackControl(property);
+  }
+
+  // --- Helper methods for building controls ---
+
+  Widget _buildColorControl(
+      BuildContext context, EditableProperty property, Color? color) {
+    final currentColor = color ?? Colors.transparent;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text(property.label,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black87,
+              )),
+        ),
+        const SizedBox(height: 8),
+        GestureDetector(
+          onTap: () => _showColorPicker(context, property, currentColor),
+          child: Container(
+            width: double.infinity,
+            height: 40,
+            decoration: BoxDecoration(
+              color: currentColor,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+
+  Widget _buildBorderRadiusControl(
+      EditableProperty property, BorderRadius? radius) {
+    final currentValue = radius?.topLeft.x ?? 0.0;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text('${property.label}: ${currentValue.toStringAsFixed(1)}',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black87,
+              )),
+        ),
+        Slider(
+          value: currentValue,
           min: 0.0,
           max: 50.0,
-          onChanged: (newValue) {
-            // Create a wrapper function to handle the type conversion
-            final callback = property.onChanged;
-            final newBorderRadius = BorderRadius.circular(newValue);
-            callback(newBorderRadius);
-          },
+          onChanged: (newValue) => property.onChanged(BorderRadius.circular(newValue)),
         ),
       ],
     );
@@ -514,12 +777,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
           value: currentValue,
           min: 0.0,
           max: 50.0,
-          onChanged: (newValue) {
-            // Create a wrapper function to handle the type conversion
-            final callback = property.onChanged;
-            final newEdgeInsets = EdgeInsets.all(newValue);
-            callback(newEdgeInsets);
-          },
+          onChanged: (newValue) => property.onChanged(EdgeInsets.all(newValue)),
         ),
       ],
     );
@@ -536,8 +794,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             color: Colors.grey.shade100,
             borderRadius: BorderRadius.circular(4),
           ),
-          child: Text(
-              '${property.label}: ${(currentValue / 1000).toStringAsFixed(1)}s',
+          child: Text('${property.label}: ${(currentValue / 1000).toStringAsFixed(1)}s',
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 14,
@@ -550,10 +807,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
           max: 5000,
           divisions: 49,
           onChanged: (newValue) {
-            // Create a wrapper function to handle the type conversion
-            final callback = property.onChanged;
-            final newDuration = Duration(milliseconds: newValue.toInt());
-            callback(newDuration);
+            property.onChanged(Duration(milliseconds: newValue.toInt()));
           },
         ),
       ],
@@ -581,9 +835,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             child: ColorPicker(
               pickerColor: currentColor,
               onColorChanged: (Color color) {
-                // Create a wrapper function to handle the type conversion
-                final callback = property.onChanged;
-                callback(color);
+                property.onChanged(color);
               },
             ),
           ),
