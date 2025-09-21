@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:example/play_ground_page.dart';
+import 'package:flutter_hover_effects/hover_effects.dart';
 
 /// Enum for categorizing the hover effects.
 enum ShowcaseCategory {
@@ -17,12 +18,12 @@ class ShowcaseItem {
   /// The category this widget belongs to.
   final ShowcaseCategory category;
 
-  /// A builder function that returns an instance of the hover widget.
-  /// This is used to display the preview in the main showcase grid.
-  final Widget Function() widgetBuilder;
+  /// The initial theme instance for the playground page.
+  final PlaygroundTheme initialTheme;
 
-  /// The default code snippet for the widget.
-  /// This is used for the "Copy Default Code" button.
+  /// A function that builds the widget to be displayed.
+  final WidgetBuilderWithTheme widgetBuilder;
+
   final String defaultCode;
 
   // In the future, this will be used to build the playground page.
@@ -32,6 +33,7 @@ class ShowcaseItem {
     required this.name,
     required this.category,
     required this.widgetBuilder,
+    required this.initialTheme,
     required this.defaultCode,
   });
 }

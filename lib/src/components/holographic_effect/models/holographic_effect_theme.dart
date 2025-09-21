@@ -1,12 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_hover_effects/src/playground/playground_property.dart';
+import 'package:flutter_hover_effects/src/playground/playground_theme.dart';
 
 /// Defines the visual properties and theme for the [HolographicEffect] widget.
 ///
 /// This theme can be provided directly to the widget or integrated into the
 /// application's overall theme using `ThemeData.extensions`.
 @immutable
-class HolographicEffectTheme extends ThemeExtension<HolographicEffectTheme> {
+class HolographicEffectTheme extends ThemeExtension<HolographicEffectTheme>
+    implements PlaygroundTheme {
   /// The background color of the card (matches CSS #111).
   final Color? backgroundColor;
 
@@ -104,5 +107,62 @@ class HolographicEffectTheme extends ThemeExtension<HolographicEffectTheme> {
       animationDuration: t < 0.5 ? animationDuration : other.animationDuration,
       shineDuration: t < 0.5 ? shineDuration : other.shineDuration,
     );
+  }
+
+  @override
+  List<EditableProperty> getEditableProperties(
+      void Function(PlaygroundTheme newTheme) onUpdate) {
+    return [
+      EditableProperty(
+        label: 'Background Color',
+        value: backgroundColor,
+        onChanged: (value) => onUpdate(copyWith(backgroundColor: value)),
+      ),
+      EditableProperty(
+        label: 'Shine Color',
+        value: shineColor,
+        onChanged: (value) => onUpdate(copyWith(shineColor: value)),
+      ),
+      EditableProperty(
+        label: 'Glow Color',
+        value: glowColor,
+        onChanged: (value) => onUpdate(copyWith(glowColor: value)),
+      ),
+      EditableProperty(
+        label: 'Border Radius',
+        value: borderRadius,
+        onChanged: (value) => onUpdate(copyWith(borderRadius: value)),
+      ),
+      EditableProperty(
+        label: 'Padding',
+        value: padding,
+        onChanged: (value) => onUpdate(copyWith(padding: value)),
+      ),
+      EditableProperty(
+        label: 'Elevation',
+        value: elevation,
+        onChanged: (value) => onUpdate(copyWith(elevation: value)),
+      ),
+      EditableProperty(
+        label: 'Hover Elevation',
+        value: hoverElevation,
+        onChanged: (value) => onUpdate(copyWith(hoverElevation: value)),
+      ),
+      EditableProperty(
+        label: 'Scale Factor',
+        value: scaleFactor,
+        onChanged: (value) => onUpdate(copyWith(scaleFactor: value)),
+      ),
+      EditableProperty(
+        label: 'Animation Duration',
+        value: animationDuration,
+        onChanged: (value) => onUpdate(copyWith(animationDuration: value)),
+      ),
+      EditableProperty(
+        label: 'Shine Duration',
+        value: shineDuration,
+        onChanged: (value) => onUpdate(copyWith(shineDuration: value)),
+      ),
+    ];
   }
 }

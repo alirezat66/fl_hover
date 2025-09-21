@@ -19,11 +19,11 @@ class HolographicCard extends StatefulWidget {
 
   /// Optional callback when the card is hovered.
   final VoidCallback? onHover;
-
+                                                                                
   /// Optional callback when the card is no longer hovered.
   final VoidCallback? onHoverExit;
 
-  const HolographicCard({
+                                                                                      const HolographicCard({
     Key? key,
     required this.child,
     this.theme,

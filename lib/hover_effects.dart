@@ -9,8 +9,6 @@ library flutter_hover_effects;
 // Export previous components...
 export 'src/components/button_3d/button_3d_widget.dart';
 export 'src/components/button_3d/models/button_3d_theme.dart';
-export 'src/components/holographic_card/holographic_card_widget.dart';
-export 'src/components/holographic_card/models/holographic_card_theme.dart';
 export 'src/components/flip_card/flip_card_widget.dart';
 export 'src/components/flip_card/models/flip_card_theme.dart';
 export 'src/components/liquid_morph/liquid_morph_widget.dart';
@@ -55,3 +53,6 @@ export 'src/components/scotch_showcase/models/scotch_showcase_theme.dart';
 
 // Export the Holographic Effect component
 export 'src/components/holographic_effect/models/holographic_effect_theme.dart';
+export 'src/components/holographic_effect/holographic_effect_card.dart';
+export 'src/playground/playground_theme.dart';
+export 'src/playground/playground_property.dart';

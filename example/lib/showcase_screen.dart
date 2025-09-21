@@ -1,7 +1,6 @@
 import 'package:example/data/showcase_data.dart';
 import 'package:example/models/showcase_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 class ShowcasePage extends StatelessWidget {
@@ -97,7 +96,7 @@ class _ShowcaseCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: Colors.white.withOpacity(0.1)),
+        side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -105,9 +104,9 @@ class _ShowcaseCard extends StatelessWidget {
           // 1. Showcase Area
           Expanded(
             child: Container(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               alignment: Alignment.center,
-              child: item.widgetBuilder(),
+              child: item.widgetBuilder(item.initialTheme),
             ),
           ),
           // 2. Title and Actions
@@ -138,14 +137,14 @@ class _ShowcaseCard extends StatelessWidget {
                       icon: const Icon(Icons.copy_all_outlined),
                       tooltip: 'Copy Default Code',
                       onPressed: () {
-                        Clipboard.setData(
+                        /* Clipboard.setData(
                             ClipboardData(text: item.defaultCode));
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Default code copied to clipboard!'),
                             duration: Duration(seconds: 2),
                           ),
-                        );
+                        ); */
                       },
                     ),
                   ],

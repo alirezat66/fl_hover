@@ -1,3 +1,4 @@
+import 'package:example/data/showcase_data.dart';
 import 'package:example/play_ground_page.dart';
 import 'package:example/showcase_screen.dart';
 import 'package:flutter/material.dart';
@@ -18,8 +19,16 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'details/:widgetName',
           builder: (BuildContext context, GoRouterState state) {
+            final showcaseItems = ShowcaseData.items;
             final widgetName = state.pathParameters['widgetName']!;
-            return PlaygroundPage(widgetName: widgetName);
+            final item =
+                showcaseItems.firstWhere((item) => item.name == widgetName);
+
+            return PlaygroundPage(
+              title: item.name,
+              initialTheme: item.initialTheme,
+              widgetBuilder: item.widgetBuilder,
+            );
           },
         ),
       ],
