@@ -40,7 +40,7 @@ class _AnimatedNavMenuItemWidgetState extends State<AnimatedNavMenuItemWidget> {
         onTap: widget.item.onTap,
         child: AnimatedContainer(
           duration: theme.animationDuration,
-          curve: Curves.easeInOut,
+          curve: theme.animationCurve,
           width: _isHovering ? theme.itemHoverWidth : theme.itemSize,
           height: theme.itemSize,
           decoration: BoxDecoration(
@@ -92,6 +92,7 @@ class _AnimatedNavMenuItemWidgetState extends State<AnimatedNavMenuItemWidget> {
                     // Icon
                     AnimatedScale(
                       duration: theme.animationDuration,
+                      curve: theme.animationCurve,
                       scale: _isHovering ? 0 : 1,
                       child: Icon(
                         widget.item.icon,
@@ -102,6 +103,7 @@ class _AnimatedNavMenuItemWidgetState extends State<AnimatedNavMenuItemWidget> {
                     // Title
                     AnimatedScale(
                       duration: theme.animationDuration,
+                      curve: theme.animationCurve,
                       scale: _isHovering ? 1 : 0,
                       child: Text(
                         widget.item.title,

@@ -19,6 +19,8 @@ class CardHoverTheme extends ThemeExtension<CardHoverTheme>
   final TextStyle authorTextStyle;
   final Color overlayColor;
   final double overlayOpacity;
+  final Duration animationDuration;
+  final Curve animationCurve;
 
   const CardHoverTheme({
     this.width = 250.0,
@@ -52,6 +54,8 @@ class CardHoverTheme extends ThemeExtension<CardHoverTheme>
         const TextStyle(color: Color(0xFFAD7D52), fontWeight: FontWeight.w600),
     this.overlayColor = Colors.white,
     this.overlayOpacity = 0.3,
+    this.animationDuration = const Duration(milliseconds: 300),
+    this.animationCurve = Curves.easeOut,
   });
 
   @override
@@ -70,6 +74,8 @@ class CardHoverTheme extends ThemeExtension<CardHoverTheme>
     TextStyle? authorTextStyle,
     Color? overlayColor,
     double? overlayOpacity,
+    Duration? animationDuration,
+    Curve? animationCurve,
   }) {
     return CardHoverTheme(
       width: width ?? this.width,
@@ -86,6 +92,8 @@ class CardHoverTheme extends ThemeExtension<CardHoverTheme>
       authorTextStyle: authorTextStyle ?? this.authorTextStyle,
       overlayColor: overlayColor ?? this.overlayColor,
       overlayOpacity: overlayOpacity ?? this.overlayOpacity,
+      animationDuration: animationDuration ?? this.animationDuration,
+      animationCurve: animationCurve ?? this.animationCurve,
     );
   }
 
@@ -126,6 +134,9 @@ class CardHoverTheme extends ThemeExtension<CardHoverTheme>
           Color.lerp(overlayColor, other.overlayColor, t) ?? overlayColor,
       overlayOpacity:
           lerpDouble(overlayOpacity, other.overlayOpacity, t) ?? overlayOpacity,
+      // Duration and Curve can't be linearly interpolated
+      animationDuration: t > 0.5 ? other.animationDuration : animationDuration,
+      animationCurve: t > 0.5 ? other.animationCurve : animationCurve,
     );
   }
 
@@ -186,6 +197,46 @@ class CardHoverTheme extends ThemeExtension<CardHoverTheme>
             copyWith(overlayOpacity: (value as num).toDouble())
                 as PlaygroundTheme),
       ),
+      EditableProperty<Duration?>(
+        label: 'Animation Duration',
+        value: animationDuration,
+        onChanged: (value) => onUpdate(
+            copyWith(animationDuration: value as Duration?) as PlaygroundTheme),
+      ),
+      EditableProperty<String?>(
+        label: 'Animation Curve',
+        value: animationCurve.toString(),
+        onChanged: (value) {
+          final curve = _getCurveFromString(value ?? 'easeOut');
+          onUpdate(copyWith(animationCurve: curve) as PlaygroundTheme);
+        },
+      ),
     ];
+  }
+
+  // Helper method to convert string to Curve
+  static Curve _getCurveFromString(String curveName) {
+    switch (curveName) {
+      case 'easeInOut':
+        return Curves.easeInOut;
+      case 'easeIn':
+        return Curves.easeIn;
+      case 'easeOut':
+        return Curves.easeOut;
+      case 'linear':
+        return Curves.linear;
+      case 'fastOutSlowIn':
+        return Curves.fastOutSlowIn;
+      case 'bounceIn':
+        return Curves.bounceIn;
+      case 'bounceOut':
+        return Curves.bounceOut;
+      case 'elasticIn':
+        return Curves.elasticIn;
+      case 'elasticOut':
+        return Curves.elasticOut;
+      default:
+        return Curves.easeOut;
+    }
   }
 }

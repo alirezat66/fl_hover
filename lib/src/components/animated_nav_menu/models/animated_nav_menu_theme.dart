@@ -9,6 +9,7 @@ class AnimatedNavMenuTheme extends ThemeExtension<AnimatedNavMenuTheme>
   final double itemHoverWidth;
   final double spacing;
   final Duration animationDuration;
+  final Curve animationCurve;
   final Color iconColor;
   final Color textColor;
   final double iconSize;
@@ -20,6 +21,7 @@ class AnimatedNavMenuTheme extends ThemeExtension<AnimatedNavMenuTheme>
     this.itemHoverWidth = 180.0,
     this.spacing = 25.0,
     this.animationDuration = const Duration(milliseconds: 500),
+    this.animationCurve = Curves.easeOut,
     this.iconColor = const Color(0xFF777777),
     this.textColor = Colors.white,
     this.iconSize = 0.45,
@@ -33,6 +35,7 @@ class AnimatedNavMenuTheme extends ThemeExtension<AnimatedNavMenuTheme>
     double? itemHoverWidth,
     double? spacing,
     Duration? animationDuration,
+    Curve? animationCurve,
     Color? iconColor,
     Color? textColor,
     double? iconSize,
@@ -44,6 +47,7 @@ class AnimatedNavMenuTheme extends ThemeExtension<AnimatedNavMenuTheme>
       itemHoverWidth: itemHoverWidth ?? this.itemHoverWidth,
       spacing: spacing ?? this.spacing,
       animationDuration: animationDuration ?? this.animationDuration,
+      animationCurve: animationCurve ?? this.animationCurve,
       iconColor: iconColor ?? this.iconColor,
       textColor: textColor ?? this.textColor,
       iconSize: iconSize ?? this.iconSize,
@@ -69,9 +73,9 @@ class AnimatedNavMenuTheme extends ThemeExtension<AnimatedNavMenuTheme>
       textColor: Color.lerp(textColor, other.textColor, t) ?? textColor,
       iconSize: lerpDouble(iconSize, other.iconSize, t) ?? iconSize,
       textSize: lerpDouble(textSize, other.textSize, t) ?? textSize,
-      // Duration can't be linearly interpolated, so we'll just take the new one.
+      // Duration, Curve and FontWeight can't be linearly interpolated
       animationDuration: t > 0.5 ? other.animationDuration : animationDuration,
-      // FontWeight can't be linearly interpolated, so we'll just take the new one.
+      animationCurve: t > 0.5 ? other.animationCurve : animationCurve,
       textWeight: t > 0.5 ? other.textWeight : textWeight,
     );
   }
@@ -118,6 +122,14 @@ class AnimatedNavMenuTheme extends ThemeExtension<AnimatedNavMenuTheme>
         onChanged: (value) => onUpdate(
             copyWith(animationDuration: value as Duration?) as PlaygroundTheme),
       ),
+      EditableProperty<String?>(
+        label: 'Animation Curve',
+        value: animationCurve.toString(),
+        onChanged: (value) {
+          final curve = _getCurveFromString(value ?? 'easeOut');
+          onUpdate(copyWith(animationCurve: curve) as PlaygroundTheme);
+        },
+      ),
       EditableProperty<Color?>(
         label: 'Icon Color',
         value: iconColor,
@@ -131,5 +143,31 @@ class AnimatedNavMenuTheme extends ThemeExtension<AnimatedNavMenuTheme>
             onUpdate(copyWith(textColor: value as Color?) as PlaygroundTheme),
       ),
     ];
+  }
+
+  // Helper method to convert string to Curve
+  static Curve _getCurveFromString(String curveName) {
+    switch (curveName) {
+      case 'easeInOut':
+        return Curves.easeInOut;
+      case 'easeIn':
+        return Curves.easeIn;
+      case 'easeOut':
+        return Curves.easeOut;
+      case 'linear':
+        return Curves.linear;
+      case 'fastOutSlowIn':
+        return Curves.fastOutSlowIn;
+      case 'bounceIn':
+        return Curves.bounceIn;
+      case 'bounceOut':
+        return Curves.bounceOut;
+      case 'elasticIn':
+        return Curves.elasticIn;
+      case 'elasticOut':
+        return Curves.elasticOut;
+      default:
+        return Curves.easeOut;
+    }
   }
 }

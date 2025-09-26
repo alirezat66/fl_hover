@@ -93,7 +93,7 @@ class __SlidingNavMenuItemWidgetState extends State<_SlidingNavMenuItemWidget> {
               LayoutBuilder(builder: (context, constraints) {
                 return AnimatedContainer(
                   duration: theme.animationDuration,
-                  curve: Curves.easeOut,
+                  curve: theme.animationCurve,
                   width: isHorizontal
                       ? (_isHovering ? constraints.maxWidth : theme.peekSize)
                       : null,

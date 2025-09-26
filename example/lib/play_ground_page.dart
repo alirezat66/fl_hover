@@ -247,6 +247,10 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         code.writeln(
             '    animationDuration: ${_durationToString(theme.animationDuration!)},');
       }
+      if (theme.animationCurve != Curves.easeOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve!)},');
+      }
       code.writeln('  ),');
       code.writeln('  icon: const Icon(');
       code.writeln('    Icons.person,');
@@ -280,6 +284,14 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       if (theme.overlayOpacity != 0.3) {
         code.writeln('    overlayOpacity: ${theme.overlayOpacity},');
       }
+      if (theme.animationDuration != const Duration(milliseconds: 300)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
       code.writeln('  ),');
       code.writeln('  image: NetworkImage(\'https://example.com/image.jpg\'),');
       code.writeln('  category: \'Recipe\',');
@@ -305,6 +317,10 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       if (theme.animationDuration != const Duration(milliseconds: 500)) {
         code.writeln(
             '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
       }
       if (theme.iconColor != const Color(0xFF777777)) {
         code.writeln('    iconColor: ${_colorToString(theme.iconColor)},');
@@ -345,6 +361,10 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       if (theme.animationDuration != const Duration(milliseconds: 300)) {
         code.writeln(
             '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
       }
       if (theme.fillDirection != FillDirection.leftToRight) {
         code.writeln(
@@ -416,6 +436,46 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
     if (curve == Curves.elasticIn) return 'Curves.elasticIn';
     if (curve == Curves.elasticOut) return 'Curves.elasticOut';
     return 'Curves.easeInOut';
+  }
+
+  /// Converts string to Curve
+  Curve _getCurveFromString(String curveName) {
+    switch (curveName) {
+      case 'easeInOut':
+        return Curves.easeInOut;
+      case 'easeIn':
+        return Curves.easeIn;
+      case 'easeOut':
+        return Curves.easeOut;
+      case 'linear':
+        return Curves.linear;
+      case 'fastOutSlowIn':
+        return Curves.fastOutSlowIn;
+      case 'bounceIn':
+        return Curves.bounceIn;
+      case 'bounceOut':
+        return Curves.bounceOut;
+      case 'elasticIn':
+        return Curves.elasticIn;
+      case 'elasticOut':
+        return Curves.elasticOut;
+      default:
+        return Curves.easeOut;
+    }
+  }
+
+  /// Converts curve toString() to display name for dropdown
+  String _getCurveDisplayName(String curveString) {
+    if (curveString.contains('easeInOut')) return 'easeInOut';
+    if (curveString.contains('easeIn')) return 'easeIn';
+    if (curveString.contains('easeOut')) return 'easeOut';
+    if (curveString.contains('linear')) return 'linear';
+    if (curveString.contains('fastOutSlowIn')) return 'fastOutSlowIn';
+    if (curveString.contains('bounceIn')) return 'bounceIn';
+    if (curveString.contains('bounceOut')) return 'bounceOut';
+    if (curveString.contains('elasticIn')) return 'elasticIn';
+    if (curveString.contains('elasticOut')) return 'elasticOut';
+    return 'easeOut'; // default
   }
 
   /// Copies the generated code to clipboard
@@ -806,6 +866,20 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         'Center Horizontal',
         'Center Vertical',
       ];
+    } else if (property.label == 'Animation Curve') {
+      options = [
+        'easeInOut',
+        'easeIn',
+        'easeOut',
+        'linear',
+        'fastOutSlowIn',
+        'bounceIn',
+        'bounceOut',
+        'elasticIn',
+        'elasticOut',
+      ];
+      // Convert curve toString() to readable name
+      currentValue = _getCurveDisplayName(currentValue);
     } else {
       // Default curve options
       options = [

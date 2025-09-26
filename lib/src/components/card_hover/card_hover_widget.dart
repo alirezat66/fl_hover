@@ -47,8 +47,8 @@ class _CardHoverState extends State<CardHover> {
       onExit: (_) => _onHover(false),
       cursor: SystemMouseCursors.click,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.easeOut,
+        duration: theme.animationDuration,
+        curve: theme.animationCurve,
         width: theme.width,
         height: theme.height,
         transform: Matrix4.identity()
@@ -83,7 +83,8 @@ class _CardHoverState extends State<CardHover> {
               // Hover Image Overlay (covers entire card on hover)
               Positioned.fill(
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
+                  duration: theme.animationDuration,
+                  curve: theme.animationCurve,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: widget.image,
@@ -91,7 +92,8 @@ class _CardHoverState extends State<CardHover> {
                     ),
                   ),
                   child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 200),
+                    duration: theme.animationDuration,
+                    curve: theme.animationCurve,
                     opacity: _isHovering ? theme.overlayOpacity : 0.0,
                     child: Container(color: theme.overlayColor),
                   ),
@@ -148,12 +150,14 @@ class _CardHoverState extends State<CardHover> {
 
               // Info Content
               AnimatedPositioned(
-                duration: const Duration(milliseconds: 400),
+                duration: theme.animationDuration,
+                curve: theme.animationCurve,
                 bottom: 0,
                 left: 0,
                 right: 0,
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 400),
+                  duration: theme.animationDuration,
+                  curve: theme.animationCurve,
                   color: _isHovering
                       ? Colors.transparent
                       : theme.infoBackgroundColor,

@@ -25,6 +25,9 @@ class SlidingNavMenuTheme extends ThemeExtension<SlidingNavMenuTheme>
   /// The direction in which the background fills the item.
   final FillDirection fillDirection;
 
+  /// The curve for the animation.
+  final Curve animationCurve;
+
   /// The duration of the slide and text color animations.
   final Duration animationDuration;
 
@@ -38,6 +41,7 @@ class SlidingNavMenuTheme extends ThemeExtension<SlidingNavMenuTheme>
         const TextStyle(color: Colors.white, fontSize: 16),
     this.peekSize = 0.0,
     this.fillDirection = FillDirection.leftToRight,
+    this.animationCurve = Curves.easeOut,
     this.animationDuration = const Duration(milliseconds: 300),
   });
 
@@ -49,6 +53,7 @@ class SlidingNavMenuTheme extends ThemeExtension<SlidingNavMenuTheme>
     TextStyle? itemHoverTextStyle,
     double? peekSize,
     FillDirection? fillDirection,
+    Curve? animationCurve,
     Duration? animationDuration,
   }) {
     return SlidingNavMenuTheme(
@@ -58,6 +63,7 @@ class SlidingNavMenuTheme extends ThemeExtension<SlidingNavMenuTheme>
       itemHoverTextStyle: itemHoverTextStyle ?? this.itemHoverTextStyle,
       peekSize: peekSize ?? this.peekSize,
       fillDirection: fillDirection ?? this.fillDirection,
+      animationCurve: animationCurve ?? this.animationCurve,
       animationDuration: animationDuration ?? this.animationDuration,
     );
   }
@@ -81,8 +87,9 @@ class SlidingNavMenuTheme extends ThemeExtension<SlidingNavMenuTheme>
           TextStyle.lerp(itemHoverTextStyle, other.itemHoverTextStyle, t) ??
               itemHoverTextStyle,
       peekSize: lerpDouble(peekSize, other.peekSize, t) ?? peekSize,
-      // FillDirection and Duration can't be linearly interpolated
+      // FillDirection, Curve and Duration can't be linearly interpolated
       fillDirection: t > 0.5 ? other.fillDirection : fillDirection,
+      animationCurve: t > 0.5 ? other.animationCurve : animationCurve,
       animationDuration: t > 0.5 ? other.animationDuration : animationDuration,
     );
   }
@@ -121,6 +128,14 @@ class SlidingNavMenuTheme extends ThemeExtension<SlidingNavMenuTheme>
             copyWith(animationDuration: value as Duration?) as PlaygroundTheme),
       ),
       EditableProperty<String?>(
+        label: 'Animation Curve',
+        value: animationCurve.toString(),
+        onChanged: (value) {
+          final curve = _getCurveFromString(value ?? 'easeOut');
+          onUpdate(copyWith(animationCurve: curve) as PlaygroundTheme);
+        },
+      ),
+      EditableProperty<String?>(
         label: 'Fill Direction',
         value: fillDirection.displayName,
         onChanged: (value) {
@@ -132,5 +147,31 @@ class SlidingNavMenuTheme extends ThemeExtension<SlidingNavMenuTheme>
         },
       ),
     ];
+  }
+
+  // Helper method to convert string to Curve
+  static Curve _getCurveFromString(String curveName) {
+    switch (curveName) {
+      case 'easeInOut':
+        return Curves.easeInOut;
+      case 'easeIn':
+        return Curves.easeIn;
+      case 'easeOut':
+        return Curves.easeOut;
+      case 'linear':
+        return Curves.linear;
+      case 'fastOutSlowIn':
+        return Curves.fastOutSlowIn;
+      case 'bounceIn':
+        return Curves.bounceIn;
+      case 'bounceOut':
+        return Curves.bounceOut;
+      case 'elasticIn':
+        return Curves.elasticIn;
+      case 'elasticOut':
+        return Curves.elasticOut;
+      default:
+        return Curves.easeOut;
+    }
   }
 }

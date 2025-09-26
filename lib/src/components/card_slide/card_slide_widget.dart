@@ -72,7 +72,7 @@ class _CardSlideState extends State<CardSlide>
   void _setupAnimations() {
     _slideAnimation = CurvedAnimation(
       parent: _controller,
-      curve: Curves.easeInOut,
+      curve: _finalTheme.animationCurve ?? Curves.easeInOut,
     );
   }
 
