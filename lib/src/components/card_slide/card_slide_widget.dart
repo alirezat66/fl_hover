@@ -113,7 +113,7 @@ class _CardSlideState extends State<CardSlide>
           final topAngle = flipValue * (math.pi / 2);
           final topTransform = Matrix4.identity()
             ..setEntry(3, 2, 0.001) // Perspective
-            ..translate(0.0, -slideValue * theme.slideOffset!)
+            ..translateByDouble(0.0, -slideValue * theme.slideOffset!, 0.0, 1.0)
             ..rotateX(topAngle);
 
           // Bottom card starts at a -90 degree angle and flips into view (-90 to 0 degrees)

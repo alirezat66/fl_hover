@@ -76,11 +76,11 @@ class _AnimatedArrowButtonState extends State<AnimatedArrowButton>
       [
         TweenSequenceItem(
             tween:
-                ColorTween(begin: hoverColor, end: hoverColor.withOpacity(0.6)),
+                ColorTween(begin: hoverColor, end: hoverColor.withValues(alpha: 0.6)),
             weight: 50),
         TweenSequenceItem(
             tween:
-                ColorTween(begin: hoverColor.withOpacity(0.6), end: hoverColor),
+                ColorTween(begin: hoverColor.withValues(alpha: 0.6), end: hoverColor),
             weight: 50),
       ],
     ).animate(CurvedAnimation(

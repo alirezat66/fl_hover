@@ -19,16 +19,12 @@ class CardFace extends StatefulWidget {
   /// The visual theme of the card.
   final CardFaceTheme theme;
 
-  /// The duration of the shrink/expand animation.
-  final Duration animationDuration;
-
   const CardFace({
     Key? key,
     required this.bottomFace,
     required this.topFace,
     required this.topFaceDecoration,
     this.theme = const CardFaceTheme(),
-    this.animationDuration = const Duration(milliseconds: 500),
   }) : super(key: key);
 
   @override
@@ -76,8 +72,8 @@ class _CardFaceState extends State<CardFace> {
 
             // Top Face (face2)
             AnimatedContainer(
-              duration: widget.animationDuration,
-              curve: Curves.easeInOut,
+              duration: theme.animationDuration,
+              curve: theme.animationCurve,
               width: theme.width,
               height: _isHovering ? theme.shrunkenHeight : theme.height,
               decoration: widget.topFaceDecoration.copyWith(

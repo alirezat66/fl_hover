@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hover_effects/hover_effects.dart';
 
 /// Defines the visual properties and animations for the [CardSlide] widget.
 ///
 /// This class can be used as a [ThemeExtension] to provide a consistent
 /// look and feel for [CardSlide] widgets across the entire application.
 @immutable
-class CardSlideTheme extends ThemeExtension<CardSlideTheme> {
+class CardSlideTheme extends ThemeExtension<CardSlideTheme>
+    implements PlaygroundTheme {
   /// The background color of the card panels.
   final Color? backgroundColor;
 
@@ -83,5 +85,60 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme> {
   static double? lerpDouble(double? a, double? b, double t) {
     if (a == null || b == null) return t < 0.5 ? a : b;
     return a + (b - a) * t;
+  }
+
+  @override
+  List<EditableProperty> getEditableProperties(
+    void Function(PlaygroundTheme newTheme) onUpdate,
+  ) {
+    return [
+      EditableProperty<Color?>(
+        label: 'Background Color',
+        value: backgroundColor,
+        onChanged: (value) =>
+            onUpdate(copyWith(backgroundColor: value as Color?) as PlaygroundTheme),
+      ),
+      EditableProperty<BorderRadius?>(
+        label: 'Border Radius',
+        value: borderRadius,
+        onChanged: (value) =>
+            onUpdate(copyWith(borderRadius: value as BorderRadius?) as PlaygroundTheme),
+      ),
+      EditableProperty<EdgeInsets?>(
+        label: 'Padding',
+        value: padding,
+        onChanged: (value) => onUpdate(copyWith(padding: value as EdgeInsets?) as PlaygroundTheme),
+      ),
+      EditableProperty<double?>(
+        label: 'Elevation',
+        value: elevation,
+        min: 0.0,
+        max: 20.0,
+        onChanged: (value) =>
+            onUpdate(copyWith(elevation: (value as num).toDouble()) as PlaygroundTheme),
+      ),
+      EditableProperty<double?>(
+        label: 'Hover Elevation',
+        value: hoverElevation,
+        min: 0.0,
+        max: 30.0,
+        onChanged: (value) =>
+            onUpdate(copyWith(hoverElevation: (value as num).toDouble()) as PlaygroundTheme),
+      ),
+      EditableProperty<double?>(
+        label: 'Slide Offset',
+        value: slideOffset,
+        min: 20.0,
+        max: 200.0,
+        onChanged: (value) =>
+            onUpdate(copyWith(slideOffset: (value as num).toDouble()) as PlaygroundTheme),
+      ),
+      EditableProperty<Duration?>(
+        label: 'Animation Duration',
+        value: animationDuration,
+        onChanged: (value) =>
+            onUpdate(copyWith(animationDuration: value as Duration?) as PlaygroundTheme),
+      ),
+    ];
   }
 }

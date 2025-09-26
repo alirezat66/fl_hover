@@ -54,7 +54,7 @@ class LiquidMorphPainter extends CustomPainter {
           : animationValue * 2;
 
       canvas.drawRect(
-          rect, liquidPaint..color = Colors.white.withOpacity(opacity * 0.5));
+          rect, liquidPaint..color = Colors.white.withValues(alpha: opacity * 0.5));
 
       canvas.restore();
     }

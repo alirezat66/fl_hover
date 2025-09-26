@@ -66,7 +66,7 @@ class _AnimatedIconWidgetState extends State<AnimatedIconWidget> {
                   child: Container(
                     width: theme.size,
                     height: theme.size,
-                    color: theme.hoverOverlayColor.withOpacity(0.7),
+                    color: theme.hoverOverlayColor.withValues(alpha: 0.7),
                   ),
                 ),
 

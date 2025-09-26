@@ -93,5 +93,118 @@ FlipCard(
 """,
       initialTheme: const FlipCardTheme(),
     ),
+    ShowcaseItem(
+      name: 'CardFace',
+      category: ShowcaseCategory.card,
+      widgetBuilder: (theme) => CardFace(
+        theme: theme as CardFaceTheme,
+        bottomFace: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.description, size: 40, color: Colors.black87),
+              SizedBox(height: 12),
+              Text(
+                'Details go here',
+                style: TextStyle(color: Colors.black87),
+              ),
+            ],
+          ),
+        ),
+        topFace: const Text(
+          'Summary',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        topFaceDecoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF7F00FF), Color(0xFFE100FF)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+      ),
+      defaultCode: """
+CardFace(
+  theme: const CardFaceTheme(),
+  bottomFace: Center(child: Text('Details')),
+  topFace: Text('Summary', style: TextStyle(color: Colors.white)),
+  topFaceDecoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [Color(0xFF7F00FF), Color(0xFFE100FF)],
+    ),
+  ),
+)
+""",
+      initialTheme: const CardFaceTheme(),
+    ),
+    ShowcaseItem(
+      name: 'CardSlide',
+      category: ShowcaseCategory.card,
+      widgetBuilder: (theme) => CardSlide(
+        theme: theme as CardSlideTheme,
+        topSlideChild: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.swipe, size: 48, color: Colors.blue),
+              SizedBox(height: 16),
+              Text(
+                'Top Panel',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Hover to slide',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.blue,
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomSlideChild: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.flip, size: 48, color: Colors.green),
+              SizedBox(height: 16),
+              Text(
+                'Bottom Panel',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Slide & flip effect',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.green,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      defaultCode: """
+CardSlide(
+  theme: const CardSlideTheme(),
+  topSlideChild: Center(child: Text('Top Panel')),
+  bottomSlideChild: Center(child: Text('Bottom Panel')),
+)
+""",
+      initialTheme: const CardSlideTheme(),
+    ),
   ];
 }

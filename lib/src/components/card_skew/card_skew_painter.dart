@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 /// A custom painter that draws the skewed background and its blurred reflection.
 class CardSkewPainter extends CustomPainter {

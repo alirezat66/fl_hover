@@ -176,7 +176,7 @@ class _HolographicCardState extends State<HolographicCard>
                       ? [
                           BoxShadow(
                             color: (theme.glowColor ?? const Color(0xFF00FFFF))
-                                .withOpacity(0.5),
+                                .withValues(alpha: 0.5),
                             blurRadius: 20,
                             spreadRadius: 0,
                             offset: Offset(0, theme.hoverElevation ?? 0),
@@ -185,7 +185,7 @@ class _HolographicCardState extends State<HolographicCard>
                       : [
                           if ((theme.elevation ?? 0) > 0)
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
+                              color: Colors.black.withValues(alpha: 0.2),
                               blurRadius: (theme.elevation ?? 0) * 2,
                               spreadRadius: 0,
                               offset: Offset(0, theme.elevation ?? 0),

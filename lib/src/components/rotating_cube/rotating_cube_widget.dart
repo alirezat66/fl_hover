@@ -99,41 +99,41 @@ class _RotatingCubeState extends State<RotatingCube>
                 // Front
                 _buildFace(
                   widget.frontFace,
-                  Matrix4.identity()..translate(0.0, 0.0, perspective),
+                  Matrix4.identity()..translateByDouble(0.0, 0.0, perspective , 1.0),
                 ),
                 // Back
                 _buildFace(
                   widget.backFace,
                   Matrix4.identity()
-                    ..translate(0.0, 0.0, -perspective)
+                    ..translateByDouble(0.0, 0.0, -perspective , 1.0)
                     ..rotateY(math.pi),
                 ),
                 // Left
                 _buildFace(
                   widget.leftFace,
                   Matrix4.identity()
-                    ..translate(-perspective, 0.0, 0.0)
+                    ..translateByDouble(-perspective, 0.0, 0.0 , 1.0)
                     ..rotateY(-math.pi / 2),
                 ),
                 // Right
                 _buildFace(
                   widget.rightFace,
                   Matrix4.identity()
-                    ..translate(perspective, 0.0, 0.0)
+                    ..translateByDouble(perspective, 0.0, 0.0 , 1.0)
                     ..rotateY(math.pi / 2),
                 ),
                 // Top
                 _buildFace(
                   widget.topFace,
                   Matrix4.identity()
-                    ..translate(0.0, -perspective, 0.0)
+                    ..translateByDouble(0.0, -perspective, 0.0 , 1.0)
                     ..rotateX(math.pi / 2),
                 ),
                 // Bottom
                 _buildFace(
                   widget.bottomFace,
                   Matrix4.identity()
-                    ..translate(0.0, perspective, 0.0)
+                    ..translateByDouble(0.0, perspective, 0.0 , 1.0)
                     ..rotateX(-math.pi / 2),
                 ),
               ],

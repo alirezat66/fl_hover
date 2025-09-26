@@ -154,6 +154,150 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    ),');
       code.writeln('  ),');
       code.writeln(')');
+    } else if (_currentTheme is CardFaceTheme) {
+      final theme = _currentTheme as CardFaceTheme;
+      code.writeln('CardFace(');
+      code.writeln('  theme: CardFaceTheme(');
+      if (theme.width != 300.0) {
+        code.writeln('    width: ${theme.width},');
+      }
+      if (theme.height != 400.0) {
+        code.writeln('    height: ${theme.height},');
+      }
+      if (theme.borderRadius != const BorderRadius.all(Radius.circular(15))) {
+        code.writeln(
+            '    borderRadius: ${_borderRadiusToString(theme.borderRadius)},');
+      }
+      if (theme.shrunkenHeight != 60.0) {
+        code.writeln('    shrunkenHeight: ${theme.shrunkenHeight},');
+      }
+      if (theme.shadow !=
+          const BoxShadow(
+            color: Color.fromRGBO(0, 0, 0, 0.5),
+            blurRadius: 60,
+            spreadRadius: 0,
+            offset: Offset(0, 15),
+          )) {
+        code.writeln(
+            '    shadow: BoxShadow(color: ${_colorToString(theme.shadow.color)}, blurRadius: ${theme.shadow.blurRadius}, spreadRadius: ${theme.shadow.spreadRadius}, offset: Offset(${theme.shadow.offset.dx}, ${theme.shadow.offset.dy})),');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 500)) {
+        code.writeln(
+            '    animationDuration: ${_durationToString(theme.animationDuration)},');
+      }
+      if (theme.animationCurve != Curves.easeInOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  bottomFace: const Center(');
+      code.writeln('    child: Column(');
+      code.writeln('      mainAxisAlignment: MainAxisAlignment.center,');
+      code.writeln('      children: [');
+      code.writeln(
+          '        Icon(Icons.description, size: 40, color: Colors.black87),');
+      code.writeln('        SizedBox(height: 12),');
+      code.writeln(
+          '        Text(\'Details go here\', style: TextStyle(color: Colors.black87)),');
+      code.writeln('      ],');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln('  topFace: const Text(');
+      code.writeln('    \'Summary\',');
+      code.writeln('    style: TextStyle(');
+      code.writeln('      color: Colors.white,');
+      code.writeln('      fontSize: 20,');
+      code.writeln('      fontWeight: FontWeight.w600,');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln('  topFaceDecoration: const BoxDecoration(');
+      code.writeln('    gradient: LinearGradient(');
+      code.writeln('      colors: [Color(0xFF7F00FF), Color(0xFFE100FF)],');
+      code.writeln('      begin: Alignment.topLeft,');
+      code.writeln('      end: Alignment.bottomRight,');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln(')');
+    } else if (_currentTheme is CardSlideTheme) {
+      final theme = _currentTheme as CardSlideTheme;
+      code.writeln('CardSlide(');
+      code.writeln('  theme: CardSlideTheme(');
+      if (theme.backgroundColor != Colors.white) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor!)},');
+      }
+      if (theme.borderRadius != const BorderRadius.all(Radius.circular(12))) {
+        code.writeln(
+            '    borderRadius: ${_borderRadiusToString(theme.borderRadius!)},');
+      }
+      if (theme.padding != const EdgeInsets.all(24.0)) {
+        code.writeln('    padding: ${_edgeInsetsToString(theme.padding!)},');
+      }
+      if (theme.elevation != 4.0) {
+        code.writeln('    elevation: ${theme.elevation},');
+      }
+      if (theme.hoverElevation != 16.0) {
+        code.writeln('    hoverElevation: ${theme.hoverElevation},');
+      }
+      if (theme.slideOffset != 80.0) {
+        code.writeln('    slideOffset: ${theme.slideOffset},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 800)) {
+        code.writeln(
+            '    animationDuration: ${_durationToString(theme.animationDuration!)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  topSlideChild: const Center(');
+      code.writeln('    child: Column(');
+      code.writeln('      mainAxisAlignment: MainAxisAlignment.center,');
+      code.writeln('      children: [');
+      code.writeln('        Icon(Icons.slide, size: 48, color: Colors.blue),');
+      code.writeln('        SizedBox(height: 16),');
+      code.writeln('        Text(');
+      code.writeln('          \'Top Panel\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 24,');
+      code.writeln('            fontWeight: FontWeight.bold,');
+      code.writeln('            color: Colors.blue,');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('        SizedBox(height: 8),');
+      code.writeln('        Text(');
+      code.writeln('          \'Hover to slide\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 14,');
+      code.writeln('            color: Colors.blue,');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('      ],');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln('  bottomSlideChild: const Center(');
+      code.writeln('    child: Column(');
+      code.writeln('      mainAxisAlignment: MainAxisAlignment.center,');
+      code.writeln('      children: [');
+      code.writeln('        Icon(Icons.flip, size: 48, color: Colors.green),');
+      code.writeln('        SizedBox(height: 16),');
+      code.writeln('        Text(');
+      code.writeln('          \'Bottom Panel\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 24,');
+      code.writeln('            fontWeight: FontWeight.bold,');
+      code.writeln('            color: Colors.green,');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('        SizedBox(height: 8),');
+      code.writeln('        Text(');
+      code.writeln('          \'Slide & flip effect\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 14,');
+      code.writeln('            color: Colors.green,');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('      ],');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
@@ -187,6 +331,20 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
   /// Converts Duration to string representation
   String _durationToString(Duration duration) {
     return 'Duration(milliseconds: ${duration.inMilliseconds})';
+  }
+
+  /// Converts Curve to string representation
+  String _curveToString(Curve curve) {
+    if (curve == Curves.easeInOut) return 'Curves.easeInOut';
+    if (curve == Curves.easeIn) return 'Curves.easeIn';
+    if (curve == Curves.easeOut) return 'Curves.easeOut';
+    if (curve == Curves.linear) return 'Curves.linear';
+    if (curve == Curves.fastOutSlowIn) return 'Curves.fastOutSlowIn';
+    if (curve == Curves.bounceIn) return 'Curves.bounceIn';
+    if (curve == Curves.bounceOut) return 'Curves.bounceOut';
+    if (curve == Curves.elasticIn) return 'Curves.elasticIn';
+    if (curve == Curves.elasticOut) return 'Curves.elasticOut';
+    return 'Curves.easeInOut';
   }
 
   /// Copies the generated code to clipboard
@@ -361,6 +519,11 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
     // Handle Duration properties
     if (value is Duration?) {
       return _buildDurationControl(property, value);
+    }
+
+    // Handle String properties (for dropdowns)
+    if (value is String) {
+      return _buildDropdownControl(property, value);
     }
 
     // Fallback for any unsupported types
@@ -555,6 +718,65 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             final newDuration = Duration(milliseconds: newValue.toInt());
             callback(newDuration);
           },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDropdownControl(EditableProperty property, String currentValue) {
+    final curveOptions = [
+      'easeInOut',
+      'easeIn',
+      'easeOut',
+      'linear',
+      'fastOutSlowIn',
+      'bounceIn',
+      'bounceOut',
+      'elasticIn',
+      'elasticOut',
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text('${property.label}: $currentValue',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black87,
+              )),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
+          ),
+          child: DropdownButton<String>(
+            value: currentValue,
+            isExpanded: true,
+            underline: const SizedBox(),
+            items: curveOptions.map((String curve) {
+              return DropdownMenuItem<String>(
+                value: curve,
+                child: Text(curve),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              if (newValue != null) {
+                final callback = property.onChanged;
+                callback(newValue);
+              }
+            },
+          ),
         ),
       ],
     );

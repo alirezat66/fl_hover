@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 /// Defines the type of a property to be displayed in the playground.
 class EditableProperty<T> {

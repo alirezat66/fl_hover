@@ -47,7 +47,8 @@ class _CardHoverState extends State<CardHover> {
         width: theme.width,
         height: theme.height,
         transform: Matrix4.identity()
-          ..scale(_isHovering ? 1.1 : 1.0, _isHovering ? 1.1 : 1.0),
+          ..scaleByDouble(
+              _isHovering ? 1.1 : 1.0, _isHovering ? 1.1 : 1.0, 1.0, 1.0),
         transformAlignment: Alignment.center,
         decoration: BoxDecoration(
           color: theme.infoBackgroundColor,

@@ -73,8 +73,7 @@ class __SlidingNavMenuItemWidgetState extends State<_SlidingNavMenuItemWidget> {
       case AxisDirection.down:
         return Alignment.bottomCenter;
       case AxisDirection.left:
-      default:
-        return Alignment.centerLeft;
+      return Alignment.centerLeft;
     }
   }
 
