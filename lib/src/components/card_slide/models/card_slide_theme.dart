@@ -8,8 +8,11 @@ import 'package:flutter_hover_effects/hover_effects.dart';
 @immutable
 class CardSlideTheme extends ThemeExtension<CardSlideTheme>
     implements PlaygroundTheme {
-  /// The background color of the card panels.
+  /// The background color of the content panel.
   final Color? backgroundColor;
+
+  /// The background color of the icon panel.
+  final Color? iconBackgroundColor;
 
   /// The border radius for the card.
   final BorderRadius? borderRadius;
@@ -17,47 +20,63 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
   /// The internal padding for the content within each panel.
   final EdgeInsets? padding;
 
-  /// The shadow elevation of the card in its normal state.
-  final double? elevation;
+  /// The width of the card.
+  final double? cardWidth;
 
-  /// The shadow elevation of the card when hovered.
-  final double? hoverElevation;
+  /// The height of the card.
+  final double? cardHeight;
 
-  /// The duration for the entire slide and flip animation sequence.
+  /// The duration for the slide animation.
   final Duration? animationDuration;
 
-  /// The vertical distance the top panel slides up on hover.
-  final double? slideOffset;
+  /// The text style for the title.
+  final TextStyle? titleTextStyle;
+
+  /// The text style for the subtitle.
+  final TextStyle? subtitleTextStyle;
 
   /// Creates a theme for the CardSlide widget.
   const CardSlideTheme({
     this.backgroundColor = Colors.white,
+    this.iconBackgroundColor = const Color(0xFF2c73df),
     this.borderRadius = const BorderRadius.all(Radius.circular(12)),
-    this.padding = const EdgeInsets.all(24.0),
-    this.elevation = 4.0,
-    this.hoverElevation = 16.0,
-    this.animationDuration = const Duration(milliseconds: 800),
-    this.slideOffset = 80.0,
+    this.padding = const EdgeInsets.all(20.0),
+    this.cardWidth = 400.0,
+    this.cardHeight = 250.0,
+    this.animationDuration = const Duration(milliseconds: 500),
+    this.titleTextStyle = const TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: Color(0xFF414141),
+    ),
+    this.subtitleTextStyle = const TextStyle(
+      fontSize: 16,
+      color: Color(0xFF414141),
+    ),
   });
 
   @override
   ThemeExtension<CardSlideTheme> copyWith({
     Color? backgroundColor,
+    Color? iconBackgroundColor,
     BorderRadius? borderRadius,
     EdgeInsets? padding,
-    double? elevation,
-    double? hoverElevation,
+    double? cardWidth,
+    double? cardHeight,
     Duration? animationDuration,
-    double? slideOffset,
+    TextStyle? titleTextStyle,
+    TextStyle? subtitleTextStyle,
   }) {
     return CardSlideTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
+      iconBackgroundColor: iconBackgroundColor ?? this.iconBackgroundColor,
       borderRadius: borderRadius ?? this.borderRadius,
       padding: padding ?? this.padding,
-      elevation: elevation ?? this.elevation,
-      hoverElevation: hoverElevation ?? this.hoverElevation,
+      cardWidth: cardWidth ?? this.cardWidth,
+      cardHeight: cardHeight ?? this.cardHeight,
       animationDuration: animationDuration ?? this.animationDuration,
-      slideOffset: slideOffset ?? this.slideOffset,
+      titleTextStyle: titleTextStyle ?? this.titleTextStyle,
+      subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
     );
   }
 
@@ -71,11 +90,15 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
     }
     return CardSlideTheme(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
+      iconBackgroundColor:
+          Color.lerp(iconBackgroundColor, other.iconBackgroundColor, t),
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t),
       padding: EdgeInsets.lerp(padding, other.padding, t),
-      elevation: lerpDouble(elevation, other.elevation, t),
-      hoverElevation: lerpDouble(hoverElevation, other.hoverElevation, t),
-      slideOffset: lerpDouble(slideOffset, other.slideOffset, t),
+      cardWidth: lerpDouble(cardWidth, other.cardWidth, t),
+      cardHeight: lerpDouble(cardHeight, other.cardHeight, t),
+      titleTextStyle: TextStyle.lerp(titleTextStyle, other.titleTextStyle, t),
+      subtitleTextStyle:
+          TextStyle.lerp(subtitleTextStyle, other.subtitleTextStyle, t),
       // Duration can't be linearly interpolated, so we'll just take the new one.
       animationDuration: t > 0.5 ? other.animationDuration : animationDuration,
     );
@@ -95,49 +118,48 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
       EditableProperty<Color?>(
         label: 'Background Color',
         value: backgroundColor,
-        onChanged: (value) =>
-            onUpdate(copyWith(backgroundColor: value as Color?) as PlaygroundTheme),
+        onChanged: (value) => onUpdate(
+            copyWith(backgroundColor: value as Color?) as PlaygroundTheme),
+      ),
+      EditableProperty<Color?>(
+        label: 'Icon Background Color',
+        value: iconBackgroundColor,
+        onChanged: (value) => onUpdate(
+            copyWith(iconBackgroundColor: value as Color?) as PlaygroundTheme),
       ),
       EditableProperty<BorderRadius?>(
         label: 'Border Radius',
         value: borderRadius,
-        onChanged: (value) =>
-            onUpdate(copyWith(borderRadius: value as BorderRadius?) as PlaygroundTheme),
+        onChanged: (value) => onUpdate(
+            copyWith(borderRadius: value as BorderRadius?) as PlaygroundTheme),
       ),
       EditableProperty<EdgeInsets?>(
         label: 'Padding',
         value: padding,
-        onChanged: (value) => onUpdate(copyWith(padding: value as EdgeInsets?) as PlaygroundTheme),
+        onChanged: (value) => onUpdate(
+            copyWith(padding: value as EdgeInsets?) as PlaygroundTheme),
       ),
       EditableProperty<double?>(
-        label: 'Elevation',
-        value: elevation,
-        min: 0.0,
-        max: 20.0,
-        onChanged: (value) =>
-            onUpdate(copyWith(elevation: (value as num).toDouble()) as PlaygroundTheme),
+        label: 'Card Width',
+        value: cardWidth,
+        min: 200.0,
+        max: 600.0,
+        onChanged: (value) => onUpdate(
+            copyWith(cardWidth: (value as num).toDouble()) as PlaygroundTheme),
       ),
       EditableProperty<double?>(
-        label: 'Hover Elevation',
-        value: hoverElevation,
-        min: 0.0,
-        max: 30.0,
-        onChanged: (value) =>
-            onUpdate(copyWith(hoverElevation: (value as num).toDouble()) as PlaygroundTheme),
-      ),
-      EditableProperty<double?>(
-        label: 'Slide Offset',
-        value: slideOffset,
-        min: 20.0,
-        max: 200.0,
-        onChanged: (value) =>
-            onUpdate(copyWith(slideOffset: (value as num).toDouble()) as PlaygroundTheme),
+        label: 'Card Height',
+        value: cardHeight,
+        min: 150.0,
+        max: 400.0,
+        onChanged: (value) => onUpdate(
+            copyWith(cardHeight: (value as num).toDouble()) as PlaygroundTheme),
       ),
       EditableProperty<Duration?>(
         label: 'Animation Duration',
         value: animationDuration,
-        onChanged: (value) =>
-            onUpdate(copyWith(animationDuration: value as Duration?) as PlaygroundTheme),
+        onChanged: (value) => onUpdate(
+            copyWith(animationDuration: value as Duration?) as PlaygroundTheme),
       ),
     ];
   }
