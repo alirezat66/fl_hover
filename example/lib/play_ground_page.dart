@@ -289,6 +289,49 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('  onAuthorTap: () {},');
       code.writeln('  onLikeTap: () {},');
       code.writeln(')');
+    } else if (_currentTheme is AnimatedNavMenuTheme) {
+      final theme = _currentTheme as AnimatedNavMenuTheme;
+      code.writeln('AnimatedNavMenu(');
+      code.writeln('  theme: AnimatedNavMenuTheme(');
+      if (theme.itemSize != 60.0) {
+        code.writeln('    itemSize: ${theme.itemSize},');
+      }
+      if (theme.itemHoverWidth != 180.0) {
+        code.writeln('    itemHoverWidth: ${theme.itemHoverWidth},');
+      }
+      if (theme.spacing != 25.0) {
+        code.writeln('    spacing: ${theme.spacing},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 500)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.iconColor != const Color(0xFF777777)) {
+        code.writeln('    iconColor: ${_colorToString(theme.iconColor)},');
+      }
+      if (theme.textColor != Colors.white) {
+        code.writeln('    textColor: ${_colorToString(theme.textColor)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  items: [');
+      code.writeln('    AnimatedNavMenuItem(');
+      code.writeln('      icon: Icons.home,');
+      code.writeln('      title: \'Home\',');
+      code.writeln('      hoverGradient: LinearGradient(');
+      code.writeln('        colors: [Color(0xFF667eea), Color(0xFF764ba2)],');
+      code.writeln('      ),');
+      code.writeln('      onTap: () {},');
+      code.writeln('    ),');
+      code.writeln('    AnimatedNavMenuItem(');
+      code.writeln('      icon: Icons.search,');
+      code.writeln('      title: \'Search\',');
+      code.writeln('      hoverGradient: LinearGradient(');
+      code.writeln('        colors: [Color(0xFFf093fb), Color(0xFFf5576c)],');
+      code.writeln('      ),');
+      code.writeln('      onTap: () {},');
+      code.writeln('    ),');
+      code.writeln('  ],');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';

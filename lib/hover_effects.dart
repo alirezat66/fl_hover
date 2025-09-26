@@ -35,6 +35,7 @@ export 'src/components/button_3d_social/button_3d_social_widget.dart';
 export 'src/components/button_3d_social/models/button_3d_social_theme.dart';
 export 'src/components/animated_nav_menu/animated_nav_menu_widget.dart';
 export 'src/components/animated_nav_menu/models/animated_nav_menu_item.dart';
+export 'src/components/animated_nav_menu/models/animated_nav_menu_theme.dart';
 export 'src/components/sliding_nav_menu/sliding_nav_menu_widget.dart';
 export 'src/components/sliding_nav_menu/models/sliding_nav_menu_item.dart';
 export 'src/components/sliding_nav_menu/models/sliding_nav_menu_theme.dart';

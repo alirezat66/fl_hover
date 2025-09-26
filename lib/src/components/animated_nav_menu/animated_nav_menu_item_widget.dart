@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'models/animated_nav_menu_item.dart';
+import 'models/animated_nav_menu_theme.dart';
 
 /// The individual item widget for [AnimatedNavMenu].
 /// Manages its own hover state and animations.
 class AnimatedNavMenuItemWidget extends StatefulWidget {
   final AnimatedNavMenuItem item;
-  final double size;
-  final double hoverWidth;
-  final Duration duration;
+  final AnimatedNavMenuTheme theme;
 
   const AnimatedNavMenuItemWidget({
     Key? key,
     required this.item,
-    required this.size,
-    required this.hoverWidth,
-    required this.duration,
+    required this.theme,
   }) : super(key: key);
 
   @override
@@ -33,6 +30,8 @@ class _AnimatedNavMenuItemWidgetState extends State<AnimatedNavMenuItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = widget.theme;
+
     return MouseRegion(
       onEnter: (_) => _onHover(true),
       onExit: (_) => _onHover(false),
@@ -40,12 +39,12 @@ class _AnimatedNavMenuItemWidgetState extends State<AnimatedNavMenuItemWidget> {
       child: GestureDetector(
         onTap: widget.item.onTap,
         child: AnimatedContainer(
-          duration: widget.duration,
+          duration: theme.animationDuration,
           curve: Curves.easeInOut,
-          width: _isHovering ? widget.hoverWidth : widget.size,
-          height: widget.size,
+          width: _isHovering ? theme.itemHoverWidth : theme.itemSize,
+          height: theme.itemSize,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(widget.size),
+            borderRadius: BorderRadius.circular(theme.itemSize),
             boxShadow: [
               if (_isHovering)
                 BoxShadow(
@@ -60,12 +59,12 @@ class _AnimatedNavMenuItemWidgetState extends State<AnimatedNavMenuItemWidget> {
             children: [
               // Background gradient revealed on hover
               AnimatedOpacity(
-                duration: widget.duration,
+                duration: theme.animationDuration,
                 opacity: _isHovering ? 1.0 : 0.0,
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: widget.item.hoverGradient,
-                    borderRadius: BorderRadius.circular(widget.size),
+                    borderRadius: BorderRadius.circular(theme.itemSize),
                   ),
                 ),
               ),
@@ -74,7 +73,7 @@ class _AnimatedNavMenuItemWidgetState extends State<AnimatedNavMenuItemWidget> {
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(widget.size),
+                    borderRadius: BorderRadius.circular(theme.itemSize),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.1),
@@ -86,31 +85,31 @@ class _AnimatedNavMenuItemWidgetState extends State<AnimatedNavMenuItemWidget> {
                 ),
               // Icon and Title
               SizedBox(
-                width: widget.hoverWidth,
+                width: theme.itemHoverWidth,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
                     // Icon
                     AnimatedScale(
-                      duration: widget.duration,
+                      duration: theme.animationDuration,
                       scale: _isHovering ? 0 : 1,
                       child: Icon(
                         widget.item.icon,
-                        color: const Color(0xFF777777),
-                        size: widget.size * 0.45,
+                        color: theme.iconColor,
+                        size: theme.itemSize * theme.iconSize,
                       ),
                     ),
                     // Title
                     AnimatedScale(
-                      duration: widget.duration,
+                      duration: theme.animationDuration,
                       scale: _isHovering ? 1 : 0,
                       child: Text(
                         widget.item.title,
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: widget.size * 0.25,
+                          color: theme.textColor,
+                          fontSize: theme.itemSize * theme.textSize,
                           letterSpacing: 0.1,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: theme.textWeight,
                           textBaseline: TextBaseline.alphabetic,
                         ),
                         textAlign: TextAlign.center,

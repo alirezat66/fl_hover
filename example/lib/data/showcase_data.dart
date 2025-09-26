@@ -193,5 +193,86 @@ CardHover(
 """,
       initialTheme: const CardHoverTheme(),
     ),
+    ShowcaseItem(
+      name: 'AnimatedNavMenu',
+      category: ShowcaseCategory.navigation,
+      widgetBuilder: (theme) => AnimatedNavMenu(
+        theme: theme as AnimatedNavMenuTheme,
+        items: [
+          AnimatedNavMenuItem(
+            icon: Icons.home,
+            title: 'Home',
+            hoverGradient: const LinearGradient(
+              colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+            ),
+            onTap: () {},
+          ),
+          AnimatedNavMenuItem(
+            icon: Icons.search,
+            title: 'Search',
+            hoverGradient: const LinearGradient(
+              colors: [Color(0xFFf093fb), Color(0xFFf5576c)],
+            ),
+            onTap: () {},
+          ),
+          AnimatedNavMenuItem(
+            icon: Icons.favorite,
+            title: 'Favorites',
+            hoverGradient: const LinearGradient(
+              colors: [Color(0xFF4facfe), Color(0xFF00f2fe)],
+            ),
+            onTap: () {},
+          ),
+          AnimatedNavMenuItem(
+            icon: Icons.person,
+            title: 'Profile',
+            hoverGradient: const LinearGradient(
+              colors: [Color(0xFF43e97b), Color(0xFF38f9d7)],
+            ),
+            onTap: () {},
+          ),
+        ],
+      ),
+      defaultCode: """
+AnimatedNavMenu(
+  theme: const AnimatedNavMenuTheme(),
+  items: [
+    AnimatedNavMenuItem(
+      icon: Icons.home,
+      title: 'Home',
+      hoverGradient: LinearGradient(
+        colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+      ),
+      onTap: () {},
+    ),
+    AnimatedNavMenuItem(
+      icon: Icons.search,
+      title: 'Search',
+      hoverGradient: LinearGradient(
+        colors: [Color(0xFFf093fb), Color(0xFFf5576c)],
+      ),
+      onTap: () {},
+    ),
+    AnimatedNavMenuItem(
+      icon: Icons.favorite,
+      title: 'Favorites',
+      hoverGradient: LinearGradient(
+        colors: [Color(0xFF4facfe), Color(0xFF00f2fe)],
+      ),
+      onTap: () {},
+    ),
+    AnimatedNavMenuItem(
+      icon: Icons.person,
+      title: 'Profile',
+      hoverGradient: LinearGradient(
+        colors: [Color(0xFF43e97b), Color(0xFF38f9d7)],
+      ),
+      onTap: () {},
+    ),
+  ],
+)
+""",
+      initialTheme: const AnimatedNavMenuTheme(),
+    ),
   ];
 }
