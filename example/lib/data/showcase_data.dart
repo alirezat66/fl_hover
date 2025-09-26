@@ -274,5 +274,72 @@ AnimatedNavMenu(
 """,
       initialTheme: const AnimatedNavMenuTheme(),
     ),
+    ShowcaseItem(
+      name: 'SlidingNavMenu',
+      category: ShowcaseCategory.navigation,
+      widgetBuilder: (theme) => SlidingNavMenu(
+        theme: theme as SlidingNavMenuTheme,
+        items: [
+          SlidingNavMenuItem(
+            title: 'Dashboard',
+            highlightColor: const Color(0xFF6366F1),
+            onTap: () {},
+          ),
+          SlidingNavMenuItem(
+            title: 'Analytics',
+            highlightColor: const Color(0xFF10B981),
+            onTap: () {},
+          ),
+          SlidingNavMenuItem(
+            title: 'Projects',
+            highlightColor: const Color(0xFFF59E0B),
+            onTap: () {},
+          ),
+          SlidingNavMenuItem(
+            title: 'Team',
+            highlightColor: const Color(0xFFEF4444),
+            onTap: () {},
+          ),
+          SlidingNavMenuItem(
+            title: 'Settings',
+            highlightColor: const Color(0xFF8B5CF6),
+            onTap: () {},
+          ),
+        ],
+      ),
+      defaultCode: """
+SlidingNavMenu(
+  theme: const SlidingNavMenuTheme(),
+  items: [
+    SlidingNavMenuItem(
+      title: 'Dashboard',
+      highlightColor: Color(0xFF6366F1),
+      onTap: () {},
+    ),
+    SlidingNavMenuItem(
+      title: 'Analytics',
+      highlightColor: Color(0xFF10B981),
+      onTap: () {},
+    ),
+    SlidingNavMenuItem(
+      title: 'Projects',
+      highlightColor: Color(0xFFF59E0B),
+      onTap: () {},
+    ),
+    SlidingNavMenuItem(
+      title: 'Team',
+      highlightColor: Color(0xFFEF4444),
+      onTap: () {},
+    ),
+    SlidingNavMenuItem(
+      title: 'Settings',
+      highlightColor: Color(0xFF8B5CF6),
+      onTap: () {},
+    ),
+  ],
+)
+""",
+      initialTheme: const SlidingNavMenuTheme(),
+    ),
   ];
 }

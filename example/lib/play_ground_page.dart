@@ -332,6 +332,43 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    ),');
       code.writeln('  ],');
       code.writeln(')');
+    } else if (_currentTheme is SlidingNavMenuTheme) {
+      final theme = _currentTheme as SlidingNavMenuTheme;
+      code.writeln('SlidingNavMenu(');
+      code.writeln('  theme: SlidingNavMenuTheme(');
+      if (theme.itemHeight != 60.0) {
+        code.writeln('    itemHeight: ${theme.itemHeight},');
+      }
+      if (theme.peekSize != 0.0) {
+        code.writeln('    peekSize: ${theme.peekSize},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 300)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.fillDirection != FillDirection.leftToRight) {
+        code.writeln(
+            '    fillDirection: FillDirection.${theme.fillDirection.name},');
+      }
+      code.writeln('  ),');
+      code.writeln('  items: [');
+      code.writeln('    SlidingNavMenuItem(');
+      code.writeln('      title: \'Dashboard\',');
+      code.writeln('      highlightColor: Color(0xFF6366F1),');
+      code.writeln('      onTap: () {},');
+      code.writeln('    ),');
+      code.writeln('    SlidingNavMenuItem(');
+      code.writeln('      title: \'Analytics\',');
+      code.writeln('      highlightColor: Color(0xFF10B981),');
+      code.writeln('      onTap: () {},');
+      code.writeln('    ),');
+      code.writeln('    SlidingNavMenuItem(');
+      code.writeln('      title: \'Projects\',');
+      code.writeln('      highlightColor: Color(0xFFF59E0B),');
+      code.writeln('      onTap: () {},');
+      code.writeln('    ),');
+      code.writeln('  ],');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
@@ -758,17 +795,31 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
   }
 
   Widget _buildDropdownControl(EditableProperty property, String currentValue) {
-    final curveOptions = [
-      'easeInOut',
-      'easeIn',
-      'easeOut',
-      'linear',
-      'fastOutSlowIn',
-      'bounceIn',
-      'bounceOut',
-      'elasticIn',
-      'elasticOut',
-    ];
+    // Determine options based on property label
+    List<String> options;
+    if (property.label == 'Fill Direction') {
+      options = [
+        'Left to Right',
+        'Right to Left',
+        'Top to Bottom',
+        'Bottom to Top',
+        'Center Horizontal',
+        'Center Vertical',
+      ];
+    } else {
+      // Default curve options
+      options = [
+        'easeInOut',
+        'easeIn',
+        'easeOut',
+        'linear',
+        'fastOutSlowIn',
+        'bounceIn',
+        'bounceOut',
+        'elasticIn',
+        'elasticOut',
+      ];
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -798,10 +849,10 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
             value: currentValue,
             isExpanded: true,
             underline: const SizedBox(),
-            items: curveOptions.map((String curve) {
+            items: options.map((String option) {
               return DropdownMenuItem<String>(
-                value: curve,
-                child: Text(curve),
+                value: option,
+                child: Text(option),
               );
             }).toList(),
             onChanged: (String? newValue) {
