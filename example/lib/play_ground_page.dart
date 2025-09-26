@@ -458,6 +458,70 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    ),');
       code.writeln('  ],');
       code.writeln(')');
+    } else if (_currentTheme is AnimatedIconsTheme) {
+      final theme = _currentTheme as AnimatedIconsTheme;
+      code.writeln('AnimatedHoverIcons(');
+      code.writeln('  theme: AnimatedIconsTheme(');
+      if (theme.backgroundColor != const Color(0xFF262626)) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor)},');
+      }
+      if (theme.iconSize != 100.0) {
+        code.writeln('    iconSize: ${theme.iconSize},');
+      }
+      if (theme.spacing != 10.0) {
+        code.writeln('    spacing: ${theme.spacing},');
+      }
+      if (theme.iconBackgroundColor != const Color(0xFFd35400)) {
+        code.writeln(
+            '    iconBackgroundColor: ${_colorToString(theme.iconBackgroundColor)},');
+      }
+      if (theme.iconColor != Colors.white) {
+        code.writeln('    iconColor: ${_colorToString(theme.iconColor)},');
+      }
+      if (theme.rotationAngle != 45.0) {
+        code.writeln('    rotationAngle: ${theme.rotationAngle},');
+      }
+      if (theme.hoverBackgroundColor != const Color(0xFFe67e22)) {
+        code.writeln(
+            '    hoverBackgroundColor: ${_colorToString(theme.hoverBackgroundColor)},');
+      }
+      if (theme.hoverBackgroundOpacity != 0.7) {
+        code.writeln(
+            '    hoverBackgroundOpacity: ${theme.hoverBackgroundOpacity},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 500)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeInOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  icons: [');
+      code.writeln('    AnimatedIconItem(');
+      code.writeln('      icon: Icons.calculate,');
+      code.writeln('      hoverColor: Color(0xFFe67e22),');
+      code.writeln('      tooltip: \'Calculator\',');
+      code.writeln('    ),');
+      code.writeln('    AnimatedIconItem(');
+      code.writeln('      icon: Icons.directions_car,');
+      code.writeln('      hoverColor: Color(0xFFe67e22),');
+      code.writeln('      tooltip: \'Car\',');
+      code.writeln('    ),');
+      code.writeln('    AnimatedIconItem(');
+      code.writeln('      icon: Icons.local_cafe,');
+      code.writeln('      hoverColor: Color(0xFFe67e22),');
+      code.writeln('      tooltip: \'Coffee\',');
+      code.writeln('    ),');
+      code.writeln('    AnimatedIconItem(');
+      code.writeln('      icon: Icons.thumb_up,');
+      code.writeln('      hoverColor: Color(0xFFe67e22),');
+      code.writeln('      tooltip: \'Thumbs Up\',');
+      code.writeln('    ),');
+      code.writeln('  ],');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';

@@ -398,5 +398,62 @@ AnimatedFillIcon(
 """,
       initialTheme: const AnimatedFillIconTheme(),
     ),
+    ShowcaseItem(
+      name: 'AnimatedHoverIcons',
+      category: ShowcaseCategory.social,
+      widgetBuilder: (theme) => AnimatedHoverIcons(
+        theme: theme as AnimatedIconsTheme,
+        icons: const [
+          AnimatedIconItem(
+            icon: Icons.calculate,
+            hoverColor: Color(0xFFe67e22),
+            tooltip: 'Calculator',
+          ),
+          AnimatedIconItem(
+            icon: Icons.directions_car,
+            hoverColor: Color(0xFFe67e22),
+            tooltip: 'Car',
+          ),
+          AnimatedIconItem(
+            icon: Icons.local_cafe,
+            hoverColor: Color(0xFFe67e22),
+            tooltip: 'Coffee',
+          ),
+          AnimatedIconItem(
+            icon: Icons.thumb_up,
+            hoverColor: Color(0xFFe67e22),
+            tooltip: 'Thumbs Up',
+          ),
+        ],
+      ),
+      defaultCode: """
+AnimatedHoverIcons(
+  theme: const AnimatedIconsTheme(),
+  icons: [
+    AnimatedIconItem(
+      icon: Icons.calculate,
+      hoverColor: Color(0xFFe67e22),
+      tooltip: 'Calculator',
+    ),
+    AnimatedIconItem(
+      icon: Icons.directions_car,
+      hoverColor: Color(0xFFe67e22),
+      tooltip: 'Car',
+    ),
+    AnimatedIconItem(
+      icon: Icons.local_cafe,
+      hoverColor: Color(0xFFe67e22),
+      tooltip: 'Coffee',
+    ),
+    AnimatedIconItem(
+      icon: Icons.thumb_up,
+      hoverColor: Color(0xFFe67e22),
+      tooltip: 'Thumbs Up',
+    ),
+  ],
+)
+""",
+      initialTheme: const AnimatedIconsTheme(),
+    ),
   ];
 }

@@ -62,5 +62,10 @@ export 'src/components/social_media_icons/social_media_icons_widget.dart';
 export 'src/components/social_media_icons/models/social_media_icon.dart';
 export 'src/components/social_media_icons/models/social_media_icons_theme.dart';
 
+// Export the Animated Icons component
+export 'src/components/animated_icons/animated_icons_widget.dart';
+export 'src/components/animated_icons/models/animated_icon_item.dart';
+export 'src/components/animated_icons/models/animated_icons_theme.dart';
+
 export 'src/playground/playground_theme.dart';
 export 'src/playground/playground_property.dart';
