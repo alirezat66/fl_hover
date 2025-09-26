@@ -341,5 +341,62 @@ SlidingNavMenu(
 """,
       initialTheme: const SlidingNavMenuTheme(),
     ),
+    ShowcaseItem(
+      name: 'AnimatedFillIcon',
+      category: ShowcaseCategory.social,
+      widgetBuilder: (theme) => AnimatedFillIcon(
+        theme: theme as AnimatedFillIconTheme,
+        icons: const [
+          AnimatedFillIconItem(
+            icon: Icons.facebook,
+            hoverColor: Color(0xFF3b5999), // Facebook blue
+            tooltip: 'Facebook',
+          ),
+          AnimatedFillIconItem(
+            icon: Icons.alternate_email,
+            hoverColor: Color(0xFF55acee), // Twitter blue
+            tooltip: 'Twitter',
+          ),
+          AnimatedFillIconItem(
+            icon: Icons.work,
+            hoverColor: Color(0xFF0077b5), // LinkedIn blue
+            tooltip: 'LinkedIn',
+          ),
+          AnimatedFillIconItem(
+            icon: Icons.email,
+            hoverColor: Color(0xFFdd4b39), // Google red
+            tooltip: 'Gmail',
+          ),
+        ],
+      ),
+      defaultCode: """
+AnimatedFillIcon(
+  theme: const AnimatedFillIconTheme(),
+  icons: [
+    AnimatedFillIconItem(
+      icon: Icons.facebook,
+      hoverColor: Color(0xFF3b5999),
+      tooltip: 'Facebook',
+    ),
+    AnimatedFillIconItem(
+      icon: Icons.alternate_email,
+      hoverColor: Color(0xFF55acee),
+      tooltip: 'Twitter',
+    ),
+    AnimatedFillIconItem(
+      icon: Icons.work,
+      hoverColor: Color(0xFF0077b5),
+      tooltip: 'LinkedIn',
+    ),
+    AnimatedFillIconItem(
+      icon: Icons.email,
+      hoverColor: Color(0xFFdd4b39),
+      tooltip: 'Gmail',
+    ),
+  ],
+)
+""",
+      initialTheme: const AnimatedFillIconTheme(),
+    ),
   ];
 }

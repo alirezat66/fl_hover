@@ -7,6 +7,7 @@ enum ShowcaseCategory {
   button,
   navigation,
   effect,
+  social,
 }
 
 /// A data model to hold the necessary information for each showcase item.

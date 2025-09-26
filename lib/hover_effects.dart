@@ -56,5 +56,11 @@ export 'src/components/scotch_showcase/models/scotch_showcase_theme.dart';
 // Export the Holographic Effect component
 export 'src/components/holographic_effect/models/holographic_effect_theme.dart';
 export 'src/components/holographic_effect/holographic_effect_card.dart';
+
+// Export the Animated Fill Icon component
+export 'src/components/social_media_icons/social_media_icons_widget.dart';
+export 'src/components/social_media_icons/models/social_media_icon.dart';
+export 'src/components/social_media_icons/models/social_media_icons_theme.dart';
+
 export 'src/playground/playground_theme.dart';
 export 'src/playground/playground_property.dart';

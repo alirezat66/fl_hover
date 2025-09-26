@@ -389,6 +389,75 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    ),');
       code.writeln('  ],');
       code.writeln(')');
+    } else if (_currentTheme is AnimatedFillIconTheme) {
+      final theme = _currentTheme as AnimatedFillIconTheme;
+      code.writeln('AnimatedFillIcon(');
+      code.writeln('  theme: AnimatedFillIconTheme(');
+      if (theme.backgroundColor != const Color(0xFF262626)) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor)},');
+      }
+      if (theme.iconSize != 80.0) {
+        code.writeln('    iconSize: ${theme.iconSize},');
+      }
+      if (theme.spacing != 10.0) {
+        code.writeln('    spacing: ${theme.spacing},');
+      }
+      if (theme.iconBackgroundColor != Colors.white) {
+        code.writeln(
+            '    iconBackgroundColor: ${_colorToString(theme.iconBackgroundColor)},');
+      }
+      if (theme.iconColor != const Color(0xFF262626)) {
+        code.writeln('    iconColor: ${_colorToString(theme.iconColor)},');
+      }
+      if (theme.borderColor != Colors.white) {
+        code.writeln('    borderColor: ${_colorToString(theme.borderColor)},');
+      }
+      if (theme.borderWidth != 3.0) {
+        code.writeln('    borderWidth: ${theme.borderWidth},');
+      }
+      if (theme.hoverScale != 1.1) {
+        code.writeln('    hoverScale: ${theme.hoverScale},');
+      }
+      if (theme.hoverTranslateY != -10.0) {
+        code.writeln('    hoverTranslateY: ${theme.hoverTranslateY},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 500)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.ease) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      if (theme.fillDirection != FillDirection.bottomToTop) {
+        code.writeln(
+            '    fillDirection: FillDirection.${theme.fillDirection.name},');
+      }
+      code.writeln('  ),');
+      code.writeln('  icons: [');
+      code.writeln('    AnimatedFillIconItem(');
+      code.writeln('      icon: Icons.facebook,');
+      code.writeln('      hoverColor: Color(0xFF3b5999),');
+      code.writeln('      tooltip: \'Facebook\',');
+      code.writeln('    ),');
+      code.writeln('    AnimatedFillIconItem(');
+      code.writeln('      icon: Icons.alternate_email,');
+      code.writeln('      hoverColor: Color(0xFF55acee),');
+      code.writeln('      tooltip: \'Twitter\',');
+      code.writeln('    ),');
+      code.writeln('    AnimatedFillIconItem(');
+      code.writeln('      icon: Icons.work,');
+      code.writeln('      hoverColor: Color(0xFF0077b5),');
+      code.writeln('      tooltip: \'LinkedIn\',');
+      code.writeln('    ),');
+      code.writeln('    AnimatedFillIconItem(');
+      code.writeln('      icon: Icons.email,');
+      code.writeln('      hoverColor: Color(0xFFdd4b39),');
+      code.writeln('      tooltip: \'Gmail\',');
+      code.writeln('    ),');
+      code.writeln('  ],');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
