@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'models/card_hover_theme.dart';
 
 /// A card that reveals more information and an image overlay on hover.
+/// This matches the card__img--hover effect from the HTML/CSS version.
 class CardHover extends StatefulWidget {
   final ImageProvider image;
   final String category;
   final String title;
   final String author;
+  final String? timeText; // e.g., "15 min"
   final VoidCallback? onAuthorTap;
+  final VoidCallback? onLikeTap;
   final CardHoverTheme theme;
 
   const CardHover({
@@ -16,7 +19,9 @@ class CardHover extends StatefulWidget {
     required this.category,
     required this.title,
     required this.author,
+    this.timeText,
     this.onAuthorTap,
+    this.onLikeTap,
     this.theme = const CardHoverTheme(),
   }) : super(key: key);
 
@@ -59,7 +64,23 @@ class _CardHoverState extends State<CardHover> {
           borderRadius: theme.borderRadius,
           child: Stack(
             children: [
-              // Background Image
+              // Main Image (always visible, top part only)
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                height: theme.imageHeight,
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: widget.image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+
+              // Hover Image Overlay (covers entire card on hover)
               Positioned.fill(
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
@@ -71,11 +92,59 @@ class _CardHoverState extends State<CardHover> {
                   ),
                   child: AnimatedOpacity(
                     duration: const Duration(milliseconds: 200),
-                    opacity: _isHovering ? 0.3 : 0.0,
-                    child: Container(color: Colors.black),
+                    opacity: _isHovering ? theme.overlayOpacity : 0.0,
+                    child: Container(color: theme.overlayColor),
                   ),
                 ),
               ),
+
+              // Hover Info (like and time) - appears on hover
+              if (_isHovering)
+                Positioned(
+                  top: 16,
+                  left: 16,
+                  right: 16,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Like button
+                      GestureDetector(
+                        onTap: widget.onLikeTap,
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          child: Icon(
+                            Icons.favorite_border,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                      // Time info
+                      if (widget.timeText != null)
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.access_time,
+                                color: const Color(0xFFAD7D52),
+                                size: 15,
+                              ),
+                              const SizedBox(width: 5),
+                              Text(
+                                widget.timeText!,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xFFAD7D52),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
 
               // Info Content
               AnimatedPositioned(

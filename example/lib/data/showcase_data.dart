@@ -164,5 +164,34 @@ CardSlide(
 """,
       initialTheme: const CardSlideTheme(),
     ),
+    ShowcaseItem(
+      name: 'CardHover',
+      category: ShowcaseCategory.card,
+      widgetBuilder: (theme) => CardHover(
+        theme: theme as CardHoverTheme,
+        image: const NetworkImage(
+          'https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+        ),
+        category: 'Recipe',
+        title: 'Crisp Spanish tortilla Matzo brei',
+        author: 'Celeste Mills',
+        timeText: '15 min',
+        onAuthorTap: () {},
+        onLikeTap: () {},
+      ),
+      defaultCode: """
+CardHover(
+  theme: const CardHoverTheme(),
+  image: NetworkImage('https://example.com/image.jpg'),
+  category: 'Recipe',
+  title: 'Crisp Spanish tortilla Matzo brei',
+  author: 'Celeste Mills',
+  timeText: '15 min',
+  onAuthorTap: () {},
+  onLikeTap: () {},
+)
+""",
+      initialTheme: const CardHoverTheme(),
+    ),
   ];
 }

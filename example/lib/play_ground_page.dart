@@ -256,6 +256,39 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('  title: \'Hello there!\',');
       code.writeln('  subtitle: \'Trust yourself and keep going.\',');
       code.writeln(')');
+    } else if (_currentTheme is CardHoverTheme) {
+      final theme = _currentTheme as CardHoverTheme;
+      code.writeln('CardHover(');
+      code.writeln('  theme: CardHoverTheme(');
+      if (theme.width != 250.0) {
+        code.writeln('    width: ${theme.width},');
+      }
+      if (theme.height != 370.0) {
+        code.writeln('    height: ${theme.height},');
+      }
+      if (theme.imageHeight != 235.0) {
+        code.writeln('    imageHeight: ${theme.imageHeight},');
+      }
+      if (theme.borderRadius != const BorderRadius.all(Radius.circular(12))) {
+        code.writeln(
+            '    borderRadius: ${_borderRadiusToString(theme.borderRadius)},');
+      }
+      if (theme.overlayColor != Colors.white) {
+        code.writeln(
+            '    overlayColor: ${_colorToString(theme.overlayColor)},');
+      }
+      if (theme.overlayOpacity != 0.3) {
+        code.writeln('    overlayOpacity: ${theme.overlayOpacity},');
+      }
+      code.writeln('  ),');
+      code.writeln('  image: NetworkImage(\'https://example.com/image.jpg\'),');
+      code.writeln('  category: \'Recipe\',');
+      code.writeln('  title: \'Crisp Spanish tortilla Matzo brei\',');
+      code.writeln('  author: \'Celeste Mills\',');
+      code.writeln('  timeText: \'15 min\',');
+      code.writeln('  onAuthorTap: () {},');
+      code.writeln('  onLikeTap: () {},');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
