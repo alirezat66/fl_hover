@@ -226,77 +226,35 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         code.writeln(
             '    backgroundColor: ${_colorToString(theme.backgroundColor!)},');
       }
+      if (theme.iconBackgroundColor != const Color(0xFF2c73df)) {
+        code.writeln(
+            '    iconBackgroundColor: ${_colorToString(theme.iconBackgroundColor!)},');
+      }
       if (theme.borderRadius != const BorderRadius.all(Radius.circular(12))) {
         code.writeln(
             '    borderRadius: ${_borderRadiusToString(theme.borderRadius!)},');
       }
-      if (theme.padding != const EdgeInsets.all(24.0)) {
+      if (theme.padding != const EdgeInsets.all(20.0)) {
         code.writeln('    padding: ${_edgeInsetsToString(theme.padding!)},');
       }
-      if (theme.elevation != 4.0) {
-        code.writeln('    elevation: ${theme.elevation},');
+      if (theme.cardWidth != 400.0) {
+        code.writeln('    cardWidth: ${theme.cardWidth},');
       }
-      if (theme.hoverElevation != 16.0) {
-        code.writeln('    hoverElevation: ${theme.hoverElevation},');
+      if (theme.cardHeight != 250.0) {
+        code.writeln('    cardHeight: ${theme.cardHeight},');
       }
-      if (theme.slideOffset != 80.0) {
-        code.writeln('    slideOffset: ${theme.slideOffset},');
-      }
-      if (theme.animationDuration != const Duration(milliseconds: 800)) {
+      if (theme.animationDuration != const Duration(milliseconds: 500)) {
         code.writeln(
             '    animationDuration: ${_durationToString(theme.animationDuration!)},');
       }
       code.writeln('  ),');
-      code.writeln('  topSlideChild: const Center(');
-      code.writeln('    child: Column(');
-      code.writeln('      mainAxisAlignment: MainAxisAlignment.center,');
-      code.writeln('      children: [');
-      code.writeln('        Icon(Icons.slide, size: 48, color: Colors.blue),');
-      code.writeln('        SizedBox(height: 16),');
-      code.writeln('        Text(');
-      code.writeln('          \'Top Panel\',');
-      code.writeln('          style: TextStyle(');
-      code.writeln('            fontSize: 24,');
-      code.writeln('            fontWeight: FontWeight.bold,');
-      code.writeln('            color: Colors.blue,');
-      code.writeln('          ),');
-      code.writeln('        ),');
-      code.writeln('        SizedBox(height: 8),');
-      code.writeln('        Text(');
-      code.writeln('          \'Hover to slide\',');
-      code.writeln('          style: TextStyle(');
-      code.writeln('            fontSize: 14,');
-      code.writeln('            color: Colors.blue,');
-      code.writeln('          ),');
-      code.writeln('        ),');
-      code.writeln('      ],');
-      code.writeln('    ),');
+      code.writeln('  icon: const Icon(');
+      code.writeln('    Icons.person,');
+      code.writeln('    size: 80,');
+      code.writeln('    color: Colors.white,');
       code.writeln('  ),');
-      code.writeln('  bottomSlideChild: const Center(');
-      code.writeln('    child: Column(');
-      code.writeln('      mainAxisAlignment: MainAxisAlignment.center,');
-      code.writeln('      children: [');
-      code.writeln('        Icon(Icons.flip, size: 48, color: Colors.green),');
-      code.writeln('        SizedBox(height: 16),');
-      code.writeln('        Text(');
-      code.writeln('          \'Bottom Panel\',');
-      code.writeln('          style: TextStyle(');
-      code.writeln('            fontSize: 24,');
-      code.writeln('            fontWeight: FontWeight.bold,');
-      code.writeln('            color: Colors.green,');
-      code.writeln('          ),');
-      code.writeln('        ),');
-      code.writeln('        SizedBox(height: 8),');
-      code.writeln('        Text(');
-      code.writeln('          \'Slide & flip effect\',');
-      code.writeln('          style: TextStyle(');
-      code.writeln('            fontSize: 14,');
-      code.writeln('            color: Colors.green,');
-      code.writeln('          ),');
-      code.writeln('        ),');
-      code.writeln('      ],');
-      code.writeln('    ),');
-      code.writeln('  ),');
+      code.writeln('  title: \'Hello there!\',');
+      code.writeln('  subtitle: \'Trust yourself and keep going.\',');
       code.writeln(')');
     } else {
       // Fallback for unknown theme types

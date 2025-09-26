@@ -146,62 +146,20 @@ CardFace(
       category: ShowcaseCategory.card,
       widgetBuilder: (theme) => CardSlide(
         theme: theme as CardSlideTheme,
-        topSlideChild: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.swipe, size: 48, color: Colors.blue),
-              SizedBox(height: 16),
-              Text(
-                'Top Panel',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                ),
-              ),
-              SizedBox(height: 8),
-              Text(
-                'Hover to slide',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.blue,
-                ),
-              ),
-            ],
-          ),
+        icon: const Icon(
+          Icons.person,
+          size: 80,
+          color: Colors.white,
         ),
-        bottomSlideChild: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.flip, size: 48, color: Colors.green),
-              SizedBox(height: 16),
-              Text(
-                'Bottom Panel',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.green,
-                ),
-              ),
-              SizedBox(height: 8),
-              Text(
-                'Slide & flip effect',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.green,
-                ),
-              ),
-            ],
-          ),
-        ),
+        title: 'Hello there!',
+        subtitle: 'Trust yourself and keep going.',
       ),
       defaultCode: """
 CardSlide(
   theme: const CardSlideTheme(),
-  topSlideChild: Center(child: Text('Top Panel')),
-  bottomSlideChild: Center(child: Text('Bottom Panel')),
+  icon: Icon(Icons.person, size: 80, color: Colors.white),
+  title: 'Hello there!',
+  subtitle: 'Trust yourself and keep going.',
 )
 """,
       initialTheme: const CardSlideTheme(),
