@@ -40,9 +40,10 @@ class _CardSlideState extends State<CardSlide>
   @override
   void initState() {
     super.initState();
+    _updateTheme(); // Initialize theme first
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500), // Default duration
+      duration: _finalTheme.animationDuration,
     );
     _setupAnimations();
   }
@@ -50,8 +51,12 @@ class _CardSlideState extends State<CardSlide>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final oldTheme = _finalTheme;
     _updateTheme();
-    _controller.duration = _finalTheme.animationDuration;
+    if (oldTheme != _finalTheme) {
+      _controller.duration = _finalTheme.animationDuration;
+      _setupAnimations(); // Re-setup animations with new theme
+    }
   }
 
   @override
@@ -60,6 +65,7 @@ class _CardSlideState extends State<CardSlide>
     if (widget.theme != oldWidget.theme) {
       _updateTheme();
       _controller.duration = _finalTheme.animationDuration;
+      _setupAnimations(); // Re-setup animations with new theme
     }
   }
 
