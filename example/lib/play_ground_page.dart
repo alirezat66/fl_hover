@@ -522,6 +522,44 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    ),');
       code.writeln('  ],');
       code.writeln(')');
+    } else if (_currentTheme is HoverUnderlineTheme) {
+      final theme = _currentTheme as HoverUnderlineTheme;
+      code.writeln('HoverUnderline(');
+      code.writeln('  theme: HoverUnderlineTheme(');
+      if (theme.textStyle.color != Colors.white) {
+        code.writeln(
+            '    textStyle: TextStyle(color: ${_colorToString(theme.textStyle.color!)}, fontSize: ${theme.textStyle.fontSize}, fontWeight: ${theme.textStyle.fontWeight}),');
+      }
+      if (theme.underlineHeight != 2.0) {
+        code.writeln('    underlineHeight: ${theme.underlineHeight},');
+      }
+      if (theme.underlineOffset != 5.0) {
+        code.writeln('    underlineOffset: ${theme.underlineOffset},');
+      }
+      if (theme.underlineColors[0] != const Color(0xFFFF0000)) {
+        code.writeln(
+            '    underlineColors: [${_colorToString(theme.underlineColors[0])}, ${_colorToString(theme.underlineColors[1])}],');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 400)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  child: Text(');
+      code.writeln('    \'Reza Taghizadeh\',');
+      code.writeln('    style: TextStyle(');
+      code.writeln('      fontSize: 32,');
+      code.writeln('      color: Colors.black,');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln('  onTap: () {');
+      code.writeln('    // Handle tap');
+      code.writeln('  },');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
@@ -867,13 +905,17 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
               : (property.label == 'Elevation' ||
                       property.label == 'Hover Elevation'
                   ? 0.0
-                  : property.min ?? 0.0),
+                  : property.label == 'Animation Duration (ms)'
+                      ? 100.0
+                      : property.min ?? 0.0),
           max: property.label == 'Scale Factor'
               ? 2.0
               : (property.label == 'Elevation' ||
                       property.label == 'Hover Elevation'
                   ? 20.0
-                  : property.max ?? 100.0),
+                  : property.label == 'Animation Duration (ms)'
+                      ? 2000.0
+                      : property.max ?? 100.0),
           onChanged: (newValue) {
             // Create a wrapper function to handle the type conversion
             final callback = property.onChanged;

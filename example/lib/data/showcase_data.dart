@@ -455,5 +455,35 @@ AnimatedHoverIcons(
 """,
       initialTheme: const AnimatedIconsTheme(),
     ),
+    ShowcaseItem(
+      name: 'HoverUnderline',
+      category: ShowcaseCategory.social,
+      widgetBuilder: (theme) => HoverUnderline(
+        theme: theme as HoverUnderlineTheme,
+        child: Text(
+          'Reza Taghizadeh',
+          style: theme.textStyle.copyWith(color: Colors.black),
+        ),
+        onTap: () {
+          // Handle tap
+        },
+      ),
+      defaultCode: """
+HoverUnderline(
+  theme: const HoverUnderlineTheme(),
+  child: Text(
+    'Reza Taghizadeh',
+    style: TextStyle(
+      fontSize: 32,
+      color: Colors.black,
+    ),
+  ),
+  onTap: () {
+    // Handle tap
+  },
+)
+""",
+      initialTheme: const HoverUnderlineTheme(),
+    ),
   ];
 }

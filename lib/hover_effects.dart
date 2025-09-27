@@ -67,5 +67,8 @@ export 'src/components/animated_icons/animated_icons_widget.dart';
 export 'src/components/animated_icons/models/animated_icon_item.dart';
 export 'src/components/animated_icons/models/animated_icons_theme.dart';
 
+export 'src/components/hover_underline/hover_underline_widget.dart';
+export 'src/components/hover_underline/models/hover_underline_theme.dart';
+
 export 'src/playground/playground_theme.dart';
 export 'src/playground/playground_property.dart';
