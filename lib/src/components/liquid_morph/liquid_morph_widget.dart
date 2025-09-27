@@ -89,19 +89,26 @@ class _LiquidMorphState extends State<LiquidMorph>
                 width: widget.theme.width,
                 height: widget.theme.height,
                 decoration: BoxDecoration(
-                  color: _controller.value == 0.0
-                      ? widget.theme.backgroundColor
-                      : null,
-                  gradient: _controller.value > 0.0
-                      ? SweepGradient(
-                          colors: [
-                            widget.theme.gradientColors[0],
-                            widget.theme.gradientColors[1],
-                            widget.theme.gradientColors[2],
-                          ],
-                          stops: widget.theme.gradientStops,
-                        )
-                      : null,
+                  gradient: SweepGradient(
+                    colors: [
+                      Color.lerp(
+                        widget.theme.backgroundColor,
+                        widget.theme.gradientColors[0],
+                        _controller.value,
+                      )!,
+                      Color.lerp(
+                        widget.theme.backgroundColor,
+                        widget.theme.gradientColors[1],
+                        _controller.value,
+                      )!,
+                      Color.lerp(
+                        widget.theme.backgroundColor,
+                        widget.theme.gradientColors[2],
+                        _controller.value,
+                      )!,
+                    ],
+                    stops: widget.theme.gradientStops,
+                  ),
                   borderRadius:
                       BorderRadius.circular(_borderRadiusAnimation.value),
                 ),

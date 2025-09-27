@@ -654,32 +654,6 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
     return 'Curves.easeInOut';
   }
 
-  /// Converts string to Curve
-  Curve _getCurveFromString(String curveName) {
-    switch (curveName) {
-      case 'easeInOut':
-        return Curves.easeInOut;
-      case 'easeIn':
-        return Curves.easeIn;
-      case 'easeOut':
-        return Curves.easeOut;
-      case 'linear':
-        return Curves.linear;
-      case 'fastOutSlowIn':
-        return Curves.fastOutSlowIn;
-      case 'bounceIn':
-        return Curves.bounceIn;
-      case 'bounceOut':
-        return Curves.bounceOut;
-      case 'elasticIn':
-        return Curves.elasticIn;
-      case 'elasticOut':
-        return Curves.elasticOut;
-      default:
-        return Curves.easeOut;
-    }
-  }
-
   /// Converts curve toString() to display name for dropdown
   String _getCurveDisplayName(String curveString) {
     if (curveString.contains('easeInOut')) return 'easeInOut';
