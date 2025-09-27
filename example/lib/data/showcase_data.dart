@@ -458,17 +458,37 @@ AnimatedHoverIcons(
     ShowcaseItem(
       name: 'HoverUnderline',
       category: ShowcaseCategory.social,
-      widgetBuilder: (theme) => HoverUnderline(
-        theme: theme as HoverUnderlineTheme,
-        child: Text(
-          'Reza Taghizadeh',
-          style: theme.textStyle.copyWith(color: Colors.black),
-        ),
-        onTap: () {
-          // Handle tap
-        },
+      widgetBuilder: (theme) => Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Text example
+          HoverUnderline(
+            theme: theme as HoverUnderlineTheme,
+            child: Text(
+              'Reza Taghizadeh',
+              style: theme.textStyle.copyWith(color: Colors.black),
+            ),
+            onTap: () {
+              // Handle tap
+            },
+          ),
+          const SizedBox(height: 30),
+          // Icon example
+          HoverUnderline(
+            theme: theme,
+            child: const Icon(
+              Icons.favorite,
+              size: 48,
+              color: Colors.red,
+            ),
+            onTap: () {
+              // Handle tap
+            },
+          ),
+        ],
       ),
       defaultCode: """
+// Text example
 HoverUnderline(
   theme: const HoverUnderlineTheme(),
   child: Text(
@@ -482,6 +502,20 @@ HoverUnderline(
     // Handle tap
   },
 )
+
+// Icon example
+HoverUnderline(
+  theme: const HoverUnderlineTheme(),
+  child: Icon(
+    Icons.favorite,
+    size: 48,
+    color: Colors.red,
+  ),
+  onTap: () {
+    // Handle tap
+  },
+)
+
 """,
       initialTheme: const HoverUnderlineTheme(),
     ),
