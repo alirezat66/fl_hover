@@ -554,5 +554,24 @@ LiquidMorph(
 """,
       initialTheme: const LiquidMorphTheme(),
     ),
+    ShowcaseItem(
+      name: 'AnimatedArrowButton',
+      category: ShowcaseCategory.social,
+      widgetBuilder: (theme) => AnimatedArrowButton(
+        theme: theme as AnimatedArrowButtonTheme,
+        onTap: () {
+          // Handle tap
+        },
+      ),
+      defaultCode: """
+AnimatedArrowButton(
+  theme: const AnimatedArrowButtonTheme(),
+  onTap: () {
+    // Handle tap
+  },
+)
+""",
+      initialTheme: const AnimatedArrowButtonTheme(),
+    ),
   ];
 }

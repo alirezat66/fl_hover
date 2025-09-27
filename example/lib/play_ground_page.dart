@@ -605,6 +605,51 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    // Handle tap');
       code.writeln('  },');
       code.writeln(')');
+    } else if (_currentTheme is AnimatedArrowButtonTheme) {
+      final theme = _currentTheme as AnimatedArrowButtonTheme;
+      code.writeln('AnimatedArrowButton(');
+      code.writeln('  theme: AnimatedArrowButtonTheme(');
+      if (theme.text != 'NEXT') {
+        code.writeln('    text: \'${theme.text}\',');
+      }
+      if (theme.textStyle.color != Colors.white) {
+        code.writeln(
+            '    textStyle: TextStyle(color: ${_colorToString(theme.textStyle.color!)}, fontSize: ${theme.textStyle.fontSize}, fontWeight: ${theme.textStyle.fontWeight}),');
+      }
+      if (theme.backgroundColor != const Color(0xFF6225E6)) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor)},');
+      }
+      if (theme.shadowColor != Colors.black) {
+        code.writeln('    shadowColor: ${_colorToString(theme.shadowColor)},');
+      }
+      if (theme.hoverShadowColor != const Color(0xFFFBC638)) {
+        code.writeln(
+            '    hoverShadowColor: ${_colorToString(theme.hoverShadowColor)},');
+      }
+      if (theme.arrowColor != Colors.white) {
+        code.writeln('    arrowColor: ${_colorToString(theme.arrowColor)},');
+      }
+      if (theme.hoverArrowColor != const Color(0xFFFBC638)) {
+        code.writeln(
+            '    hoverArrowColor: ${_colorToString(theme.hoverArrowColor)},');
+      }
+      if (theme.skewAngle != 0.0) {
+        code.writeln('    skewAngle: ${theme.skewAngle},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 500)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  onTap: () {');
+      code.writeln('    // Handle tap');
+      code.writeln('  },');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
@@ -842,9 +887,14 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       return _buildDurationControl(property, value);
     }
 
-    // Handle String properties (for dropdowns)
+    // Handle String properties
     if (value is String) {
-      return _buildDropdownControl(property, value);
+      // Check if it's a text input field (not a dropdown)
+      if (property.label == 'Text') {
+        return _buildTextControl(property, value);
+      } else {
+        return _buildDropdownControl(property, value);
+      }
     }
 
     // Fallback for any unsupported types
@@ -852,6 +902,48 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
   }
 
   // --- Helper methods for building controls ---
+
+  /// Builds a text input control for string properties
+  Widget _buildTextControl(EditableProperty property, String currentValue) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text('${property.label}: $currentValue',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black87,
+              )),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade300),
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
+          ),
+          child: TextField(
+            controller: TextEditingController(text: currentValue),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(vertical: 8),
+            ),
+            onChanged: (String newValue) {
+              final callback = property.onChanged;
+              callback(newValue);
+            },
+          ),
+        ),
+      ],
+    );
+  }
 
   Widget _buildColorControl(
       BuildContext context, EditableProperty property, Color? color) {
