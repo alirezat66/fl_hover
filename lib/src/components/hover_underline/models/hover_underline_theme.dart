@@ -67,19 +67,16 @@ class HoverUnderlineTheme extends ThemeExtension<HoverUnderlineTheme>
 
     return HoverUnderlineTheme(
       textStyle: TextStyle.lerp(textStyle, other.textStyle, t) ?? textStyle,
-      underlineHeight: lerpDouble(underlineHeight, other.underlineHeight, t) ??
-          underlineHeight,
-      underlineOffset: lerpDouble(underlineOffset, other.underlineOffset, t) ??
-          underlineOffset,
+      underlineHeight: lerpDouble(underlineHeight, other.underlineHeight, t),
+      underlineOffset: lerpDouble(underlineOffset, other.underlineOffset, t),
       underlineColors:
           _lerpColorList(underlineColors, other.underlineColors, t),
       animationDuration: Duration(
         milliseconds: lerpDouble(
-              animationDuration.inMilliseconds.toDouble(),
-              other.animationDuration.inMilliseconds.toDouble(),
-              t,
-            ).round() ??
-            animationDuration.inMilliseconds,
+          animationDuration.inMilliseconds.toDouble(),
+          other.animationDuration.inMilliseconds.toDouble(),
+          t,
+        ).round(),
       ),
       animationCurve: t < 0.5 ? animationCurve : other.animationCurve,
     );

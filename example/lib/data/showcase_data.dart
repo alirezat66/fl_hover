@@ -519,5 +519,40 @@ HoverUnderline(
 """,
       initialTheme: const HoverUnderlineTheme(),
     ),
+    ShowcaseItem(
+      name: 'LiquidMorph',
+      category: ShowcaseCategory.social,
+      widgetBuilder: (theme) => LiquidMorph(
+        theme: theme as LiquidMorphTheme,
+        child: const Text(
+          'TRANSFORM',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        onTap: () {
+          // Handle tap
+        },
+      ),
+      defaultCode: """
+LiquidMorph(
+  theme: const LiquidMorphTheme(),
+  child: Text(
+    'TRANSFORM',
+    style: TextStyle(
+      color: Colors.white,
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+    ),
+  ),
+  onTap: () {
+    // Handle tap
+  },
+)
+""",
+      initialTheme: const LiquidMorphTheme(),
+    ),
   ];
 }

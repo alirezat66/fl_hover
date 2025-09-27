@@ -560,6 +560,51 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    // Handle tap');
       code.writeln('  },');
       code.writeln(')');
+    } else if (_currentTheme is LiquidMorphTheme) {
+      final theme = _currentTheme as LiquidMorphTheme;
+      code.writeln('LiquidMorph(');
+      code.writeln('  theme: LiquidMorphTheme(');
+      if (theme.backgroundColor != const Color(0xFF0a2342)) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor)},');
+      }
+      if (theme.width != 250.0) {
+        code.writeln('    width: ${theme.width},');
+      }
+      if (theme.height != 100.0) {
+        code.writeln('    height: ${theme.height},');
+      }
+      if (theme.borderRadius != 50.0) {
+        code.writeln('    borderRadius: ${theme.borderRadius},');
+      }
+      if (theme.hoverBorderRadius != 10.0) {
+        code.writeln('    hoverBorderRadius: ${theme.hoverBorderRadius},');
+      }
+      if (theme.gradientColors[0] != const Color(0xFF00FFFF)) {
+        code.writeln(
+            '    gradientColors: [${_colorToString(theme.gradientColors[0])}, ${_colorToString(theme.gradientColors[1])}, ${_colorToString(theme.gradientColors[2])}],');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 600)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeInOutCubic) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  child: Text(');
+      code.writeln('    \'TRANSFORM\',');
+      code.writeln('    style: TextStyle(');
+      code.writeln('      color: Colors.white,');
+      code.writeln('      fontSize: 24,');
+      code.writeln('      fontWeight: FontWeight.bold,');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln('  onTap: () {');
+      code.writeln('    // Handle tap');
+      code.writeln('  },');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
@@ -907,7 +952,9 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                   ? 0.0
                   : property.label == 'Animation Duration (ms)'
                       ? 100.0
-                      : property.min ?? 0.0),
+                      : property.label == 'Width' || property.label == 'Height'
+                          ? 50.0
+                          : property.min ?? 0.0),
           max: property.label == 'Scale Factor'
               ? 2.0
               : (property.label == 'Elevation' ||
@@ -915,7 +962,9 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                   ? 20.0
                   : property.label == 'Animation Duration (ms)'
                       ? 2000.0
-                      : property.max ?? 100.0),
+                      : property.label == 'Width' || property.label == 'Height'
+                          ? 500.0
+                          : property.max ?? 100.0),
           onChanged: (newValue) {
             // Create a wrapper function to handle the type conversion
             final callback = property.onChanged;

@@ -1,109 +1,116 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'liquid_morph_painter.dart';
 import 'models/liquid_morph_theme.dart';
 
-/// A widget that morphs its shape and reveals a liquid-like gradient on hover.
+/// A widget that displays a button with liquid morph hover effect.
 ///
-/// Recreates the liquid morph CSS effect using an [AnimatedContainer] for the
-/// shape and rotation, and a [CustomPainter] for the dynamic gradient effect.
+/// The button transforms from rounded to rectangular shape on hover,
+/// with a rotating conic gradient background effect.
 class LiquidMorph extends StatefulWidget {
-  /// The content to display inside the widget.
+  /// The child widget to display inside the button
   final Widget child;
 
-  /// The visual theme of the widget.
+  /// The theme for styling the widget
   final LiquidMorphTheme theme;
 
-  /// The width of the widget.
-  final double width;
-
-  /// The height of the widget.
-  final double height;
-
-  /// The duration of the morph animation.
-  final Duration animationDuration;
+  /// Callback when the button is tapped
+  final VoidCallback? onTap;
 
   const LiquidMorph({
-    Key? key,
+    super.key,
     required this.child,
-    this.theme = const LiquidMorphTheme(),
-    this.width = 250,
-    this.height = 100,
-    this.animationDuration = const Duration(milliseconds: 600),
-  }) : super(key: key);
+    required this.theme,
+    this.onTap,
+  });
 
   @override
   State<LiquidMorph> createState() => _LiquidMorphState();
 }
 
 class _LiquidMorphState extends State<LiquidMorph>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _liquidController;
-  bool _isHovering = false;
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _rotationAnimation;
+  late Animation<double> _borderRadiusAnimation;
 
   @override
   void initState() {
     super.initState();
-    _liquidController = AnimationController(
+    _controller = AnimationController(
+      duration: widget.theme.animationDuration,
       vsync: this,
-      duration: widget.animationDuration,
     );
+
+    _rotationAnimation = Tween<double>(
+      begin: 0.0,
+      end: 15.0,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: widget.theme.animationCurve,
+    ));
+
+    _borderRadiusAnimation = Tween<double>(
+      begin: widget.theme.borderRadius,
+      end: widget.theme.hoverBorderRadius,
+    ).animate(CurvedAnimation(
+      parent: _controller,
+      curve: widget.theme.animationCurve,
+    ));
   }
 
   @override
   void dispose() {
-    _liquidController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
-  void _onHover(bool isHovering) {
-    setState(() {
-      _isHovering = isHovering;
-    });
-    if (_isHovering) {
-      _liquidController.forward();
-    } else {
-      _liquidController.reverse();
-    }
+  void _handleHoverEnter() {
+    _controller.forward();
+  }
+
+  void _handleHoverExit() {
+    _controller.reverse();
   }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (_) => _onHover(true),
-      onExit: (_) => _onHover(false),
-      cursor: SystemMouseCursors.click,
-      child: AnimatedContainer(
-        duration: widget.animationDuration,
-        curve: const Cubic(0.68, -0.55, 0.265, 1.55), // Elastic ease from CSS
-        width: widget.width,
-        height: widget.height,
-        transform: Matrix4.identity()
-          ..rotateZ(_isHovering ? 15 * (math.pi / 180.0) : 0),
-        transformAlignment: Alignment.center,
-        clipBehavior: Clip.antiAlias,
-        decoration: BoxDecoration(
-          borderRadius: _isHovering
-              ? widget.theme.hoveredBorderRadius
-              : widget.theme.initialBorderRadius,
-        ),
+      onEnter: (_) => _handleHoverEnter(),
+      onExit: (_) => _handleHoverExit(),
+      child: GestureDetector(
+        onTap: widget.onTap,
         child: AnimatedBuilder(
-          animation: _liquidController,
+          animation: _controller,
           builder: (context, child) {
-            return CustomPaint(
-              painter: LiquidMorphPainter(
-                animationValue: _liquidController.value,
-                theme: widget.theme,
-              ),
-              child: Center(
-                child: DefaultTextStyle(
-                  style: widget.theme.textStyle,
-                  child: child!,
+            return Transform.rotate(
+              angle: _rotationAnimation.value *
+                  3.14159 /
+                  180, // Convert degrees to radians
+              child: Container(
+                width: widget.theme.width,
+                height: widget.theme.height,
+                decoration: BoxDecoration(
+                  color: _controller.value == 0.0
+                      ? widget.theme.backgroundColor
+                      : null,
+                  gradient: _controller.value > 0.0
+                      ? SweepGradient(
+                          colors: [
+                            widget.theme.gradientColors[0],
+                            widget.theme.gradientColors[1],
+                            widget.theme.gradientColors[2],
+                          ],
+                          stops: widget.theme.gradientStops,
+                        )
+                      : null,
+                  borderRadius:
+                      BorderRadius.circular(_borderRadiusAnimation.value),
+                ),
+                child: Center(
+                  child: widget.child,
                 ),
               ),
             );
           },
-          child: widget.child,
         ),
       ),
     );
