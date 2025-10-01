@@ -573,5 +573,331 @@ AnimatedArrowButton(
 """,
       initialTheme: const AnimatedArrowButtonTheme(),
     ),
+    ShowcaseItem(
+      name: 'PaperCardGrid',
+      category: ShowcaseCategory.list,
+      widgetBuilder: (theme) => SizedBox(
+        height: 500,
+        child: PaperCardGrid(
+          theme: theme as PaperCardGridTheme,
+          items: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child:
+                        const Icon(Icons.code, size: 48, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Remix: a practical guide',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.green,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child:
+                        const Icon(Icons.speed, size: 48, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Nuxt: a practical guide',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.orange,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: const Icon(Icons.rocket_launch,
+                        size: 48, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Solid: a practical guide',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.purple,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child:
+                        const Icon(Icons.star, size: 48, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Astro: a practical guide',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: const Icon(Icons.flash_on,
+                        size: 48, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Qwik: a practical guide',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Container(
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Colors.teal,
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    child: const Icon(Icons.next_plan,
+                        size: 48, color: Colors.white),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                const Text(
+                  'Next: a practical guide',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ],
+          onCardTap: (index) {
+            // Handle card tap
+          },
+        ),
+      ),
+      defaultCode: """
+PaperCardGrid(
+  theme: const PaperCardGridTheme(),
+  items: [
+    Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+            ),
+            child: Icon(Icons.code, size: 48, color: Colors.white),
+          ),
+        ),
+        SizedBox(height: 12),
+        Text(
+          'Remix: a practical guide',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+      ],
+    ),
+    // Add more cards...
+  ],
+  onCardTap: (index) {
+    // Handle card tap
+  },
+)
+""",
+      initialTheme: const PaperCardGridTheme(),
+    ),
+    ShowcaseItem(
+      name: 'GlowCard',
+      category: ShowcaseCategory.card,
+      widgetBuilder: (theme) => GlowCard(
+        theme: theme as GlowCardTheme,
+        onTap: () {
+          // Handle tap
+        },
+        child: const Padding(
+          padding: EdgeInsets.all(32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.auto_awesome, size: 48, color: Color(0xFFBA7245)),
+              SizedBox(height: 16),
+              Text(
+                'Glow Card',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
+                'Hover to see the glow effect',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black54,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+      defaultCode: """
+GlowCard(
+  theme: const GlowCardTheme(),
+  onTap: () {
+    // Handle tap
+  },
+  child: Padding(
+    padding: EdgeInsets.all(32.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.auto_awesome, size: 48),
+        SizedBox(height: 16),
+        Text(
+          'Glow Card',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 8),
+        Text(
+          'Hover to see the glow effect',
+          textAlign: TextAlign.center,
+        ),
+      ],
+    ),
+  ),
+)
+""",
+      initialTheme: const GlowCardTheme(),
+    ),
+    ShowcaseItem(
+      name: 'LiquidGlass',
+      category: ShowcaseCategory.card,
+      widgetBuilder: (theme) => Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF1E3A8A),
+              Color(0xFF3B0764),
+            ],
+          ),
+        ),
+        child: LiquidGlassCard(
+          theme: theme as LiquidGlassTheme,
+          onTap: () {
+            // Handle tap
+          },
+          child: const Padding(
+            padding: EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.water_drop, size: 48, color: Colors.white),
+                SizedBox(height: 16),
+                Text(
+                  'Liquid Glass',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  'Animated liquid glass effect',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white70,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      defaultCode: """
+LiquidGlassCard(
+  theme: const LiquidGlassTheme(),
+  onTap: () {
+    // Handle tap
+  },
+  child: Padding(
+    padding: EdgeInsets.all(32.0),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(Icons.water_drop, size: 48, color: Colors.white),
+        SizedBox(height: 16),
+        Text(
+          'Liquid Glass',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        SizedBox(height: 8),
+        Text(
+          'Animated liquid glass effect',
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.white70,
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    ),
+  ),
+)
+""",
+      initialTheme: const LiquidGlassTheme(),
+    ),
   ];
 }

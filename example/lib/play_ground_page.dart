@@ -650,6 +650,282 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    // Handle tap');
       code.writeln('  },');
       code.writeln(')');
+    } else if (_currentTheme is PaperCardGridTheme) {
+      final theme = _currentTheme as PaperCardGridTheme;
+      code.writeln('PaperCardGrid(');
+      code.writeln('  theme: PaperCardGridTheme(');
+      if (theme.backgroundColor != const Color(0xFFF6EEE3)) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor)},');
+      }
+      if (theme.cardBackgroundColor != Colors.white) {
+        code.writeln(
+            '    cardBackgroundColor: ${_colorToString(theme.cardBackgroundColor)},');
+      }
+      if (theme.borderColor != const Color(0xFFE5DECF)) {
+        code.writeln('    borderColor: ${_colorToString(theme.borderColor)},');
+      }
+      if (theme.borderWidth != 1.0) {
+        code.writeln('    borderWidth: ${theme.borderWidth},');
+      }
+      if (theme.borderRadius != 8.0) {
+        code.writeln('    borderRadius: ${theme.borderRadius},');
+      }
+      if (theme.gridSpacing != 16.0) {
+        code.writeln('    gridSpacing: ${theme.gridSpacing},');
+      }
+      if (theme.crossAxisCount != 3) {
+        code.writeln('    crossAxisCount: ${theme.crossAxisCount},');
+      }
+      if (theme.overlayOpacity != 0.8) {
+        code.writeln('    overlayOpacity: ${theme.overlayOpacity},');
+      }
+      if (theme.cardElevation != 4.0) {
+        code.writeln('    cardElevation: ${theme.cardElevation},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 150)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeInOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  items: [');
+      code.writeln('    Column(');
+      code.writeln('      crossAxisAlignment: CrossAxisAlignment.start,');
+      code.writeln('      children: [');
+      code.writeln('        Expanded(');
+      code.writeln('          child: Container(');
+      code.writeln('            width: double.infinity,');
+      code.writeln('            decoration: BoxDecoration(');
+      code.writeln('              color: Colors.blue,');
+      code.writeln(
+          '              borderRadius: BorderRadius.all(Radius.circular(8)),');
+      code.writeln('            ),');
+      code.writeln(
+          '            child: Icon(Icons.code, size: 48, color: Colors.white),');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('        SizedBox(height: 12),');
+      code.writeln('        Text(');
+      code.writeln('          \'Remix: a practical guide\',');
+      code.writeln(
+          '          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),');
+      code.writeln('        ),');
+      code.writeln('      ],');
+      code.writeln('    ),');
+      code.writeln('    // Add more cards...');
+      code.writeln('  ],');
+      code.writeln('  onCardTap: (index) {');
+      code.writeln('    // Handle card tap');
+      code.writeln('  },');
+      code.writeln(')');
+    } else if (_currentTheme is GlowCardTheme) {
+      final theme = _currentTheme as GlowCardTheme;
+      code.writeln('GlowCard(');
+      code.writeln('  theme: GlowCardTheme(');
+      if (theme.backgroundColor != Colors.white) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor)},');
+      }
+      if (theme.borderColor != const Color(0xFFBA7245)) {
+        code.writeln('    borderColor: ${_colorToString(theme.borderColor)},');
+      }
+      if (theme.borderWidth != 3.0) {
+        code.writeln('    borderWidth: ${theme.borderWidth},');
+      }
+      if (theme.borderRadius != 16.0) {
+        code.writeln('    borderRadius: ${theme.borderRadius},');
+      }
+      if (theme.glowColor != const Color(0xFFBA7245)) {
+        code.writeln('    glowColor: ${_colorToString(theme.glowColor)},');
+      }
+      if (theme.glowOpacity != 1.0) {
+        code.writeln('    glowOpacity: ${theme.glowOpacity},');
+      }
+      if (theme.glowStrokeWidth != 15.0) {
+        code.writeln('    glowStrokeWidth: ${theme.glowStrokeWidth},');
+      }
+      if (theme.glowBlurRadius != 14.0) {
+        code.writeln('    glowBlurRadius: ${theme.glowBlurRadius},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 500)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      code.writeln('  ),');
+      code.writeln('  onTap: () {');
+      code.writeln('    // Handle tap');
+      code.writeln('  },');
+      code.writeln('  child: Padding(');
+      code.writeln('    padding: EdgeInsets.all(32.0),');
+      code.writeln('    child: Column(');
+      code.writeln('      mainAxisSize: MainAxisSize.min,');
+      code.writeln('      children: [');
+      code.writeln('        Icon(Icons.auto_awesome, size: 48),');
+      code.writeln('        SizedBox(height: 16),');
+      code.writeln('        Text(');
+      code.writeln('          \'Glow Card\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 24,');
+      code.writeln('            fontWeight: FontWeight.bold,');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('        SizedBox(height: 8),');
+      code.writeln('        Text(');
+      code.writeln('          \'Hover to see the glow effect\',');
+      code.writeln('          textAlign: TextAlign.center,');
+      code.writeln('        ),');
+      code.writeln('      ],');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln(')');
+    } else if (_currentTheme is LiquidGlassTheme) {
+      final theme = _currentTheme as LiquidGlassTheme;
+      code.writeln('LiquidGlassCard(');
+      code.writeln('  theme: LiquidGlassTheme(');
+      if (theme.backgroundColor != Colors.white) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor)},');
+      }
+      if (theme.backgroundOpacity != 0.15) {
+        code.writeln('    backgroundOpacity: ${theme.backgroundOpacity},');
+      }
+      if (theme.blurAmount != 12.0) {
+        code.writeln('    blurAmount: ${theme.blurAmount},');
+      }
+      if (theme.borderColor != Colors.white) {
+        code.writeln('    borderColor: ${_colorToString(theme.borderColor)},');
+      }
+      if (theme.borderWidth != 1.5) {
+        code.writeln('    borderWidth: ${theme.borderWidth},');
+      }
+      if (theme.borderRadius != 24.0) {
+        code.writeln('    borderRadius: ${theme.borderRadius},');
+      }
+      if (theme.liquidIntensity != 0.3) {
+        code.writeln('    liquidIntensity: ${theme.liquidIntensity},');
+      }
+      if (theme.liquidSpeed != 1.0) {
+        code.writeln('    liquidSpeed: ${theme.liquidSpeed},');
+      }
+      if (theme.shadowBlurRadius != 25.0) {
+        code.writeln('    shadowBlurRadius: ${theme.shadowBlurRadius},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 300)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      code.writeln('  ),');
+      code.writeln('  onTap: () {');
+      code.writeln('    // Handle tap');
+      code.writeln('  },');
+      code.writeln('  child: Padding(');
+      code.writeln('    padding: EdgeInsets.all(32.0),');
+      code.writeln('    child: Column(');
+      code.writeln('      mainAxisSize: MainAxisSize.min,');
+      code.writeln('      children: [');
+      code.writeln(
+          '        Icon(Icons.water_drop, size: 48, color: Colors.white),');
+      code.writeln('        SizedBox(height: 16),');
+      code.writeln('        Text(');
+      code.writeln('          \'Liquid Glass\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 24,');
+      code.writeln('            fontWeight: FontWeight.bold,');
+      code.writeln('            color: Colors.white,');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('        SizedBox(height: 8),');
+      code.writeln('        Text(');
+      code.writeln('          \'Animated liquid glass effect\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 14,');
+      code.writeln('            color: Colors.white70,');
+      code.writeln('          ),');
+      code.writeln('          textAlign: TextAlign.center,');
+      code.writeln('        ),');
+      code.writeln('      ],');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln(')');
+    } else if (_currentTheme is GlowGlassCardTheme) {
+      final theme = _currentTheme as GlowGlassCardTheme;
+      code.writeln('GlowGlassCard(');
+      code.writeln('  theme: GlowGlassCardTheme(');
+      if (theme.backgroundColor != Colors.white) {
+        code.writeln(
+            '    backgroundColor: ${_colorToString(theme.backgroundColor)},');
+      }
+      if (theme.backgroundOpacity != 0.1) {
+        code.writeln('    backgroundOpacity: ${theme.backgroundOpacity},');
+      }
+      if (theme.blurAmount != 10.0) {
+        code.writeln('    blurAmount: ${theme.blurAmount},');
+      }
+      if (theme.borderColor != Colors.white) {
+        code.writeln('    borderColor: ${_colorToString(theme.borderColor)},');
+      }
+      if (theme.borderWidth != 1.5) {
+        code.writeln('    borderWidth: ${theme.borderWidth},');
+      }
+      if (theme.borderRadius != 20.0) {
+        code.writeln('    borderRadius: ${theme.borderRadius},');
+      }
+      if (theme.glowColor != const Color(0xFF4A90E2)) {
+        code.writeln('    glowColor: ${_colorToString(theme.glowColor)},');
+      }
+      if (theme.glowOpacity != 1.0) {
+        code.writeln('    glowOpacity: ${theme.glowOpacity},');
+      }
+      if (theme.glowStrokeWidth != 12.0) {
+        code.writeln('    glowStrokeWidth: ${theme.glowStrokeWidth},');
+      }
+      if (theme.glowBlurRadius != 16.0) {
+        code.writeln('    glowBlurRadius: ${theme.glowBlurRadius},');
+      }
+      if (theme.shadowBlurRadius != 20.0) {
+        code.writeln('    shadowBlurRadius: ${theme.shadowBlurRadius},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 500)) {
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      code.writeln('  ),');
+      code.writeln('  onTap: () {');
+      code.writeln('    // Handle tap');
+      code.writeln('  },');
+      code.writeln('  child: Padding(');
+      code.writeln('    padding: EdgeInsets.all(32.0),');
+      code.writeln('    child: Column(');
+      code.writeln('      mainAxisSize: MainAxisSize.min,');
+      code.writeln('      children: [');
+      code.writeln(
+          '        Icon(Icons.blur_on, size: 48, color: Colors.white),');
+      code.writeln('        SizedBox(height: 16),');
+      code.writeln('        Text(');
+      code.writeln('          \'Glass Card\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 24,');
+      code.writeln('            fontWeight: FontWeight.bold,');
+      code.writeln('            color: Colors.white,');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('        SizedBox(height: 8),');
+      code.writeln('        Text(');
+      code.writeln('          \'Glassmorphism with glow\',');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            fontSize: 14,');
+      code.writeln('            color: Colors.white70,');
+      code.writeln('          ),');
+      code.writeln('          textAlign: TextAlign.center,');
+      code.writeln('        ),');
+      code.writeln('      ],');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
