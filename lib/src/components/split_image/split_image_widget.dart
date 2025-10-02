@@ -116,56 +116,54 @@ class _SplitImageState extends State<SplitImage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: _finalTheme.cursorBehavior.mouseCursor,
-      onEnter: (_) => _onHover(true),
-      onExit: (_) => _onHover(false),
-      child: GestureDetector(
-        onTap: widget.onTap,
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final displayWidth = constraints.maxWidth;
-            final displayHeight = displayWidth * 1.3;
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final displayWidth = constraints.maxWidth;
+          final displayHeight = displayWidth * 1.3;
 
-            const gap = 5.0;
-            final totalGaps = (_finalTheme.columns - 1) * gap;
-            final columnWidth =
-                (displayWidth - totalGaps) / _finalTheme.columns;
-            const extraSpace = 60.0;
-            final stackHeight = displayHeight + (extraSpace * 2);
+          const gap = 0.0;
+          final totalGaps = (_finalTheme.columns - 1) * gap;
+          final columnWidth = (displayWidth - totalGaps) / _finalTheme.columns;
+          const extraSpace = 60.0;
+          final stackHeight = displayHeight + (extraSpace * 2);
 
-            if (_resolvedImage == null) {
-              return Container(
-                width: displayWidth,
-                height: stackHeight,
-                color: Colors.amber,
-              );
-            }
-
+          if (_resolvedImage == null) {
             return Container(
               width: displayWidth,
               height: stackHeight,
-              child: Stack(
-                children: [
-                  ...List.generate(_finalTheme.columns, (col) {
-                    final cellConfig = _finalTheme.cellAnimations[col];
-                    final translateYPercent = cellConfig?.translateY ?? 0.0;
+              color: Colors.amber,
+            );
+          }
 
-                    return AnimatedBuilder(
-                      animation: _animations[col],
-                      builder: (context, child) {
-                        final progress = _animations[col].value;
-                        final offsetY =
-                            (displayHeight * translateYPercent / 100) *
-                                progress;
+          return Container(
+            width: displayWidth,
+            height: stackHeight,
+            child: Stack(
+              children: [
+                ...List.generate(_finalTheme.columns, (col) {
+                  final cellConfig = _finalTheme.cellAnimations[col];
+                  final translateYPercent = cellConfig?.translateY ?? 0.0;
 
-                        final topPosition = extraSpace + offsetY;
-                        final bottomPosition = extraSpace - offsetY;
+                  return AnimatedBuilder(
+                    animation: _animations[col],
+                    builder: (context, child) {
+                      final progress = _animations[col].value;
+                      final offsetY =
+                          (displayHeight * translateYPercent / 100) * progress;
 
-                        return Positioned(
-                          left: col * (columnWidth + gap),
-                          top: topPosition,
-                          bottom: bottomPosition,
+                      final topPosition = extraSpace + offsetY;
+                      final bottomPosition = extraSpace - offsetY;
+
+                      return Positioned(
+                        left: col * (columnWidth + gap),
+                        top: topPosition,
+                        bottom: bottomPosition,
+                        child: MouseRegion(
+                          cursor: _finalTheme.cursorBehavior.mouseCursor,
+                          onEnter: (_) => _onHover(true),
+                          onExit: (_) => _onHover(false),
                           child: CustomPaint(
                             size: Size(columnWidth, displayHeight),
                             painter: ImageSlicePainter(
@@ -174,15 +172,15 @@ class _SplitImageState extends State<SplitImage> with TickerProviderStateMixin {
                               totalSlices: _finalTheme.columns,
                             ),
                           ),
-                        );
-                      },
-                    );
-                  }),
-                ],
-              ),
-            );
-          },
-        ),
+                        ),
+                      );
+                    },
+                  );
+                }),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
