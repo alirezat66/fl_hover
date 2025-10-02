@@ -30,56 +30,48 @@ HolographicEffect(
     ShowcaseItem(
       name: 'FlipCard',
       category: ShowcaseCategory.card,
-      widgetBuilder: (theme) => SizedBox(
-        width: 500,
-        height: 350,
-        child: FlipCard(
-          theme: (theme as FlipCardTheme).copyWith(
-            padding: EdgeInsets.zero,
-            width: 500,
-            height: 350,
-          ) as FlipCardTheme,
-          front: Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFFF5F5DC),
-            ),
-            child: const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'SIMPLICITY',
-                    style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF8B8B7A),
-                      letterSpacing: 3,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+      widgetBuilder: (theme) => FlipCard(
+        theme: theme as FlipCardTheme,
+        front: Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFFF5F5DC),
           ),
-          back: Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            child: const NotebookWidget(
-              textSpans: [
-                TextSpan(
-                  text:
-                      'Revolution by revolution, Steve Jobs proved that Simplicity is the most powerful force in business. ',
-                ),
-                TextSpan(
-                  text: 'Insanely Simple',
-                  style: TextStyle(fontStyle: FontStyle.italic),
-                ),
-                TextSpan(
-                  text:
-                      ' takes you on an entertaining and insightful trip through Steve\'s world, revealing how is love of Simplicity helped turn a nearly bankrupt Apple into the most valuable company in the world.',
+          child: const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'SIMPLICITY',
+                  style: TextStyle(
+                    fontSize: 48,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF8B8B7A),
+                    letterSpacing: 3,
+                  ),
                 ),
               ],
             ),
+          ),
+        ),
+        back: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
+          child: const NotebookWidget(
+            textSpans: [
+              TextSpan(
+                text:
+                    'Revolution by revolution, Steve Jobs proved that Simplicity is the most powerful force in business. ',
+              ),
+              TextSpan(
+                text: 'Insanely Simple',
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+              TextSpan(
+                text:
+                    ' takes you on an entertaining and insightful trip through Steve\'s world, revealing how is love of Simplicity helped turn a nearly bankrupt Apple into the most valuable company in the world.',
+              ),
+            ],
           ),
         ),
       ),
@@ -89,7 +81,13 @@ FlipCard(
   back: Container(child: Text('Back')),
 )
 """,
-      initialTheme: const FlipCardTheme(),
+      initialTheme: const FlipCardTheme(
+        padding: EdgeInsets.zero,
+        width: 500,
+        height: 350,
+        frontBackgroundColor: Color(0xFFF5F5DC),
+        backBackgroundColor: Colors.white,
+      ),
     ),
     ShowcaseItem(
       name: 'CardFace',
