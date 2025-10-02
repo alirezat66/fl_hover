@@ -131,7 +131,7 @@ class _SplitImageState extends State<SplitImage> with TickerProviderStateMixin {
             final totalGaps = (_finalTheme.columns - 1) * gap;
             final columnWidth =
                 (displayWidth - totalGaps) / _finalTheme.columns;
-            const extraSpace = 100.0;
+            const extraSpace = 60.0;
             final stackHeight = displayHeight + (extraSpace * 2);
 
             if (_resolvedImage == null) {
