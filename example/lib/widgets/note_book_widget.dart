@@ -14,39 +14,22 @@ class NotebookWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
+    return CustomPaint(
+      painter: NotebookPainter(
+        lineHeight: fontSize * textLineHeight,
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: CustomPaint(
-          painter: NotebookPainter(
-            lineHeight: fontSize * textLineHeight,
-          ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(40, 20, 20, 20),
-              child: RichText(
-                text: TextSpan(
-                  style: TextStyle(
-                    fontFamily: 'Georgia',
-                    fontSize: fontSize,
-                    color: const Color(0xFF333333),
-                    height: textLineHeight,
-                  ),
-                  children: textSpans,
-                ),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(40, 20, 20, 20),
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(
+                fontFamily: 'Georgia',
+                fontSize: fontSize,
+                color: const Color(0xFF333333),
+                height: textLineHeight,
               ),
+              children: textSpans,
             ),
           ),
         ),

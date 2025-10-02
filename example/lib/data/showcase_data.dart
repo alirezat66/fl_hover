@@ -61,30 +61,24 @@ HolographicEffect(
             ),
           ),
           back: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
-              border: Border.all(color: Colors.red.shade300, width: 2),
             ),
-            child: const Center(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.all(24),
-                child: NotebookWidget(
-                  textSpans: [
-                    TextSpan(
-                      text:
-                          'Revolution by revolution, Steve Jobs proved that Simplicity is the most powerful force in business. ',
-                    ),
-                    TextSpan(
-                      text: 'Insanely Simple',
-                      style: TextStyle(fontStyle: FontStyle.italic),
-                    ),
-                    TextSpan(
-                      text:
-                          ' takes you on an entertaining and insightful trip through Steve\'s world, revealing how is love of Simplicity helped turn a nearly bankrupt Apple into the most valuable company in the world.',
-                    ),
-                  ],
+            child: const NotebookWidget(
+              textSpans: [
+                TextSpan(
+                  text:
+                      'Revolution by revolution, Steve Jobs proved that Simplicity is the most powerful force in business. ',
                 ),
-              ),
+                TextSpan(
+                  text: 'Insanely Simple',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                TextSpan(
+                  text:
+                      ' takes you on an entertaining and insightful trip through Steve\'s world, revealing how is love of Simplicity helped turn a nearly bankrupt Apple into the most valuable company in the world.',
+                ),
+              ],
             ),
           ),
         ),
