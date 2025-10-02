@@ -4,25 +4,53 @@ import '../../../playground/playground_property.dart';
 import '../../../models/cursor_behavior.dart';
 
 /// Defines the visual properties for the [SplitImage] widget.
+///
+/// This theme controls all aspects of the holographic split image effect,
+/// including the number of columns, animation timing, and individual column
+/// movement patterns.
 class SplitImageTheme extends ThemeExtension<SplitImageTheme>
     implements PlaygroundTheme {
-  /// The number of columns in the grid
+  /// The number of vertical columns to split the image into.
+  ///
+  /// Each column animates independently on hover. Default is 5 columns.
   final int columns;
 
-  /// The number of rows in the grid
+  /// The number of rows in the grid (currently not used in rendering).
+  ///
+  /// Reserved for future use. Default is 5.
   final int rows;
 
-  /// The duration of the animation
+  /// The duration of the animation when hovering.
+  ///
+  /// Controls how long it takes for columns to move to their final position
+  /// and back. Default is 400 milliseconds.
   final Duration animationDuration;
 
-  /// The curve for the animation
+  /// The animation curve to use for column movements.
+  ///
+  /// Defines the easing function for the animation. Common values include
+  /// [Curves.easeInOut], [Curves.bounceOut], [Curves.elasticOut], etc.
+  /// Default is [Curves.easeInOut].
   final Curve animationCurve;
 
-  /// The cursor behavior when hovering
+  /// The mouse cursor to display when hovering over the image.
+  ///
+  /// Default is [CursorBehavior.pointer].
   final CursorBehavior cursorBehavior;
 
-  /// Cell-specific animation configurations
-  /// Map of cell index to (translateY percentage, delay in ms)
+  /// Configuration for each column's animation.
+  ///
+  /// A map where the key is the column index (0-based) and the value is
+  /// a [CellAnimation] object defining the movement and delay for that column.
+  ///
+  /// Example:
+  /// ```dart
+  /// cellAnimations: {
+  ///   0: CellAnimation(translateY: 10.0, delay: 100),  // Move down 10%, delay 100ms
+  ///   1: CellAnimation(translateY: -4.0, delay: 100),  // Move up 4%, delay 100ms
+  ///   2: CellAnimation(translateY: 6.0, delay: 0),     // Move down 6%, no delay
+  /// }
+  /// ```
   final Map<int, CellAnimation> cellAnimations;
 
   const SplitImageTheme({
@@ -189,11 +217,38 @@ class SplitImageTheme extends ThemeExtension<SplitImageTheme>
   }
 }
 
-/// Configuration for individual cell animation
+/// Configuration for individual column animation in [SplitImage].
+///
+/// Each column can have its own movement direction, distance, and timing.
+/// This allows for creating complex wave-like or staggered animation patterns.
 class CellAnimation {
-  final double translateY; // Percentage (e.g., 10.0 = 10%)
-  final int delay; // Delay in milliseconds
+  /// The vertical movement distance as a percentage of image height.
+  ///
+  /// Positive values move the column down, negative values move it up.
+  /// For example:
+  /// - `10.0` moves the column down by 10% of the image height
+  /// - `-15.0` moves the column up by 15% of the image height
+  /// - `0.0` keeps the column stationary
+  final double translateY;
 
+  /// The delay before starting the animation, in milliseconds.
+  ///
+  /// This allows columns to animate in sequence rather than all at once.
+  /// For example:
+  /// - `0` starts immediately
+  /// - `100` waits 100ms before starting
+  /// - `200` waits 200ms before starting
+  final int delay;
+
+  /// Creates a cell animation configuration.
+  ///
+  /// Example:
+  /// ```dart
+  /// CellAnimation(
+  ///   translateY: -20.0,  // Move up 20% of image height
+  ///   delay: 150,         // Wait 150ms before starting
+  /// )
+  /// ```
   const CellAnimation({
     required this.translateY,
     required this.delay,

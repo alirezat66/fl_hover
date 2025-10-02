@@ -2,9 +2,45 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 import 'models/split_image_theme.dart';
 
+/// A widget that creates a holographic split image effect.
+///
+/// The [SplitImage] widget splits an image into multiple vertical columns
+/// that animate up and down on hover, creating a dynamic holographic effect.
+/// Each column can have independent animation settings including direction,
+/// delay, and movement distance.
+///
+/// Example:
+/// ```dart
+/// SplitImage(
+///   image: AssetImage('assets/my_image.jpg'),
+///   theme: SplitImageTheme(
+///     columns: 5,
+///     animationDuration: Duration(milliseconds: 400),
+///     animationCurve: Curves.easeInOut,
+///     cellAnimations: {
+///       0: CellAnimation(translateY: -20.0, delay: 0),
+///       1: CellAnimation(translateY: 15.0, delay: 50),
+///       2: CellAnimation(translateY: -25.0, delay: 100),
+///       3: CellAnimation(translateY: 20.0, delay: 150),
+///       4: CellAnimation(translateY: -15.0, delay: 200),
+///     },
+///   ),
+/// )
+/// ```
 class SplitImage extends StatefulWidget {
+  /// The image to display and split into columns.
+  ///
+  /// This can be any [ImageProvider] such as [AssetImage], [NetworkImage],
+  /// or [FileImage].
   final ImageProvider image;
+
+  /// The theme configuration for the split image effect.
+  ///
+  /// If not provided, uses the [SplitImageTheme] from the current theme
+  /// or defaults to [SplitImageTheme()].
   final SplitImageTheme? theme;
+
+  /// Optional callback when the image is tapped.
   final VoidCallback? onTap;
 
   const SplitImage({
