@@ -1,4 +1,5 @@
 import 'package:example/models/showcase_item.dart';
+import 'package:example/widgets/note_book_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hover_effects/hover_effects.dart';
 
@@ -29,58 +30,61 @@ HolographicEffect(
     ShowcaseItem(
       name: 'FlipCard',
       category: ShowcaseCategory.card,
-      widgetBuilder: (theme) => Padding(
-        padding: const EdgeInsets.all(16.0),
+      widgetBuilder: (theme) => SizedBox(
+        width: 500,
+        height: 350,
         child: FlipCard(
-          theme: theme as FlipCardTheme,
-          front: const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.credit_card, size: 48, color: Colors.white),
-                SizedBox(height: 16),
-                Text(
-                  'Front Side',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+          theme: (theme as FlipCardTheme).copyWith(
+            padding: EdgeInsets.zero,
+            width: 500,
+            height: 350,
+          ) as FlipCardTheme,
+          front: Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFFF5F5DC),
+            ),
+            child: const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'SIMPLICITY',
+                    style: TextStyle(
+                      fontSize: 48,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF8B8B7A),
+                      letterSpacing: 3,
+                    ),
                   ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  'Hover to flip',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-          back: const Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.info_outline, size: 48, color: Colors.white),
-                SizedBox(height: 16),
-                Text(
-                  'Back Side',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+          back: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.red.shade300, width: 2),
+            ),
+            child: const Center(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(24),
+                child: NotebookWidget(
+                  textSpans: [
+                    TextSpan(
+                      text:
+                          'Revolution by revolution, Steve Jobs proved that Simplicity is the most powerful force in business. ',
+                    ),
+                    TextSpan(
+                      text: 'Insanely Simple',
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    ),
+                    TextSpan(
+                      text:
+                          ' takes you on an entertaining and insightful trip through Steve\'s world, revealing how is love of Simplicity helped turn a nearly bankrupt Apple into the most valuable company in the world.',
+                    ),
+                  ],
                 ),
-                SizedBox(height: 8),
-                Text(
-                  'Flip card effect',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white70,
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ),
