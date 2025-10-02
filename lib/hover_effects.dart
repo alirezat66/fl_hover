@@ -80,8 +80,20 @@ export 'src/components/glow_glass_card/glow_glass_card_widget.dart';
 export 'src/components/glow_glass_card/models/glow_glass_card_theme.dart';
 
 // Export the Liquid Glass component
-export 'src/components/liquid_glass/liquid_glass_widget.dart' show LiquidGlassCard;
+export 'src/components/liquid_glass/liquid_glass_widget.dart'
+    show LiquidGlassCard;
 export 'src/components/liquid_glass/models/liquid_glass_theme.dart';
+
+// Export models
+export 'src/models/cursor_behavior.dart';
+
+// Export the Cursor Showcase component
+export 'src/components/cursor_showcase/cursor_showcase_widget.dart';
+export 'src/components/cursor_showcase/models/cursor_showcase_theme.dart';
+
+// Export the Split Image component
+export 'src/components/split_image/split_image_widget.dart';
+export 'src/components/split_image/models/split_image_theme.dart';
 
 export 'src/playground/playground_theme.dart';
 export 'src/playground/playground_property.dart';

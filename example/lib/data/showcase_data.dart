@@ -790,20 +790,20 @@ GlowCard(
   },
   child: Padding(
     padding: EdgeInsets.all(32.0),
-    child: Column(
+          child: Column(
       mainAxisSize: MainAxisSize.min,
-      children: [
+            children: [
         Icon(Icons.auto_awesome, size: 48),
-        SizedBox(height: 16),
-        Text(
+              SizedBox(height: 16),
+              Text(
           'Glow Card',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 8),
+              Text(
           'Hover to see the glow effect',
           textAlign: TextAlign.center,
         ),
@@ -898,6 +898,47 @@ LiquidGlassCard(
 )
 """,
       initialTheme: const LiquidGlassTheme(),
+    ),
+    ShowcaseItem(
+      name: 'CursorShowcase',
+      category: ShowcaseCategory.effect,
+      widgetBuilder: (theme) => const CursorShowcase(),
+      defaultCode: """
+CursorShowcase(
+  theme: const CursorShowcaseTheme(),
+)
+""",
+      initialTheme: const CursorShowcaseTheme(),
+    ),
+    ShowcaseItem(
+      name: 'SplitImage',
+      category: ShowcaseCategory.effect,
+      widgetBuilder: (theme) => SizedBox(
+        height: 700,
+        child: Center(
+          child: SplitImage(
+            theme: theme as SplitImageTheme,
+            image: const NetworkImage(
+              'https://picsum.photos/820/620?image=1057',
+            ),
+            onTap: () {
+              // Handle tap
+            },
+          ),
+        ),
+      ),
+      defaultCode: """
+SplitImage(
+  theme: const SplitImageTheme(),
+  image: NetworkImage(
+    'https://picsum.photos/820/620?image=1057',
+  ),
+  onTap: () {
+    // Handle tap
+  },
+)
+""",
+      initialTheme: const SplitImageTheme(),
     ),
   ];
 }

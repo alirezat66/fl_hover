@@ -62,6 +62,7 @@ class _LiquidGlassCardState extends State<LiquidGlassCard> {
     return Padding(
       padding: _finalTheme.cardPadding,
       child: MouseRegion(
+        cursor: _finalTheme.cursorBehavior.mouseCursor,
         onEnter: (_) {
           setState(() {
             _isHovered = true;

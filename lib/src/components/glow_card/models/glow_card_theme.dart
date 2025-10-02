@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../playground/playground_theme.dart';
 import '../../../playground/playground_property.dart';
+import '../../../models/cursor_behavior.dart';
 
 /// Defines the visual properties for the [GlowCard] widget.
 class GlowCardTheme extends ThemeExtension<GlowCardTheme>
@@ -35,6 +36,9 @@ class GlowCardTheme extends ThemeExtension<GlowCardTheme>
   /// The padding around the card
   final EdgeInsets cardPadding;
 
+  /// The cursor behavior when hovering
+  final CursorBehavior cursorBehavior;
+
   const GlowCardTheme({
     this.backgroundColor = Colors.white,
     this.borderColor = const Color(0xFFBA7245),
@@ -46,6 +50,7 @@ class GlowCardTheme extends ThemeExtension<GlowCardTheme>
     this.glowBlurRadius = 14.0,
     this.animationDuration = const Duration(milliseconds: 500),
     this.cardPadding = const EdgeInsets.all(10.0),
+    this.cursorBehavior = CursorBehavior.pointer,
   });
 
   @override
@@ -60,6 +65,7 @@ class GlowCardTheme extends ThemeExtension<GlowCardTheme>
     double? glowBlurRadius,
     Duration? animationDuration,
     EdgeInsets? cardPadding,
+    CursorBehavior? cursorBehavior,
   }) {
     return GlowCardTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
@@ -72,6 +78,7 @@ class GlowCardTheme extends ThemeExtension<GlowCardTheme>
       glowBlurRadius: glowBlurRadius ?? this.glowBlurRadius,
       animationDuration: animationDuration ?? this.animationDuration,
       cardPadding: cardPadding ?? this.cardPadding,
+      cursorBehavior: cursorBehavior ?? this.cursorBehavior,
     );
   }
 
@@ -99,6 +106,7 @@ class GlowCardTheme extends ThemeExtension<GlowCardTheme>
       ),
       cardPadding:
           EdgeInsets.lerp(cardPadding, other.cardPadding, t) ?? cardPadding,
+      cursorBehavior: t < 0.5 ? cursorBehavior : other.cursorBehavior,
     );
   }
 
@@ -190,6 +198,16 @@ class GlowCardTheme extends ThemeExtension<GlowCardTheme>
             onChanged(copyWith(
               animationDuration: Duration(milliseconds: duration),
             ));
+          }
+        },
+      ),
+      EditableProperty<String?>(
+        label: 'Cursor Behavior',
+        value: cursorBehavior.displayName,
+        onChanged: (cursorString) {
+          final cursor = CursorBehavior.fromString(cursorString);
+          if (cursor != null && onChanged != null) {
+            onChanged(copyWith(cursorBehavior: cursor));
           }
         },
       ),

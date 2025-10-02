@@ -926,6 +926,34 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('    ),');
       code.writeln('  ),');
       code.writeln(')');
+    } else if (_currentTheme is CursorShowcaseTheme) {
+      code.writeln('CursorShowcase(');
+      code.writeln('  theme: const CursorShowcaseTheme(),');
+      code.writeln(')');
+    } else if (_currentTheme is SplitImageTheme) {
+      final theme = _currentTheme as SplitImageTheme;
+      code.writeln('SplitImage(');
+      code.writeln('  theme: SplitImageTheme(');
+      if (theme.columns != 5) {
+        code.writeln('    columns: ${theme.columns},');
+      }
+      if (theme.rows != 5) {
+        code.writeln('    rows: ${theme.rows},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 400)) {
+        code.writeln('    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+      }
+      if (theme.animationCurve != Curves.easeInOut) {
+        code.writeln('    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  image: NetworkImage(');
+      code.writeln('    \'https://picsum.photos/820/620?image=1057\',');
+      code.writeln('  ),');
+      code.writeln('  onTap: () {');
+      code.writeln('    // Handle tap');
+      code.writeln('  },');
+      code.writeln(')');
     } else {
       // Fallback for unknown theme types
       return '// Unknown theme type: ${_currentTheme.runtimeType}';
@@ -1446,6 +1474,22 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       ];
       // Convert curve toString() to readable name
       currentValue = _getCurveDisplayName(currentValue);
+    } else if (property.label == 'Cursor Behavior') {
+      options = [
+        'auto',
+        'pointer',
+        'help',
+        'wait',
+        'progress',
+        'text',
+        'move',
+        'notAllowed',
+        'grab',
+        'grabbing',
+        'zoomIn',
+        'zoomOut',
+        'none',
+      ];
     } else {
       // Default curve options
       options = [

@@ -60,6 +60,7 @@ class _GlowCardState extends State<GlowCard> {
     return Padding(
       padding: _finalTheme.cardPadding,
       child: MouseRegion(
+        cursor: _finalTheme.cursorBehavior.mouseCursor,
         onEnter: (_) {
           setState(() {
             _isHovered = true;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../playground/playground_theme.dart';
 import '../../../playground/playground_property.dart';
+import '../../../models/cursor_behavior.dart';
 
 /// Defines the visual properties for the [LiquidGlass] widget.
 class LiquidGlassTheme extends ThemeExtension<LiquidGlassTheme>
@@ -38,6 +39,9 @@ class LiquidGlassTheme extends ThemeExtension<LiquidGlassTheme>
   /// The padding around the card
   final EdgeInsets cardPadding;
 
+  /// The cursor behavior when hovering
+  final CursorBehavior cursorBehavior;
+
   /// The shadow color
   final Color shadowColor;
 
@@ -63,6 +67,7 @@ class LiquidGlassTheme extends ThemeExtension<LiquidGlassTheme>
     this.liquidSpeed = 1.0,
     this.animationDuration = const Duration(milliseconds: 300),
     this.cardPadding = const EdgeInsets.all(10.0),
+    this.cursorBehavior = CursorBehavior.pointer,
     this.shadowColor = Colors.black26,
     this.shadowBlurRadius = 25.0,
     this.shadowOffset = const Offset(0, 12),
@@ -81,6 +86,7 @@ class LiquidGlassTheme extends ThemeExtension<LiquidGlassTheme>
     double? liquidSpeed,
     Duration? animationDuration,
     EdgeInsets? cardPadding,
+    CursorBehavior? cursorBehavior,
     Color? shadowColor,
     double? shadowBlurRadius,
     Offset? shadowOffset,
@@ -97,6 +103,7 @@ class LiquidGlassTheme extends ThemeExtension<LiquidGlassTheme>
       liquidSpeed: liquidSpeed ?? this.liquidSpeed,
       animationDuration: animationDuration ?? this.animationDuration,
       cardPadding: cardPadding ?? this.cardPadding,
+      cursorBehavior: cursorBehavior ?? this.cursorBehavior,
       shadowColor: shadowColor ?? this.shadowColor,
       shadowBlurRadius: shadowBlurRadius ?? this.shadowBlurRadius,
       shadowOffset: shadowOffset ?? this.shadowOffset,
@@ -129,6 +136,7 @@ class LiquidGlassTheme extends ThemeExtension<LiquidGlassTheme>
       ),
       cardPadding:
           EdgeInsets.lerp(cardPadding, other.cardPadding, t) ?? cardPadding,
+      cursorBehavior: t < 0.5 ? cursorBehavior : other.cursorBehavior,
       shadowColor: Color.lerp(shadowColor, other.shadowColor, t) ?? shadowColor,
       shadowBlurRadius: lerpDouble(shadowBlurRadius, other.shadowBlurRadius, t),
       shadowOffset:
@@ -284,6 +292,16 @@ class LiquidGlassTheme extends ThemeExtension<LiquidGlassTheme>
             onChanged(copyWith(
               animationDuration: Duration(milliseconds: duration),
             ));
+          }
+        },
+      ),
+      EditableProperty<String?>(
+        label: 'Cursor Behavior',
+        value: cursorBehavior.displayName,
+        onChanged: (cursorString) {
+          final cursor = CursorBehavior.fromString(cursorString);
+          if (cursor != null && onChanged != null) {
+            onChanged(copyWith(cursorBehavior: cursor));
           }
         },
       ),
