@@ -94,33 +94,132 @@ FlipCard(
       category: ShowcaseCategory.card,
       widgetBuilder: (theme) => CardFace(
         theme: theme as CardFaceTheme,
-        bottomFace: const Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.description, size: 40, color: Colors.black87),
-              SizedBox(height: 12),
-              Text(
-                'Details go here',
-                style: TextStyle(color: Colors.black87),
+        bottomFace: const Column(
+          children: [
+            SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(24, 20, 24, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Key Features:',
+                    style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  SizedBox(height: 14),
+                  Row(
+                    children: [
+                      Icon(Icons.check_circle,
+                          size: 16, color: Color(0xFF4CAF50)),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          'Noise Cancellation',
+                          style: TextStyle(fontSize: 14, color: Colors.black87),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.check_circle,
+                          size: 16, color: Color(0xFF4CAF50)),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          '30-Hour Battery Life',
+                          style: TextStyle(fontSize: 14, color: Colors.black87),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.check_circle,
+                          size: 16, color: Color(0xFF4CAF50)),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          'Bluetooth 5.0 & USB-C',
+                          style: TextStyle(fontSize: 14, color: Colors.black87),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Icon(Icons.check_circle,
+                          size: 16, color: Color(0xFF4CAF50)),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          'Premium Sound Quality',
+                          style: TextStyle(fontSize: 14, color: Colors.black87),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-        topFace: const Text(
-          'Summary',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+        topFace: Column(
+          children: [
+            Expanded(
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(8)),
+                child: Image.network(
+                  'https://images.pexels.com/photos/205926/pexels-photo-205926.jpeg?auto=compress&cs=tinysrgb&w=800',
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              decoration: const BoxDecoration(
+                color: Color(0xFFF8F9FA),
+              ),
+              child: const Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Premium Headphones',
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    '\$299.99',
+                    style: TextStyle(
+                      color: Colors.black87,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         topFaceDecoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF7F00FF), Color(0xFFE100FF)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
+          color: Colors.white,
         ),
       ),
       defaultCode: """
@@ -135,7 +234,9 @@ CardFace(
   ),
 )
 """,
-      initialTheme: const CardFaceTheme(),
+      initialTheme: const CardFaceTheme(
+        shrunkenHeight: 58.0,
+      ),
     ),
     ShowcaseItem(
       name: 'CardSlide',
