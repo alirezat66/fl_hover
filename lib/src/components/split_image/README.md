@@ -2,14 +2,34 @@
 
 A Flutter widget that creates a stunning holographic split image effect. The image is divided into vertical columns that animate up and down on hover, creating a dynamic and eye-catching visual experience.
 
+![SplitImage Holographic Effect](https://images.pexels.com/photos/205926/pexels-photo-205926.jpeg?auto=compress&cs=tinysrgb&w=800)
+
+*Example of the holographic split image effect in action*
+
 ## Features
 
-- ✨ Split image into customizable number of columns
+- ✨ Split image into customizable number of columns (5-10)
 - 🎭 Independent animation for each column
 - ⏱️ Configurable animation duration and curve
 - 🎯 Staggered delays for wave-like effects
 - 🖱️ Customizable cursor behavior
 - 🎨 Fully themeable via `ThemeExtension`
+- 🔄 Dynamic column generation for any number of columns
+
+## Visual Examples
+
+### Default Configuration (5 Columns)
+The image splits into 5 vertical columns with alternating up/down movements:
+- Column 1: Moves down 10% with 100ms delay
+- Column 2: Moves up 4% with 100ms delay  
+- Column 3: Moves down 6% with no delay
+- Column 4: Moves down 4% with 150ms delay
+- Column 5: Moves up 10% with 50ms delay
+
+### Extended Configuration (10 Columns)
+When you increase columns to 10, additional columns get auto-generated animations:
+- Columns 6-10: Alternating patterns with varying delays
+- Creates a more complex and dynamic holographic effect
 
 ## Basic Usage
 
@@ -220,6 +240,19 @@ A: This is expected behavior. The widget reserves extra space for column movemen
 
 **Q: Columns don't animate**  
 A: Ensure `cellAnimations` map includes entries for all column indices (0 to columns-1).
+
+## Playground Controls
+
+The SplitImage widget includes interactive playground controls for easy customization:
+
+### Available Controls
+- **Columns (5-10)**: Slider to adjust number of vertical columns
+- **Animation Duration**: Slider to control animation speed (0.1s - 5s)
+- **Animation Curve**: Dropdown with various easing options
+- **Cursor Behavior**: Dropdown to change mouse cursor on hover
+
+### Real-time Preview
+All changes are applied instantly, allowing you to see the effect in real-time and find the perfect configuration for your use case.
 
 ## See Also
 
