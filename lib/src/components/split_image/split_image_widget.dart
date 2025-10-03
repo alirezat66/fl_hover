@@ -57,30 +57,38 @@ class SplitImage extends StatefulWidget {
 class _SplitImageState extends State<SplitImage> with TickerProviderStateMixin {
   late SplitImageTheme _finalTheme;
   ui.Image? _resolvedImage;
-  late List<AnimationController> _controllers;
-  late List<Animation<double>> _animations;
+  List<AnimationController> _controllers = [];
+  List<Animation<double>> _animations = [];
   bool _isHovered = false;
 
   @override
   void initState() {
     super.initState();
+    _updateTheme();
     _loadImage();
     _setupAnimations();
   }
 
   void _setupAnimations() {
+    // Dispose old controllers if they exist
+    if (_controllers.isNotEmpty) {
+      for (var controller in _controllers) {
+        controller.dispose();
+      }
+    }
+
     _controllers = List.generate(
-      5,
+      _finalTheme.columns,
       (index) => AnimationController(
         vsync: this,
-        duration: const Duration(milliseconds: 400),
+        duration: _finalTheme.animationDuration,
       ),
     );
 
     _animations = _controllers.map((controller) {
       return CurvedAnimation(
         parent: controller,
-        curve: Curves.easeInOut,
+        curve: _finalTheme.animationCurve,
       );
     }).toList();
   }
@@ -91,8 +99,10 @@ class _SplitImageState extends State<SplitImage> with TickerProviderStateMixin {
     });
 
     if (isHovering) {
+      final cellAnimations =
+          _finalTheme.getCellAnimationsForColumns(_controllers.length);
       for (int col = 0; col < _controllers.length; col++) {
-        final cellConfig = _finalTheme.cellAnimations[col];
+        final cellConfig = cellAnimations[col];
         final delay = cellConfig?.delay ?? 0;
 
         Future.delayed(Duration(milliseconds: delay), () {
@@ -119,7 +129,14 @@ class _SplitImageState extends State<SplitImage> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    final oldTheme = _finalTheme;
     _updateTheme();
+    // If theme changed (e.g., columns count), re-setup animations
+    if (oldTheme.columns != _finalTheme.columns ||
+        oldTheme.animationDuration != _finalTheme.animationDuration ||
+        oldTheme.animationCurve != _finalTheme.animationCurve) {
+      _setupAnimations();
+    }
   }
 
   @override
@@ -127,6 +144,7 @@ class _SplitImageState extends State<SplitImage> with TickerProviderStateMixin {
     super.didUpdateWidget(oldWidget);
     if (widget.theme != oldWidget.theme) {
       _updateTheme();
+      _setupAnimations();
     }
     if (widget.image != oldWidget.image) {
       _loadImage();
@@ -179,7 +197,9 @@ class _SplitImageState extends State<SplitImage> with TickerProviderStateMixin {
             child: Stack(
               children: [
                 ...List.generate(_finalTheme.columns, (col) {
-                  final cellConfig = _finalTheme.cellAnimations[col];
+                  final cellAnimations = _finalTheme
+                      .getCellAnimationsForColumns(_finalTheme.columns);
+                  final cellConfig = cellAnimations[col];
                   final translateYPercent = cellConfig?.translateY ?? 0.0;
 
                   return AnimatedBuilder(

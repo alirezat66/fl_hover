@@ -937,14 +937,17 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       if (theme.columns != 5) {
         code.writeln('    columns: ${theme.columns},');
       }
-      if (theme.rows != 5) {
-        code.writeln('    rows: ${theme.rows},');
-      }
       if (theme.animationDuration != const Duration(milliseconds: 400)) {
-        code.writeln('    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
+        code.writeln(
+            '    animationDuration: Duration(milliseconds: ${theme.animationDuration.inMilliseconds}),');
       }
       if (theme.animationCurve != Curves.easeInOut) {
-        code.writeln('    animationCurve: ${_curveToString(theme.animationCurve)},');
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      if (theme.cursorBehavior != CursorBehavior.pointer) {
+        code.writeln(
+            '    cursorBehavior: CursorBehavior.${theme.cursorBehavior.name},');
       }
       code.writeln('  ),');
       code.writeln('  image: NetworkImage(');
@@ -1176,6 +1179,11 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       return _buildSliderControl(property, value);
     }
 
+    // Handle int properties
+    if (value is int) {
+      return _buildIntControl(property, value);
+    }
+
     // Handle BorderRadius properties
     if (value is BorderRadius?) {
       return _buildBorderRadiusControl(property, value);
@@ -1290,6 +1298,41 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
               ),
             ),
           ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildIntControl(EditableProperty property, int value) {
+    final currentValue = value.toDouble();
+    final min = property.min ?? 1.0;
+    final max = property.max ?? 10.0;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          child: Text('${property.label}: $value',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black87,
+              )),
+        ),
+        Slider(
+          value: currentValue,
+          min: min,
+          max: max,
+          divisions: (max - min).toInt(),
+          onChanged: (newValue) {
+            final intValue = newValue.round();
+            property.onChanged(intValue);
+          },
         ),
       ],
     );

@@ -15,11 +15,6 @@ class SplitImageTheme extends ThemeExtension<SplitImageTheme>
   /// Each column animates independently on hover. Default is 5 columns.
   final int columns;
 
-  /// The number of rows in the grid (currently not used in rendering).
-  ///
-  /// Reserved for future use. Default is 5.
-  final int rows;
-
   /// The duration of the animation when hovering.
   ///
   /// Controls how long it takes for columns to move to their final position
@@ -55,7 +50,6 @@ class SplitImageTheme extends ThemeExtension<SplitImageTheme>
 
   const SplitImageTheme({
     this.columns = 5,
-    this.rows = 5,
     this.animationDuration = const Duration(milliseconds: 400),
     this.animationCurve = Curves.easeInOut,
     this.cursorBehavior = CursorBehavior.pointer,
@@ -68,10 +62,30 @@ class SplitImageTheme extends ThemeExtension<SplitImageTheme>
     },
   });
 
+  /// Generates cell animations for the specified number of columns.
+  /// If the current cellAnimations doesn't cover all columns, generates
+  /// additional animations with random patterns.
+  Map<int, CellAnimation> getCellAnimationsForColumns(int columnCount) {
+    final result = <int, CellAnimation>{};
+
+    // Copy existing animations
+    for (int i = 0; i < columnCount; i++) {
+      if (cellAnimations.containsKey(i)) {
+        result[i] = cellAnimations[i]!;
+      } else {
+        // Generate new animation for missing columns
+        final translateY = (i % 2 == 0 ? 1 : -1) * (5.0 + (i % 3) * 3.0);
+        final delay = (i % 4) * 50;
+        result[i] = CellAnimation(translateY: translateY, delay: delay);
+      }
+    }
+
+    return result;
+  }
+
   @override
   SplitImageTheme copyWith({
     int? columns,
-    int? rows,
     Duration? animationDuration,
     Curve? animationCurve,
     CursorBehavior? cursorBehavior,
@@ -79,7 +93,6 @@ class SplitImageTheme extends ThemeExtension<SplitImageTheme>
   }) {
     return SplitImageTheme(
       columns: columns ?? this.columns,
-      rows: rows ?? this.rows,
       animationDuration: animationDuration ?? this.animationDuration,
       animationCurve: animationCurve ?? this.animationCurve,
       cursorBehavior: cursorBehavior ?? this.cursorBehavior,
@@ -94,7 +107,6 @@ class SplitImageTheme extends ThemeExtension<SplitImageTheme>
     }
     return SplitImageTheme(
       columns: t < 0.5 ? columns : other.columns,
-      rows: t < 0.5 ? rows : other.rows,
       animationDuration: Duration(
         milliseconds: lerpDouble(
           animationDuration.inMilliseconds.toDouble(),
@@ -117,31 +129,22 @@ class SplitImageTheme extends ThemeExtension<SplitImageTheme>
       [void Function(PlaygroundTheme)? onChanged]) {
     return [
       EditableProperty<int>(
-        label: 'Columns',
+        label: 'Columns (5-10)',
         value: columns,
+        min: 5,
+        max: 10,
         onChanged: (cols) {
           if (onChanged != null) {
             onChanged(copyWith(columns: cols));
           }
         },
       ),
-      EditableProperty<int>(
-        label: 'Rows',
-        value: rows,
-        onChanged: (r) {
-          if (onChanged != null) {
-            onChanged(copyWith(rows: r));
-          }
-        },
-      ),
-      EditableProperty<int>(
-        label: 'Animation Duration (ms)',
-        value: animationDuration.inMilliseconds,
+      EditableProperty<Duration>(
+        label: 'Animation Duration',
+        value: animationDuration,
         onChanged: (duration) {
           if (onChanged != null) {
-            onChanged(copyWith(
-              animationDuration: Duration(milliseconds: duration),
-            ));
+            onChanged(copyWith(animationDuration: duration));
           }
         },
       ),
