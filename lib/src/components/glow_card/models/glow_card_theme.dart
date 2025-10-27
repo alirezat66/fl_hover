@@ -166,6 +166,8 @@ class GlowCardTheme extends ThemeExtension<GlowCardTheme>
       EditableProperty<double>(
         label: 'Glow Opacity',
         value: glowOpacity,
+        min: 0.0,
+        max: 1.0,
         onChanged: (opacity) {
           if (onChanged != null) {
             onChanged(copyWith(glowOpacity: opacity));
