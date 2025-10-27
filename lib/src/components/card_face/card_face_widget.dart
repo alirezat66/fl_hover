@@ -77,12 +77,7 @@ class _CardFaceState extends State<CardFace> {
               width: theme.width,
               height: _isHovering ? theme.shrunkenHeight : theme.height,
               decoration: widget.topFaceDecoration.copyWith(
-                borderRadius: _isHovering
-                    ? BorderRadius.only(
-                        bottomLeft: theme.borderRadius.bottomLeft,
-                        bottomRight: theme.borderRadius.bottomRight,
-                      )
-                    : theme.borderRadius,
+                borderRadius: theme.borderRadius,
               ),
               alignment: Alignment.center,
               child: widget.topFace,

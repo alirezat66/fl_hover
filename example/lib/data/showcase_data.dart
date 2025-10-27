@@ -94,82 +94,93 @@ FlipCard(
       category: ShowcaseCategory.card,
       widgetBuilder: (theme) => CardFace(
         theme: theme as CardFaceTheme,
-        bottomFace: const Column(
-          children: [
-            SingleChildScrollView(
-              padding: EdgeInsets.fromLTRB(24, 20, 24, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Key Features:',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  SizedBox(height: 14),
-                  Row(
+        bottomFace: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
+          child: const Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.fromLTRB(24, 20, 24, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.check_circle,
-                          size: 16, color: Color(0xFF4CAF50)),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          'Noise Cancellation',
-                          style: TextStyle(fontSize: 14, color: Colors.black87),
+                      Text(
+                        'Key Features:',
+                        style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
                         ),
+                      ),
+                      SizedBox(height: 14),
+                      Row(
+                        children: [
+                          Icon(Icons.check_circle,
+                              size: 16, color: Color(0xFF4CAF50)),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Noise Cancellation',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.black87),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(Icons.check_circle,
+                              size: 16, color: Color(0xFF4CAF50)),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              '30-Hour Battery Life',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.black87),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(Icons.check_circle,
+                              size: 16, color: Color(0xFF4CAF50)),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Bluetooth 5.0 & USB-C',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.black87),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(Icons.check_circle,
+                              size: 16, color: Color(0xFF4CAF50)),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Premium Sound Quality',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.black87),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Icon(Icons.check_circle,
-                          size: 16, color: Color(0xFF4CAF50)),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          '30-Hour Battery Life',
-                          style: TextStyle(fontSize: 14, color: Colors.black87),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Icon(Icons.check_circle,
-                          size: 16, color: Color(0xFF4CAF50)),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          'Bluetooth 5.0 & USB-C',
-                          style: TextStyle(fontSize: 14, color: Colors.black87),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Icon(Icons.check_circle,
-                          size: 16, color: Color(0xFF4CAF50)),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          'Premium Sound Quality',
-                          style: TextStyle(fontSize: 14, color: Colors.black87),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         topFace: Column(
           children: [
@@ -236,6 +247,7 @@ CardFace(
 """,
       initialTheme: const CardFaceTheme(
         shrunkenHeight: 58.0,
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
     ),
     ShowcaseItem(
