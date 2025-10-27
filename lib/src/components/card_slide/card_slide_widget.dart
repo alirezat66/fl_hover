@@ -5,24 +5,53 @@ import 'models/card_slide_theme.dart';
 ///
 /// On hover, the top panel slides up while the bottom panel slides down,
 /// creating a smooth vertical transition effect similar to the HTML/CSS version.
+///
+/// ## Use Cases:
+/// - **Team Member Cards**: Show photo on top, details on bottom
+/// - **Product Cards**: Show image on top, specs on bottom
+/// - **Service Cards**: Show icon on top, description on bottom
+///
+/// Example:
+/// ```dart
+/// CardSlide(
+///   theme: const CardSlideTheme(),
+///   topWidget: ClipRRect(
+///     borderRadius: BorderRadius.circular(12),
+///     child: Image.network('https://example.com/photo.jpg'),
+///   ),
+///   bottomWidget: Column(
+///     children: [
+///       Text('Name', style: TextStyle(fontWeight: FontWeight.bold)),
+///       Text('Role'),
+///       Text('Bio...'),
+///     ],
+///   ),
+/// )
+/// ```
 class CardSlide extends StatefulWidget {
-  /// The icon widget for the top panel (usually an icon).
-  final Widget icon;
+  /// The widget displayed on the top panel (slides up on hover).
+  ///
+  /// This can be any widget, such as:
+  /// - An image (for team member/product cards)
+  /// - An icon
+  /// - A colored container
+  final Widget topWidget;
 
-  /// The title text for the bottom panel.
-  final String title;
-
-  /// The subtitle text for the bottom panel.
-  final String subtitle;
+  /// The widget displayed on the bottom panel (slides down on hover).
+  ///
+  /// This can be any widget, such as:
+  /// - Text content (title, subtitle, description)
+  /// - A list of features
+  /// - Action buttons
+  final Widget bottomWidget;
 
   /// The visual theme of the card. If null, it will use the theme from the context.
   final CardSlideTheme? theme;
 
   const CardSlide({
     Key? key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
+    required this.topWidget,
+    required this.bottomWidget,
     this.theme,
   }) : super(key: key);
 
@@ -114,17 +143,24 @@ class _CardSlideState extends State<CardSlide>
             height: theme.cardHeight,
             child: Stack(
               children: [
-                // slide2 (content panel) - starts at 0, goes to +100px on hover
+                // Bottom panel - slides down on hover
                 Transform.translate(
-                  offset: Offset(0, slideValue * 100),
-                  child: _buildContentPanel(),
+                  offset: Offset(
+                      0,
+                      slideValue *
+                          (theme.cardHeight ?? 100) *
+                          (theme.coveragePercentage ?? 0.1)),
+                  child: _buildBottomPanel(),
                 ),
 
-                // slide1 (icon panel) - starts at 0, goes to -100px on hover
-                // This should be on top (z-index: 1 in CSS)
+                // Top panel - slides up on hover (z-index: 1)
                 Transform.translate(
-                  offset: Offset(0, -slideValue * 100),
-                  child: _buildIconPanel(),
+                  offset: Offset(
+                      0,
+                      -slideValue *
+                          (theme.cardHeight ?? 100) *
+                          (theme.coveragePercentage ?? 0.1)),
+                  child: _buildTopPanel(),
                 ),
               ],
             ),
@@ -134,21 +170,18 @@ class _CardSlideState extends State<CardSlide>
     );
   }
 
-  Widget _buildIconPanel() {
-    return Container(
-      width: _finalTheme.cardWidth,
-      height: _finalTheme.cardHeight,
-      decoration: BoxDecoration(
-        color: _finalTheme.iconBackgroundColor,
-        borderRadius: _finalTheme.borderRadius,
-      ),
-      child: Center(
-        child: widget.icon,
+  Widget _buildTopPanel() {
+    return ClipRRect(
+      borderRadius: _finalTheme.borderRadius ?? BorderRadius.zero,
+      child: Container(
+        width: _finalTheme.cardWidth,
+        height: _finalTheme.cardHeight,
+        child: widget.topWidget,
       ),
     );
   }
 
-  Widget _buildContentPanel() {
+  Widget _buildBottomPanel() {
     return Container(
       width: _finalTheme.cardWidth,
       height: _finalTheme.cardHeight,
@@ -164,32 +197,8 @@ class _CardSlideState extends State<CardSlide>
         ],
       ),
       child: Padding(
-        padding: _finalTheme.padding!,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              widget.title,
-              style: _finalTheme.titleTextStyle,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              widget.subtitle,
-              style: _finalTheme.subtitleTextStyle,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 15),
-            Container(
-              width: 30,
-              height: 4,
-              decoration: BoxDecoration(
-                color: _finalTheme.iconBackgroundColor,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-          ],
-        ),
+        padding: const EdgeInsets.symmetric(vertical: 60),
+        child: widget.bottomWidget,
       ),
     );
   }

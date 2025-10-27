@@ -255,23 +255,71 @@ CardFace(
       category: ShowcaseCategory.card,
       widgetBuilder: (theme) => CardSlide(
         theme: theme as CardSlideTheme,
-        icon: const Icon(
-          Icons.person,
-          size: 80,
-          color: Colors.white,
+        topWidget: ClipRRect(
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(12),
+          ),
+          child: Image.network(
+            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop',
+            fit: BoxFit.cover,
+            width: 400,
+            height: 250,
+          ),
         ),
-        title: 'Hello there!',
-        subtitle: 'Trust yourself and keep going.',
+        bottomWidget: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Alex Morgan',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF414141),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Lead Designer',
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF414141),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 15),
+            Container(
+              width: 30,
+              height: 4,
+              decoration: const BoxDecoration(
+                color: Color(0xFF2c73df),
+                borderRadius: BorderRadius.all(Radius.circular(2)),
+              ),
+            ),
+          ],
+        ),
       ),
       defaultCode: """
 CardSlide(
   theme: const CardSlideTheme(),
-  icon: Icon(Icons.person, size: 80, color: Colors.white),
-  title: 'Hello there!',
-  subtitle: 'Trust yourself and keep going.',
+  topWidget: ClipRRect(
+    borderRadius: BorderRadius.circular(12),
+    child: Image.network('https://example.com/photo.jpg'),
+  ),
+  bottomWidget: Column(
+    children: [
+      Text('Name', style: TextStyle(fontWeight: FontWeight.bold)),
+      Text('Role'),
+      Text('Description'),
+    ],
+  ),
 )
 """,
-      initialTheme: const CardSlideTheme(),
+      initialTheme: const CardSlideTheme(
+        cardWidth: 400.0,
+        cardHeight: 250.0,
+        cardOffset: 40.0,
+      ),
     ),
     ShowcaseItem(
       name: 'CardHover',

@@ -226,16 +226,12 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
         code.writeln(
             '    backgroundColor: ${_colorToString(theme.backgroundColor!)},');
       }
-      if (theme.iconBackgroundColor != const Color(0xFF2c73df)) {
-        code.writeln(
-            '    iconBackgroundColor: ${_colorToString(theme.iconBackgroundColor!)},');
-      }
       if (theme.borderRadius != const BorderRadius.all(Radius.circular(12))) {
         code.writeln(
             '    borderRadius: ${_borderRadiusToString(theme.borderRadius!)},');
       }
-      if (theme.padding != const EdgeInsets.all(20.0)) {
-        code.writeln('    padding: ${_edgeInsetsToString(theme.padding!)},');
+      if (theme.cardOffset != 20.0) {
+        code.writeln('    cardOffset: ${theme.cardOffset},');
       }
       if (theme.cardWidth != 400.0) {
         code.writeln('    cardWidth: ${theme.cardWidth},');

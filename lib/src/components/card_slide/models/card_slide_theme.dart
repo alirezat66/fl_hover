@@ -11,20 +11,21 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
   /// The background color of the content panel.
   final Color? backgroundColor;
 
-  /// The background color of the icon panel.
-  final Color? iconBackgroundColor;
-
   /// The border radius for the card.
   final BorderRadius? borderRadius;
 
-  /// The internal padding for the content within each panel.
-  final EdgeInsets? padding;
+  /// Controls how much of the bottom card remains visible when the top card slides up.
+  /// This is the offset from the bottom edge where the bottom card content starts.
+  /// Default is 20.0 pixels from the bottom.
+  final double? cardOffset;
 
   /// The width of the card.
   final double? cardWidth;
 
   /// The height of the card.
   final double? cardHeight;
+
+  final double? coveragePercentage;
 
   /// The duration for the slide animation.
   final Duration? animationDuration;
@@ -41,11 +42,11 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
   /// Creates a theme for the CardSlide widget.
   const CardSlideTheme({
     this.backgroundColor = Colors.white,
-    this.iconBackgroundColor = const Color(0xFF2c73df),
     this.borderRadius = const BorderRadius.all(Radius.circular(12)),
-    this.padding = const EdgeInsets.all(20.0),
+    this.cardOffset = 20.0,
     this.cardWidth = 400.0,
     this.cardHeight = 250.0,
+    this.coveragePercentage = 0.4,
     this.animationDuration = const Duration(milliseconds: 500),
     this.animationCurve = Curves.easeOut,
     this.titleTextStyle = const TextStyle(
@@ -62,27 +63,27 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
   @override
   ThemeExtension<CardSlideTheme> copyWith({
     Color? backgroundColor,
-    Color? iconBackgroundColor,
     BorderRadius? borderRadius,
-    EdgeInsets? padding,
+    double? cardOffset,
     double? cardWidth,
     double? cardHeight,
     Duration? animationDuration,
     Curve? animationCurve,
     TextStyle? titleTextStyle,
     TextStyle? subtitleTextStyle,
+    double? coveragePercentage,
   }) {
     return CardSlideTheme(
       backgroundColor: backgroundColor ?? this.backgroundColor,
-      iconBackgroundColor: iconBackgroundColor ?? this.iconBackgroundColor,
       borderRadius: borderRadius ?? this.borderRadius,
-      padding: padding ?? this.padding,
+      cardOffset: cardOffset ?? this.cardOffset,
       cardWidth: cardWidth ?? this.cardWidth,
       cardHeight: cardHeight ?? this.cardHeight,
       animationDuration: animationDuration ?? this.animationDuration,
       animationCurve: animationCurve ?? this.animationCurve,
       titleTextStyle: titleTextStyle ?? this.titleTextStyle,
       subtitleTextStyle: subtitleTextStyle ?? this.subtitleTextStyle,
+      coveragePercentage: coveragePercentage ?? this.coveragePercentage,
     );
   }
 
@@ -96,10 +97,8 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
     }
     return CardSlideTheme(
       backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
-      iconBackgroundColor:
-          Color.lerp(iconBackgroundColor, other.iconBackgroundColor, t),
       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t),
-      padding: EdgeInsets.lerp(padding, other.padding, t),
+      cardOffset: lerpDouble(cardOffset, other.cardOffset, t),
       cardWidth: lerpDouble(cardWidth, other.cardWidth, t),
       cardHeight: lerpDouble(cardHeight, other.cardHeight, t),
       titleTextStyle: TextStyle.lerp(titleTextStyle, other.titleTextStyle, t),
@@ -108,6 +107,8 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
       // Duration and Curve can't be linearly interpolated
       animationDuration: t > 0.5 ? other.animationDuration : animationDuration,
       animationCurve: t > 0.5 ? other.animationCurve : animationCurve,
+      coveragePercentage:
+          lerpDouble(coveragePercentage, other.coveragePercentage, t),
     );
   }
 
@@ -128,23 +129,11 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
         onChanged: (value) => onUpdate(
             copyWith(backgroundColor: value as Color?) as PlaygroundTheme),
       ),
-      EditableProperty<Color?>(
-        label: 'Icon Background Color',
-        value: iconBackgroundColor,
-        onChanged: (value) => onUpdate(
-            copyWith(iconBackgroundColor: value as Color?) as PlaygroundTheme),
-      ),
       EditableProperty<BorderRadius?>(
         label: 'Border Radius',
         value: borderRadius,
         onChanged: (value) => onUpdate(
             copyWith(borderRadius: value as BorderRadius?) as PlaygroundTheme),
-      ),
-      EditableProperty<EdgeInsets?>(
-        label: 'Padding',
-        value: padding,
-        onChanged: (value) => onUpdate(
-            copyWith(padding: value as EdgeInsets?) as PlaygroundTheme),
       ),
       EditableProperty<double?>(
         label: 'Card Width',
@@ -161,6 +150,15 @@ class CardSlideTheme extends ThemeExtension<CardSlideTheme>
         max: 400.0,
         onChanged: (value) => onUpdate(
             copyWith(cardHeight: (value as num).toDouble()) as PlaygroundTheme),
+      ),
+      EditableProperty<double?>(
+        label: 'Coverage Percentage',
+        value: coveragePercentage,
+        min: 0.0,
+        max: 0.5,
+        onChanged: (value) => onUpdate(
+            copyWith(coveragePercentage: (value as num).toDouble())
+                as PlaygroundTheme),
       ),
       EditableProperty<Duration?>(
         label: 'Animation Duration',
