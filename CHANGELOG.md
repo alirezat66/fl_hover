@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2024-12-XX
+
+### Added
+- **Widget Extensions** - New extension methods for adding hover effects to any widget
+  - `increaseSizeOnHover()` - Smoothly increases widget size on hover with customizable scale factor, animation curve, alignment, and cursor
+  - `changeWidgetOnHover()` - Changes image to a different image on hover with fade transition and customizable transition builder
+- GIF demos for all widget extensions
+- New extension category in the showcase
+- Comprehensive documentation with advanced usage examples for extensions
+
+### Improved
+- Better customization options for extension methods
+- Enhanced documentation with more detailed examples
+- Improved code organization with separated extension files
+
+### Changed
+- Package renamed from `flutter_hover_effects` to `fl_hover`
+- GitHub repository links updated to use `main` branch instead of `develop`
+- README updated with comprehensive GIF demos and usage examples
+
 ## [1.0.0] - 2024-12-XX
 
 ### Added
