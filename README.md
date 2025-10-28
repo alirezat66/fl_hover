@@ -31,29 +31,77 @@ Here is a list of the available widgets in this package:
 ### Cards
 
 #### Holographic Card
+
 Creates a stunning holographic appearance with animated gradients and shimmer effects.
 
-![Holographic Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/holographic_card.gif?raw=true)
+![Holographic Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/holographic_effect.gif?raw=true)
+
+**Use Cases:**
+- Product showcase cards for tech items
+- Premium feature badges
+- Special announcement cards
+- Landing page hero cards
 
 **Simple Usage:**
 ```dart
+import 'package:fl_hover/fl_hover.dart';
+
 HolographicCard(
   child: Text('Hover Me'),
 )
 ```
 
-**Customizable Properties:**
-| Property      | Type          | Description                               |
-|---------------|---------------|-------------------------------------------|
-| `theme`       | `HolographicEffectTheme` | Defines the visual properties of the card. |
-| `child`       | `Widget`      | The widget to display inside the card.    |
+**Advanced Usage with Custom Theme:**
+```dart
+HolographicCard(
+  theme: HolographicEffectTheme(
+    backgroundColor: Color(0xFF111111),
+    shineColor: Color(0x4D00FFFF),  // rgba(0, 255, 255, 0.3)
+    glowColor: Color(0x8000FFFF),   // rgba(0, 255, 255, 0.5)
+    borderRadius: BorderRadius.circular(15),
+    padding: EdgeInsets.all(24.0),
+    scaleFactor: 1.05,
+    animationDuration: Duration(milliseconds: 500),
+    shineDuration: Duration(milliseconds: 500),
+  ),
+  child: Column(
+    children: [
+      Icon(Icons.star, size: 48, color: Colors.white),
+      Text('Premium', style: TextStyle(color: Colors.white)),
+    ],
+  ),
+)
+```
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `backgroundColor` | `Color` | `Color(0xFF111111)` | Background color of the card |
+| `shineColor` | `Color` | `Color(0x4D00FFFF)` | Color of the holographic shine effect |
+| `glowColor` | `Color` | `Color(0x8000FFFF)` | Color of the glow/shadow effect when hovered |
+| `borderRadius` | `BorderRadius` | `BorderRadius.circular(15)` | Border radius for the card's corners |
+| `padding` | `EdgeInsets` | `EdgeInsets.all(24)` | Padding between the card's border and its child |
+| `elevation` | `double` | `0.0` | Elevation (shadow depth) of the card |
+| `hoverElevation` | `double` | `0.0` | Elevation when hovered |
+| `scaleFactor` | `double` | `1.05` | Scaling factor applied on hover |
+| `animationDuration` | `Duration` | `500ms` | Duration of hover animations |
+| `shineDuration` | `Duration` | `500ms` | Duration of one full sweep of the holographic shine |
 
 ---
 
 #### Flip Card
+
 A card that flips on hover to reveal content on the back.
 
 ![Flip Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/flip_card.gif?raw=true)
+
+**Use Cases:**
+- Playing cards (Poker, Blackjack, Solitaire)
+- Flash cards for education
+- Credit/Debit card displays
+- Business cards with contact info
+- Trading cards
+- Product comparison cards
 
 **Simple Usage:**
 ```dart
@@ -63,63 +111,248 @@ FlipCard(
 )
 ```
 
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `front` | `Widget` | The widget to display on the front of the card. |
-| `back` | `Widget` | The widget to display on the back of the card. |
-| `theme` | `FlipCardTheme` | Defines the visual properties of the card. |
+**Advanced Usage with Custom Theme:**
+```dart
+FlipCard(
+  theme: FlipCardTheme(
+    borderRadius: BorderRadius.circular(12),
+    frontBackgroundColor: Color(0xFFF5F5DC),
+    backBackgroundColor: Colors.white,
+    padding: EdgeInsets.zero,
+    width: 500,
+    height: 350,
+    animationDuration: Duration(milliseconds: 600),
+    animationCurve: Curves.easeInOut,
+    perspective: 0.001,
+  ),
+  front: Container(
+    decoration: BoxDecoration(color: Color(0xFFF5F5DC)),
+    child: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          FlutterLogo(size: 56),
+          Text('FLUTTER', 
+            style: TextStyle(
+              fontSize: 48,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF8B8B7A),
+              letterSpacing: 3,
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+  back: Container(
+    decoration: BoxDecoration(color: Colors.white),
+    child: Padding(
+      padding: EdgeInsets.all(24),
+      child: Text(
+        'Flutter is Google\'s UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.',
+        style: TextStyle(fontSize: 16),
+      ),
+    ),
+  ),
+)
+```
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `borderRadius` | `BorderRadius` | `BorderRadius.circular(8)` | Border radius for both sides |
+| `frontBackgroundColor` | `Color` | `Color(0xFF2196F3)` | Background color of the front face |
+| `backBackgroundColor` | `Color` | `Color(0xFF4CAF50)` | Background color of the back face |
+| `padding` | `EdgeInsets` | `EdgeInsets.all(16)` | Padding inside the card |
+| `width` | `double` | `300` | Width of the card |
+| `height` | `double` | `200` | Height of the card |
+| `animationDuration` | `Duration` | `600ms` | Duration of the flip animation |
+| `animationCurve` | `Curve` | `Curves.easeInOut` | Curve of the flip animation |
+| `perspective` | `double` | `0.001` | Perspective value for the 3D effect |
 
 ---
 
 #### Card Face
+
 A card with a top face that moves on hover to reveal the content underneath.
 
 ![Card Face](https://github.com/alirezat66/fl_hover/blob/develop/assets/card_face.gif?raw=true)
+
+**Use Cases:**
+- Product cards with image and details (e-commerce)
+- Portfolio items with thumbnail and description
+- Blog post preview cards
+- Event cards with date and info
 
 **Simple Usage:**
 ```dart
 CardFace(
   topFace: Text('Summary'),
   bottomFace: Text('Details'),
+  topFaceDecoration: BoxDecoration(
+    gradient: LinearGradient(
+      colors: [Color(0xFF7F00FF), Color(0xFFE100FF)],
+    ),
+  ),
 )
 ```
 
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `topFace` | `Widget` | The widget that is initially visible. |
-| `bottomFace` | `Widget` | The widget that is revealed on hover. |
-| `theme` | `CardFaceTheme` | Defines the visual properties of the card. |
+**Advanced Usage with Custom Theme:**
+```dart
+CardFace(
+  theme: CardFaceTheme(
+    width: 300.0,
+    height: 400.0,
+    borderRadius: BorderRadius.circular(15),
+    shrunkenHeight: 60.0,
+    shadow: BoxShadow(
+      color: Color.fromRGBO(0, 0, 0, 0.5),
+      blurRadius: 60,
+      spreadRadius: 0,
+      offset: Offset(0, 15),
+    ),
+    animationDuration: Duration(milliseconds: 500),
+    animationCurve: Curves.easeInOut,
+  ),
+  bottomFace: Container(
+    color: Colors.white,
+    child: Column(
+      children: [
+        Text('Key Features:',
+          style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+        ),
+        // ... more content
+      ],
+    ),
+  ),
+  topFace: Column(
+    children: [
+      Expanded(
+        child: Image.asset('assets/images/product.jpg', fit: BoxFit.cover),
+      ),
+      Container(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        child: Text('\$299.99', 
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+      ),
+    ],
+  ),
+  topFaceDecoration: BoxDecoration(color: Colors.white),
+)
+```
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `width` | `double` | `300` | Width of the card |
+| `height` | `double` | `400` | Height of the card |
+| `borderRadius` | `BorderRadius` | `BorderRadius.circular(15)` | Border radius for the card |
+| `shrunkenHeight` | `double` | `60` | Height of the top face when shrunk |
+| `shadow` | `BoxShadow` | Custom | Box shadow for the card |
+| `animationDuration` | `Duration` | `500ms` | Duration of the hover animation |
+| `animationCurve` | `Curve` | `Curves.easeInOut` | Animation curve |
 
 ---
 
 #### Card Slide
+
 A card where the top image slides up on hover, revealing text content below.
 
 ![Card Slide](https://github.com/alirezat66/fl_hover/blob/develop/assets/card_slide.gif?raw=true)
+
+**Use Cases:**
+- Team member cards (photo + bio)
+- Product cards (image + specifications)
+- Service cards (icon + description)
+- Testimonial cards (photo + quote)
 
 **Simple Usage:**
 ```dart
 CardSlide(
   topWidget: Image.network('...'),
-  bottomWidget: Text('Details'),
+  bottomWidget: Column(
+    children: [
+      Text('Name', style: TextStyle(fontWeight: FontWeight.bold)),
+      Text('Role'),
+    ],
+  ),
 )
 ```
 
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `topWidget` | `Widget` | The widget at the top (usually an image). |
-| `bottomWidget` | `Widget` | The widget at the bottom, revealed on hover. |
-| `theme` | `CardSlideTheme` | Defines the visual properties of the card. |
+**Advanced Usage with Custom Theme:**
+```dart
+CardSlide(
+  theme: CardSlideTheme(
+    backgroundColor: Colors.white,
+    borderRadius: BorderRadius.circular(12),
+    cardOffset: 20.0,
+    cardWidth: 400.0,
+    cardHeight: 250.0,
+    coveragePercentage: 0.4,
+    animationDuration: Duration(milliseconds: 500),
+    animationCurve: Curves.easeOut,
+    titleTextStyle: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: Color(0xFF414141),
+    ),
+    subtitleTextStyle: TextStyle(
+      fontSize: 16,
+      color: Color(0xFF414141),
+    ),
+  ),
+  topWidget: ClipRRect(
+    borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+    child: Image.asset('assets/images/profile.jpg', fit: BoxFit.cover),
+  ),
+  bottomWidget: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Text('John Doe',
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF414141),
+        ),
+      ),
+      SizedBox(height: 10),
+      Text('Senior Developer',
+        style: TextStyle(fontSize: 16, color: Color(0xFF414141)),
+      ),
+    ],
+  ),
+)
+```
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `backgroundColor` | `Color` | `Colors.white` | Background color of the content panel |
+| `borderRadius` | `BorderRadius` | `BorderRadius.circular(12)` | Border radius for the card |
+| `cardOffset` | `double` | `20.0` | Offset from bottom where bottom card starts |
+| `cardWidth` | `double` | `400` | Width of the card |
+| `cardHeight` | `double` | `250` | Height of the card |
+| `coveragePercentage` | `double` | `0.4` | Percentage of bottom card visible |
+| `animationDuration` | `Duration` | `500ms` | Duration for the slide animation |
+| `animationCurve` | `Curve` | `Curves.easeOut` | Curve for the animation |
+| `titleTextStyle` | `TextStyle` | Custom | Text style for the title |
+| `subtitleTextStyle` | `TextStyle` | Custom | Text style for the subtitle |
 
 ---
 
 #### Card Hover
+
 A card with a hover effect that includes a category, title, author, and time.
 
 ![Card Hover](https://github.com/alirezat66/fl_hover/blob/develop/assets/card_hover.gif?raw=true)
+
+**Use Cases:**
+- Recipe cards (photo + ingredients + cooking time)
+- Blog post cards (image + title + author + read time)
+- News article cards
+- Event cards (image + event details + date/time)
+- Portfolio item cards
 
 **Simple Usage:**
 ```dart
@@ -131,22 +364,25 @@ CardHover(
   timeText: '5 min read',
 )
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `image` | `ImageProvider` | The background image for the card. |
-| `title` | `String` | The main title text. |
-| `category` | `String` | The category text displayed at the top. |
-| `author` | `String` | The author's name. |
-| `timeText` | `String` | Text to display for time (e.g., read time). |
-| `theme` | `CardHoverTheme` | Defines the visual properties of the card. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See CardHoverTheme documentation |
 
 ---
 
 #### Paper Card Grid
+
 A grid of cards with a paper-like unfolding effect on hover.
 
 ![Paper Card Grid](https://github.com/alirezat66/fl_hover/blob/develop/assets/paper_card_grid.gif?raw=true)
+
+**Use Cases:**
+- Tutorial/documentation grid
+- Course cards grid
+- Project showcase grid
+- Feature highlights grid
 
 **Simple Usage:**
 ```dart
@@ -159,19 +395,24 @@ PaperCardGrid(
 )
 ```
 
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `items` | `List<Widget>` | The list of widgets to display in the grid. |
-| `onCardTap` | `Function(int)` | Callback for when a card is tapped. |
-| `theme` | `PaperCardGridTheme` | Defines the visual properties of the grid. |
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See PaperCardGridTheme documentation |
 
 ---
 
 #### Glow Card
+
 A card that emits a glow effect from the borders on hover.
 
 ![Glow Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/glow_card.gif?raw=true)
+
+**Use Cases:**
+- Premium feature highlights
+- Special announcement cards
+- Call-to-action cards
+- Achievement badges
 
 **Simple Usage:**
 ```dart
@@ -181,19 +422,24 @@ GlowCard(
 )
 ```
 
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `child` | `Widget` | The content of the card. |
-| `onTap` | `Function()` | Callback for when the card is tapped. |
-| `theme` | `GlowCardTheme` | Defines the visual properties of the card. |
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See GlowCardTheme documentation |
 
 ---
 
 #### Liquid Glass Card
+
 A card with a liquid-like, distorted glass effect on hover.
 
 ![Liquid Glass Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/liquid_glass.gif?raw=true)
+
+**Use Cases:**
+- Interactive portfolio cards
+- Premium product displays
+- Feature showcases
+- Game UI elements
 
 **Simple Usage:**
 ```dart
@@ -202,21 +448,27 @@ LiquidGlassCard(
   onTap: () {},
 )
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `child` | `Widget` | The content of the card. |
-| `onTap` | `Function()` | Callback for when the card is tapped. |
-| `theme` | `LiquidGlassTheme` | Defines the visual properties of the card. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See LiquidGlassTheme documentation |
 
 ---
 
 ### Navigation
 
 #### Animated Nav Menu
+
 A navigation menu with items that animate with a gradient on hover.
 
 ![Animated Nav Menu](https://github.com/alirezat66/fl_hover/blob/develop/assets/animated_nav_menu.gif?raw=true)
+
+**Use Cases:**
+- Main website navigation
+- Mobile app side menu
+- Dashboard navigation
+- Admin panel menu
 
 **Simple Usage:**
 ```dart
@@ -227,18 +479,25 @@ AnimatedNavMenu(
   ],
 )
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `items` | `List<AnimatedNavMenuItem>` | The list of navigation items. |
-| `theme` | `AnimatedNavMenuTheme` | Defines the visual properties of the menu. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See AnimatedNavMenuTheme documentation |
 
 ---
 
 #### Sliding Nav Menu
+
 A navigation menu with a sliding highlight that moves to the hovered item.
 
 ![Sliding Nav Menu](https://github.com/alirezat66/fl_hover/blob/develop/assets/sliding_nav_menu.gif?raw=true)
+
+**Use Cases:**
+- Tab navigation
+- Settings menu
+- Dashboard side menu
+- Filter menu
 
 **Simple Usage:**
 ```dart
@@ -249,20 +508,27 @@ SlidingNavMenu(
   ],
 )
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `items` | `List<SlidingNavMenuItem>` | The list of navigation items. |
-| `theme` | `SlidingNavMenuTheme` | Defines the visual properties of the menu. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See SlidingNavMenuTheme documentation |
 
 ---
 
 ### Icons & Buttons
 
 #### Animated Fill Icon
+
 A set of icons that fill with color on hover.
 
 ![Animated Fill Icon](https://github.com/alirezat66/fl_hover/blob/develop/assets/animated_fill_icon.gif?raw=true)
+
+**Use Cases:**
+- Social media share buttons
+- Action buttons (like, favorite, bookmark)
+- Rating icons
+- Status indicators
 
 **Simple Usage:**
 ```dart
@@ -273,18 +539,25 @@ AnimatedFillIcon(
   ],
 )
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `icons` | `List<AnimatedFillIconItem>` | The list of icon items. |
-| `theme` | `AnimatedFillIconTheme` | Defines the visual properties of the icons. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See AnimatedFillIconTheme documentation |
 
 ---
 
 #### Animated Hover Icons
+
 A set of icons that perform a jump and color change animation on hover.
 
 ![Animated Hover Icons](https://github.com/alirezat66/fl_hover/blob/develop/assets/animated_hover_icon.gif?raw=true)
+
+**Use Cases:**
+- Toolbar icons
+- Quick action buttons
+- Feature icons
+- Category icons
 
 **Simple Usage:**
 ```dart
@@ -295,18 +568,25 @@ AnimatedHoverIcons(
   ],
 )
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `icons` | `List<AnimatedIconItem>` | The list of icon items. |
-| `theme` | `AnimatedIconsTheme` | Defines the visual properties of the icons. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See AnimatedIconsTheme documentation |
 
 ---
 
 #### Hover Underline
+
 A widget (text or icon) that gets an animated underline on hover.
 
 ![Hover Underline](https://github.com/alirezat66/fl_hover/blob/develop/assets/hover_under_line.gif?raw=true)
+
+**Use Cases:**
+- Navigation links
+- Read more links
+- Clickable text elements
+- Icon links
 
 **Simple Usage:**
 ```dart
@@ -316,19 +596,24 @@ HoverUnderline(
 )
 ```
 
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `child` | `Widget` | The widget to underline on hover. |
-| `onTap` | `Function()` | Callback for when the widget is tapped. |
-| `theme` | `HoverUnderlineTheme` | Defines the visual properties of the underline. |
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See HoverUnderlineTheme documentation |
 
 ---
 
 #### Liquid Morph
+
 A button with a liquid morphing effect on hover.
 
 ![Liquid Morph](https://github.com/alirezat66/fl_hover/blob/develop/assets/liquid_morph.gif?raw=true)
+
+**Use Cases:**
+- Call-to-action buttons
+- Submit buttons
+- Feature activation buttons
+- Game buttons
 
 **Simple Usage:**
 ```dart
@@ -338,19 +623,24 @@ LiquidMorph(
 )
 ```
 
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `child` | `Widget` | The content of the button. |
-| `onTap` | `Function()` | Callback for when the button is tapped. |
-| `theme` | `LiquidMorphTheme` | Defines the visual properties of the button. |
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See LiquidMorphTheme documentation |
 
 ---
 
 #### Animated Arrow Button
+
 A button with an arrow that animates on hover.
 
 ![Animated Arrow Button](https://github.com/alirezat66/fl_hover/blob/develop/assets/animated_arrow_button.gif?raw=true)
+
+**Use Cases:**
+- Continue/Next buttons
+- Forward/Backward navigation
+- Slide arrows
+- Read more buttons
 
 **Simple Usage:**
 ```dart
@@ -358,36 +648,47 @@ AnimatedArrowButton(
   onTap: () {},
 )
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `onTap` | `Function()` | Callback for when the button is tapped. |
-| `theme` | `AnimatedArrowButtonTheme` | Defines the visual properties of the button. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See AnimatedArrowButtonTheme documentation |
 
 ---
 
 ### Effects
 
 #### Cursor Showcase
+
 An effect that changes the cursor's appearance and adds a trailing highlight effect.
 
-![Cursor Showcase](https://github.com/alirezat66/fl_hover/blob/develop/assets/cursor_showcase.gif?raw=true)
+**Use Cases:**
+- Interactive portfolio
+- Creative agency websites
+- Gaming websites
+- Interactive presentations
 
 **Simple Usage:**
 ```dart
 CursorShowcase()
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `theme` | `CursorShowcaseTheme` | Defines the visual properties of the cursor effect. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| Various theme properties | Various | Various | See CursorShowcaseTheme documentation |
 
 ---
 
 #### Split Image
+
 An image that splits into multiple pieces on hover.
 
-![Split Image](https://github.com/alirezat66/fl_hover/blob/develop/assets/split_image.gif?raw=true)
+**Use Cases:**
+- Portfolio galleries
+- Product galleries
+- Team member showcases
+- Photo galleries
 
 **Simple Usage:**
 ```dart
@@ -396,12 +697,15 @@ SplitImage(
   onTap: () {},
 )
 ```
-**Customizable Properties:**
-| Property | Type | Description |
-|---|---|---|
-| `image` | `ImageProvider` | The image to apply the effect to. |
-| `onTap` | `Function()` | Callback for when the image is tapped. |
-| `theme` | `SplitImageTheme` | Defines the visual properties of the effect. |
+
+**Theme Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `columns` | `int` | `5` | Number of vertical columns to split the image |
+| `animationDuration` | `Duration` | `400ms` | Duration of the animation when hovering |
+| `animationCurve` | `Curve` | `Curves.easeInOut` | Animation curve |
+| `cursorBehavior` | `CursorBehavior` | `CursorBehavior.pointer` | Mouse cursor when hovering |
+| `cellAnimations` | `Map<int, CellAnimation>` | Custom | Configuration for each column's animation |
 
 ---
 
