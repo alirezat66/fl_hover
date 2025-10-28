@@ -716,6 +716,8 @@ SplitImage(
 #### Increase Size on Hover
 An extension method that smoothly increases a widget's size on hover.
 
+![Increase Size on Hover](https://github.com/alirezat66/fl_hover/blob/main/assets/increase_extension.gif?raw=true)
+
 **Use Cases:**
 - Interactive icons
 - Buttons with size feedback
@@ -753,6 +755,8 @@ Icon(Icons.favorite, size: 80)
 
 #### Change Widget on Hover
 An extension method that changes a widget to a different widget on hover with a fade transition.
+
+![Change Widget on Hover](https://github.com/alirezat66/fl_hover/blob/main/assets/change_extension.gif?raw=true)
 
 **Use Cases:**
 - Profile images that change on hover
