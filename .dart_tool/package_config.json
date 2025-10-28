@@ -176,7 +176,7 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "flutter_hover_effects",
+      "name": "fl_hover",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.0"

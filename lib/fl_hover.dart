@@ -4,7 +4,7 @@
 
 /// A collection of beautiful and customizable UI components with stunning
 /// hover and animation effects.
-library flutter_hover_effects;
+library fl_hover;
 
 // Export previous components...
 export 'src/components/button_3d/button_3d_widget.dart';

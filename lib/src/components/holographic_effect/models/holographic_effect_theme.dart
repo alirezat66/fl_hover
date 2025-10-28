@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_hover_effects/src/playground/playground_property.dart';
-import 'package:flutter_hover_effects/src/playground/playground_theme.dart';
+import 'package:fl_hover/src/playground/playground_property.dart';
+import 'package:fl_hover/src/playground/playground_theme.dart';
 
 /// Defines the visual properties and theme for the [HolographicEffect] widget.
 ///

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fl_hover/fl_hover.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
-import 'package:flutter_hover_effects/hover_effects.dart';
 
 typedef WidgetBuilderWithTheme = Widget Function(dynamic theme);
 

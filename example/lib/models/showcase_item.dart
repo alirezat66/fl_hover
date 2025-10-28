@@ -1,6 +1,5 @@
 import 'package:example/play_ground_page.dart';
-import 'package:flutter_hover_effects/hover_effects.dart';
-
+import 'package:fl_hover/fl_hover.dart';
 /// Enum for categorizing the hover effects.
 enum ShowcaseCategory {
   card,

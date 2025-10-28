@@ -34,7 +34,8 @@ When you increase columns to 10, additional columns get auto-generated animation
 ## Basic Usage
 
 ```dart
-import 'package:flutter_hover_effects/hover_effects.dart';
+import 'package:fl_hover/hover_effects.dart';
+import 'package:flutter/material.dart';
 
 SplitImage(
   image: AssetImage('assets/my_image.jpg'),

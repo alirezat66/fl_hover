@@ -15,7 +15,7 @@ A Flutter widget that creates a stunning 3D flip card effect. The card flips 180
 ## Basic Usage
 
 ```dart
-import 'package:flutter_hover_effects/hover_effects.dart';
+import 'package:fl_hover/hover_effects.dart';
 
 FlipCard(
   front: Container(

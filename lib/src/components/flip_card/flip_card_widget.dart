@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
-import 'package:flutter_hover_effects/src/components/flip_card/models/flip_card_theme.dart';
+import 'package:fl_hover/src/components/flip_card/models/flip_card_theme.dart';
 
 /// A widget that creates a flip card effect with customizable front and back sides.
 /// The card flips when hovered over.

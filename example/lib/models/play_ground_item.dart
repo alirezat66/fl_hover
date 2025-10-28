@@ -1,7 +1,7 @@
-import 'package:example/play_ground_page.dart';
-import 'package:flutter_hover_effects/hover_effects.dart';
+import 'package:fl_hover/fl_hover.dart';
 
-class PlaygroundItem {
+import '../play_ground_page.dart';
+class PlayGroundItem {
   /// A unique identifier used for routing (e.g., 'button-3d').
   final String id;
 
@@ -14,7 +14,7 @@ class PlaygroundItem {
   /// A function that builds the widget to be displayed.
   final WidgetBuilderWithTheme widgetBuilder;
 
-  PlaygroundItem({
+  PlayGroundItem({
     required this.id,
     required this.title,
     required this.initialTheme,

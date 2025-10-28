@@ -81,7 +81,7 @@ class _ShowcasePageState extends State<ShowcasePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Flutter Hover Effects',
+                        'FL Hover Showcase',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
@@ -145,7 +145,7 @@ class _ShowcasePageState extends State<ShowcasePage> {
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
       appBar: AppBar(
-        title: const Text('Flutter Hover Effects'),
+        title: const Text('Fl Hover Effects'),
         backgroundColor: const Color(0xFF6366F1),
         foregroundColor: Colors.white,
         elevation: 0,

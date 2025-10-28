@@ -1,7 +1,7 @@
 import 'package:example/models/showcase_item.dart';
 import 'package:example/widgets/note_book_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hover_effects/hover_effects.dart';
+import 'package:fl_hover/fl_hover.dart';
 
 /// A centralized data provider for all showcase items.
 /// This keeps the UI layer clean and separates data from presentation.

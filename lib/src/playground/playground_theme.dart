@@ -1,4 +1,4 @@
-import 'package:flutter_hover_effects/hover_effects.dart';
+import 'package:fl_hover/fl_hover.dart';
 
 /// The abstract "contract" that any theme must implement to be editable
 /// in the playground.

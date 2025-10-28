@@ -83,19 +83,17 @@ class LiquidMorphTheme extends ThemeExtension<LiquidMorphTheme>
           backgroundColor,
       width: lerpDouble(width, other.width, t),
       height: lerpDouble(height, other.height, t),
-      borderRadius:
-          lerpDouble(borderRadius, other.borderRadius, t),
+      borderRadius: lerpDouble(borderRadius, other.borderRadius, t),
       hoverBorderRadius:
           lerpDouble(hoverBorderRadius, other.hoverBorderRadius, t),
-    
       gradientColors: _lerpColorList(gradientColors, other.gradientColors, t),
       gradientStops: _lerpDoubleList(gradientStops, other.gradientStops, t),
       animationDuration: Duration(
         milliseconds: lerpDouble(
-              animationDuration.inMilliseconds.toDouble(),
-              other.animationDuration.inMilliseconds.toDouble(),
-              t,
-            ).round() ,
+          animationDuration.inMilliseconds.toDouble(),
+          other.animationDuration.inMilliseconds.toDouble(),
+          t,
+        ).round(),
       ),
       animationCurve: t < 0.5 ? animationCurve : other.animationCurve,
     );

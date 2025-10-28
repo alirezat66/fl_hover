@@ -17,7 +17,9 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_hover_effects: ^1.0.0
+  flutter:
+    sdk: flutter
+  fl_hover: ^1.0.0
 ```
 
 Then run:
@@ -29,7 +31,7 @@ flutter pub get
 ## Quick Start
 
 ```dart
-import 'package:flutter_hover_effects/flutter_hover_effects.dart';
+import 'package:fl_hover/flutter_hover_effects.dart';
 
 // Holographic Effect
 HolographicEffect(

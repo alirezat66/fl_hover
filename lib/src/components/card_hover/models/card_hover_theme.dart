@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hover_effects/hover_effects.dart';
+import 'package:fl_hover/fl_hover.dart';
 
 /// Defines the visual properties for the [CardHover] widget.
 @immutable

@@ -1,10 +1,10 @@
 {
   "roots": [
-    "flutter_hover_effects"
+    "fl_hover"
   ],
   "packages": [
     {
-      "name": "flutter_hover_effects",
+      "name": "fl_hover",
       "version": "1.0.0",
       "dependencies": [
         "flutter",

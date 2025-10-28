@@ -12,7 +12,7 @@ class HoverEffectsShowcaseApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
-      title: 'Flutter Hover Effects Showcase',
+      title: 'FL Hover Showcase',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
