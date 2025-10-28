@@ -52,8 +52,8 @@ class CardHoverTheme extends ThemeExtension<CardHoverTheme>
         fontFamily: 'Raleway', fontSize: 12, fontWeight: FontWeight.w500),
     this.authorTextStyle =
         const TextStyle(color: Color(0xFFAD7D52), fontWeight: FontWeight.w600),
-    this.overlayColor = Colors.white,
-    this.overlayOpacity = 0.3,
+    this.overlayColor = const Color(0xFF092949),
+    this.overlayOpacity = 0.7,
     this.animationDuration = const Duration(milliseconds: 300),
     this.animationCurve = Curves.easeOut,
   });

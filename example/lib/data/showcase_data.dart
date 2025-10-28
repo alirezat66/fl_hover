@@ -17,7 +17,11 @@ class ShowcaseData {
         theme: theme as HolographicEffectTheme,
         child: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 24),
-          child: Text('Holographic Effect'),
+          child: Text(
+            'Holographic Effect',
+            style: TextStyle(
+                fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
         ),
       ),
       defaultCode: """
@@ -40,14 +44,21 @@ HolographicEffect(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'SIMPLICITY',
-                  style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF8B8B7A),
-                    letterSpacing: 3,
-                  ),
+                Column(
+                  children: [
+                    FlutterLogo(
+                      size: 56,
+                    ),
+                    Text(
+                      'FLUTTER',
+                      style: TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF8B8B7A),
+                        letterSpacing: 3,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -61,15 +72,33 @@ HolographicEffect(
             textSpans: [
               TextSpan(
                 text:
-                    'Revolution by revolution, Steve Jobs proved that Simplicity is the most powerful force in business. ',
+                    'Flutter is an open-source software development kit (SDK) from Google that lets developers build natively compiled applications for mobile, web, and desktop from a single codebase. It uses the',
               ),
               TextSpan(
-                text: 'Insanely Simple',
-                style: TextStyle(fontStyle: FontStyle.italic),
+                text: ' Dart programming language',
+                style: TextStyle(
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
               ),
               TextSpan(
                 text:
-                    ' takes you on an entertaining and insightful trip through Steve\'s world, revealing how is love of Simplicity helped turn a nearly bankrupt Apple into the most valuable company in the world.',
+                    ' and provides a rich set of pre-built widgets to create visually appealing user interfaces (UIs) for various platforms, including iOS, Android, the web, and desktop (Windows, macOS, and Linux). Key features like',
+              ),
+              TextSpan(
+                text: ' hot reload ',
+                style: TextStyle(
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue,
+                  decoration: TextDecoration.underline,
+                ),
+              ),
+              TextSpan(
+                text:
+                    ' allow developers to see changes instantly, speeding up the development process.  ',
               ),
             ],
           ),
@@ -123,7 +152,7 @@ FlipCard(
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Noise Cancellation',
+                              'Ultimate over-ear listening experience',
                               style: TextStyle(
                                   fontSize: 14, color: Colors.black87),
                             ),
@@ -138,7 +167,7 @@ FlipCard(
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              '30-Hour Battery Life',
+                              'Five new colours ',
                               style: TextStyle(
                                   fontSize: 14, color: Colors.black87),
                             ),
@@ -153,7 +182,7 @@ FlipCard(
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Bluetooth 5.0 & USB-C',
+                              'FOCUS ON WHAT YOU WANT TO HEAR',
                               style: TextStyle(
                                   fontSize: 14, color: Colors.black87),
                             ),
@@ -168,7 +197,37 @@ FlipCard(
                           SizedBox(width: 10),
                           Expanded(
                             child: Text(
-                              'Premium Sound Quality',
+                              'Hear the world around you',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.black87),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(Icons.check_circle,
+                              size: 16, color: Color(0xFF4CAF50)),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Design for optimal acoustics',
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.black87),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(Icons.check_circle,
+                              size: 16, color: Color(0xFF4CAF50)),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'MAGICAL EXPERIENCE',
                               style: TextStyle(
                                   fontSize: 14, color: Colors.black87),
                             ),
@@ -188,8 +247,8 @@ FlipCard(
               child: ClipRRect(
                 borderRadius:
                     const BorderRadius.vertical(top: Radius.circular(8)),
-                child: Image.network(
-                  'https://images.pexels.com/photos/205926/pexels-photo-205926.jpeg?auto=compress&cs=tinysrgb&w=800',
+                child: Image.asset(
+                  'assets/images/air_pods_max.jpeg',
                   fit: BoxFit.cover,
                   width: double.infinity,
                 ),
@@ -205,7 +264,7 @@ FlipCard(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Premium Headphones',
+                    'Apple AirPods Max',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 12,
@@ -217,7 +276,7 @@ FlipCard(
                   ),
                   SizedBox(height: 2),
                   Text(
-                    '\$299.99',
+                    '\$484.00',
                     style: TextStyle(
                       color: Colors.black87,
                       fontSize: 16,
@@ -259,8 +318,8 @@ CardFace(
           borderRadius: const BorderRadius.vertical(
             top: Radius.circular(12),
           ),
-          child: Image.network(
-            'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop',
+          child: Image.asset(
+            'assets/images/me.png',
             fit: BoxFit.cover,
             width: 400,
             height: 250,
@@ -270,7 +329,7 @@ CardFace(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Alex Morgan',
+              'Reza Taghizadeh',
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -280,7 +339,7 @@ CardFace(
             ),
             const SizedBox(height: 10),
             const Text(
-              'Lead Designer',
+              'Senior Flutter Developer',
               style: TextStyle(
                 fontSize: 16,
                 color: Color(0xFF414141),
@@ -326,12 +385,13 @@ CardSlide(
       category: ShowcaseCategory.card,
       widgetBuilder: (theme) => CardHover(
         theme: theme as CardHoverTheme,
-        image: const NetworkImage(
-          'https://images.pexels.com/photos/45202/brownie-dessert-cake-sweet-45202.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260',
+        
+        image: const AssetImage(
+          'assets/images/ghorme_sabzi.jpg',
         ),
         category: 'Recipe',
-        title: 'Crisp Spanish tortilla Matzo brei',
-        author: 'Celeste Mills',
+        title: 'Ghorme Sabzi (Persian Cabbage Stew)',
+        author: 'Reza Taghizadeh',
         timeText: '15 min',
         onAuthorTap: () {},
         onLikeTap: () {},
