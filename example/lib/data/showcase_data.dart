@@ -385,7 +385,6 @@ CardSlide(
       category: ShowcaseCategory.card,
       widgetBuilder: (theme) => CardHover(
         theme: theme as CardHoverTheme,
-        
         image: const AssetImage(
           'assets/images/ghorme_sabzi.jpg',
         ),
@@ -1156,6 +1155,60 @@ SplitImage(
 )
 """,
       initialTheme: const SplitImageTheme(),
+    ),
+    ShowcaseItem(
+      name: 'ChangeWidgetOnHover',
+      category: ShowcaseCategory.extension,
+      widgetBuilder: (theme) => Center(
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: Image.asset(
+            'assets/images/profile_image.png',
+            fit: BoxFit.cover,
+            width: 150,
+            height: 150,
+            errorBuilder: (context, error, stackTrace) {
+              return const Icon(Icons.person, size: 150);
+            },
+          ).changeWidgetOnHover(
+            Image.asset(
+              'assets/images/profile_image_hover.png',
+              fit: BoxFit.cover,
+              width: 150,
+              height: 150,
+              errorBuilder: (context, error, stackTrace) {
+                return const Icon(Icons.person_outline, size: 150);
+              },
+            ),
+          ),
+        ),
+      ),
+      defaultCode: """
+ClipRRect(
+  borderRadius: BorderRadius.circular(100),
+  child: Image.asset('assets/images/profile_image.png')
+    .changeWidgetOnHover(
+      Image.asset('assets/images/profile_image_hover.png')
+    ),
+)
+""",
+      initialTheme: const HolographicEffectTheme(),
+    ),
+    ShowcaseItem(
+      name: 'IncreaseSizeOnHover',
+      category: ShowcaseCategory.extension,
+      widgetBuilder: (theme) => Center(
+        child: const Icon(
+          Icons.favorite,
+          size: 80,
+          color: Colors.red,
+        ).increaseSizeOnHover(1.5),
+      ),
+      defaultCode: """
+Icon(Icons.favorite, size: 80)
+  .increaseSizeOnHover(1.5)
+""",
+      initialTheme: const HolographicEffectTheme(),
     ),
   ];
 }

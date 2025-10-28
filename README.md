@@ -711,6 +711,112 @@ SplitImage(
 
 ---
 
+### Widget Extensions
+
+#### Increase Size on Hover
+An extension method that smoothly increases a widget's size on hover.
+
+**Use Cases:**
+- Interactive icons
+- Buttons with size feedback
+- Images that need emphasis on hover
+- Social media icons
+
+**Simple Usage:**
+```dart
+Icon(Icons.favorite, size: 80)
+  .increaseSizeOnHover(1.5)
+```
+
+**Advanced Usage:**
+```dart
+Icon(Icons.favorite, size: 80)
+  .increaseSizeOnHover(
+    1.5,
+    duration: Duration(milliseconds: 500),
+    curve: Curves.bounceOut,
+    alignment: Alignment.center,
+    cursor: SystemMouseCursors.zoomIn,
+  )
+```
+
+**Customizable Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `scaleFactor` | `double` | required | The scale factor to apply on hover |
+| `duration` | `Duration` | `300ms` | The duration of the animation |
+| `curve` | `Curve` | `Curves.easeInOut` | The animation curve |
+| `alignment` | `AlignmentGeometry` | `Alignment.center` | The alignment for the transform |
+| `cursor` | `SystemMouseCursor` | `SystemMouseCursors.click` | The cursor to show on hover |
+
+---
+
+#### Change Widget on Hover
+An extension method that changes a widget to a different widget on hover with a fade transition.
+
+**Use Cases:**
+- Profile images that change on hover
+- Before/after product images
+- Interactive image galleries
+- Icon state changes
+
+**Simple Usage:**
+```dart
+Image.asset('assets/images/profile.png')
+  .changeWidgetOnHover(
+    Image.asset('assets/images/profile_hover.png')
+  )
+```
+
+**Advanced Usage:**
+```dart
+ClipRRect(
+  borderRadius: BorderRadius.circular(100),
+  child: Image.asset(
+    'assets/images/profile_image.png',
+    fit: BoxFit.cover,
+    width: 150,
+    height: 150,
+    errorBuilder: (context, error, stackTrace) {
+      return const Icon(Icons.person, size: 150);
+    },
+  ).changeWidgetOnHover(
+    Image.asset(
+      'assets/images/profile_image_hover.png',
+      fit: BoxFit.cover,
+      width: 150,
+      height: 150,
+      errorBuilder: (context, error, stackTrace) {
+        return const Icon(Icons.person_outline, size: 150);
+      },
+    ),
+    duration: Duration(milliseconds: 500),
+    transitionBuilder: (child, animation) {
+      return FadeTransition(
+        opacity: animation,
+        child: ScaleTransition(
+          scale: Tween<double>(begin: 0.8, end: 1.0).animate(animation),
+          child: child,
+        ),
+      );
+    },
+    cursor: SystemMouseCursors.grab,
+  ),
+)
+```
+
+**Customizable Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `hoverWidget` | `Widget` | required | The widget to show when hovering |
+| `duration` | `Duration` | `300ms` | The duration of the fade transition |
+| `transitionBuilder` | `AnimatedSwitcherTransitionBuilder` | `FadeTransition` | Custom transition builder for the animation |
+| `cursor` | `SystemMouseCursor` | `SystemMouseCursors.click` | The cursor to show on hover |
+
+**Note:** This extension only works with `Image` widgets.
+
+---
+
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 

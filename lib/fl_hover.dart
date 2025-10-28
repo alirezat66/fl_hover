@@ -97,3 +97,6 @@ export 'src/components/split_image/models/split_image_theme.dart';
 
 export 'src/playground/playground_theme.dart';
 export 'src/playground/playground_property.dart';
+
+// Export widget extensions
+export 'src/extensions/widget_extensions.dart';

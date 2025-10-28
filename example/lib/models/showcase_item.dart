@@ -1,5 +1,6 @@
 import 'package:example/play_ground_page.dart';
 import 'package:fl_hover/fl_hover.dart';
+
 /// Enum for categorizing the hover effects.
 enum ShowcaseCategory {
   card,
@@ -8,6 +9,7 @@ enum ShowcaseCategory {
   effect,
   social,
   list,
+  extension,
 }
 
 /// A data model to hold the necessary information for each showcase item.
