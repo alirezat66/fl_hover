@@ -22,7 +22,6 @@ class ScotchShowcaseBackgroundPainter extends CustomPainter {
     paint.style = PaintingStyle.stroke;
 
     // These values are calculated to mimic the CSS linear-gradient stripes
-    const angle = 150 * (3.14159 / 180);
     final sinAngle = -0.5; // sin(150deg)
     final cosAngle = 0.866; // cos(150deg)
 

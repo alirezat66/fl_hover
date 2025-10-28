@@ -44,8 +44,8 @@ class _SocialIconButtonState extends State<SocialIconButton> {
           width: theme.size,
           height: theme.size,
           transform: Matrix4.identity()
-            ..translate(0.0, _isHovering ? -10.0 : 0.0, 0.0)
-            ..scale(_isHovering ? 1.1 : 1.0),
+            ..translateByDouble(0.0, _isHovering ? -10.0 : 0.0, 0.0 , 1.0)
+            ..scaleByDouble(_isHovering ? 1.1 : 1.0, _isHovering ? 1.1 : 1.0, 1.0, 1.0),
           transformAlignment: Alignment.center,
           decoration: BoxDecoration(
             shape: BoxShape.circle,

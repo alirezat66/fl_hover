@@ -10,8 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_hover_effects:
+  fl_hover:
     path: ../
+  flutter_colorpicker: ^1.1.0
+  go_router: ^16.2.2
 
 dev_dependencies:
   flutter_test:
@@ -20,3 +22,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/

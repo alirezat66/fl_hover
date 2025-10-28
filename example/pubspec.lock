@@ -41,6 +41,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
+  equatable:
+    dependency: transitive
+    description:
+      name: equatable
+      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.7"
   fake_async:
     dependency: transitive
     description:
@@ -49,18 +57,26 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.3"
-  flutter:
-    dependency: "direct main"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
-  flutter_hover_effects:
+  fl_hover:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
     version: "1.0.0"
+  flutter:
+    dependency: "direct main"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_colorpicker:
+    dependency: "direct main"
+    description:
+      name: flutter_colorpicker
+      sha256: "969de5f6f9e2a570ac660fb7b501551451ea2a1ab9e2097e89475f60e07816ea"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -69,11 +85,32 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  flutter_shaders:
+    dependency: transitive
+    description:
+      name: flutter_shaders
+      sha256: "34794acadd8275d971e02df03afee3dee0f98dbfb8c4837082ad0034f612a3e2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  go_router:
+    dependency: "direct main"
+    description:
+      name: go_router
+      sha256: b1488741c9ce37b72e026377c69a59c47378493156fc38efb5a54f6def3f92a3
+      url: "https://pub.dev"
+    source: hosted
+    version: "16.2.2"
   leak_tracker:
     dependency: transitive
     description:
@@ -106,6 +143,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  liquid_glass_renderer:
+    dependency: transitive
+    description:
+      name: liquid_glass_renderer
+      sha256: "4a4203d720bc565108bd8c0df7d9b4694bfd5d4444654171d36998093e23584c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1-dev.10"
+  logging:
+    dependency: transitive
+    description:
+      name: logging
+      sha256: c8245ada5f1717ed44271ed1c26b8ce85ca3228fd2ffdb75468ab01979309d61
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.3.0"
   matcher:
     dependency: transitive
     description:
@@ -209,4 +262,4 @@ packages:
     version: "15.0.0"
 sdks:
   dart: ">=3.8.0-0 <4.0.0"
-  flutter: ">=3.18.0-18.0.pre.54"
+  flutter: ">=3.32.4"

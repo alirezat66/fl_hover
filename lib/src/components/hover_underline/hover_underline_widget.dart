@@ -1,97 +1,126 @@
 import 'package:flutter/material.dart';
 import 'models/hover_underline_theme.dart';
 
-/// A text widget that shows an animated underline and overline on hover.
-/// The lines animate from the outside towards the center.
+/// A widget that displays any child with animated underlines on hover.
+///
+/// The underlines appear above and below the child with a gradient effect,
+/// animating from the edges toward the center on hover.
 class HoverUnderline extends StatefulWidget {
-  /// The text to display.
-  final String text;
+  /// The child widget to display
+  final Widget child;
 
-  /// The visual theme of the widget.
+  /// The theme for styling the widget
   final HoverUnderlineTheme theme;
 
-  /// The duration of the line animation.
-  final Duration animationDuration;
+  /// Callback when the widget is tapped
+  final VoidCallback? onTap;
 
   const HoverUnderline({
-    Key? key,
-    required this.text,
-    this.theme = const HoverUnderlineTheme(),
-    this.animationDuration = const Duration(milliseconds: 400),
-  }) : super(key: key);
+    super.key,
+    required this.child,
+    required this.theme,
+    this.onTap,
+  });
 
   @override
   State<HoverUnderline> createState() => _HoverUnderlineState();
 }
 
-class _HoverUnderlineState extends State<HoverUnderline> {
-  bool _isHovering = false;
+class _HoverUnderlineState extends State<HoverUnderline>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
-  void _onHover(bool isHovering) {
-    setState(() {
-      _isHovering = isHovering;
-    });
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: widget.theme.animationDuration,
+      vsync: this,
+    );
+    _animation = CurvedAnimation(
+      parent: _controller,
+      curve: widget.theme.animationCurve,
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _handleHoverEnter() {
+    _controller.forward();
+  }
+
+  void _handleHoverExit() {
+    _controller.reverse();
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = widget.theme;
-
     return MouseRegion(
-      onEnter: (_) => _onHover(true),
-      onExit: (_) => _onHover(false),
-      cursor: SystemMouseCursors.text,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildAnimatedLine(isOverline: true),
-          SizedBox(height: theme.lineGap),
-          Text(widget.text, style: theme.textStyle),
-          SizedBox(height: theme.lineGap),
-          _buildAnimatedLine(isOverline: false),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAnimatedLine({required bool isOverline}) {
-    final theme = widget.theme;
-    return Stack(
-      children: [
-        // This is a dummy text to measure the width correctly for the Stack.
-        // It's transparent so it's not visible.
-        Text(
-          widget.text,
-          style: theme.textStyle.copyWith(color: Colors.transparent),
-        ),
-        // The animated line is built inside a Positioned.fill and LayoutBuilder
-        // to get the exact width of the parent Stack.
-        Positioned.fill(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return AnimatedAlign(
-                duration: widget.animationDuration,
-                curve: Curves.easeOut,
-                alignment: _isHovering
-                    ? Alignment.center
-                    : (isOverline
-                        ? Alignment.centerLeft
-                        : Alignment.centerRight),
-                child: AnimatedContainer(
-                  duration: widget.animationDuration,
-                  // Animate between 0 and the actual measured width.
-                  width: _isHovering ? constraints.maxWidth : 0,
-                  height: theme.lineHeight,
-                  decoration: BoxDecoration(
-                    gradient: theme.lineGradient,
+      onEnter: (_) => _handleHoverEnter(),
+      onExit: (_) => _handleHoverExit(),
+      child: GestureDetector(
+        onTap: widget.onTap,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: widget.theme.underlineOffset),
+          child: AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  // Top underline (starts from left, like CSS ::before)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Transform.scale(
+                      scaleX: _animation.value,
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        height: widget.theme.underlineHeight,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: widget.theme.underlineColors,
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  // Bottom underline (starts from right, like CSS ::after)
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Transform.scale(
+                      scaleX: _animation.value,
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        height: widget.theme.underlineHeight,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: widget.theme.underlineColors,
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // Child widget
+                  widget.child,
+                ],
               );
             },
           ),
         ),
-      ],
+      ),
     );
   }
 }

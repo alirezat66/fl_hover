@@ -1,15 +1,40 @@
-import 'package:flutter/material.dart';
+import 'package:example/play_ground_page.dart';
+import 'package:fl_hover/fl_hover.dart';
+/// Enum for categorizing the hover effects.
+enum ShowcaseCategory {
+  card,
+  button,
+  navigation,
+  effect,
+  social,
+  list,
+}
 
-/// A data model to represent a single widget showcase.
+/// A data model to hold the necessary information for each showcase item.
+/// This helps in organizing the showcase page and the playground pages.
 class ShowcaseItem {
-  /// The title of the widget to be displayed on the card.
-  final String title;
+  /// The unique identifier and display name of the widget, e.g., "FlipCard".
+  final String name;
 
-  /// A builder function that returns the widget instance to be showcased.
-  final WidgetBuilder builder;
+  /// The category this widget belongs to.
+  final ShowcaseCategory category;
 
-  const ShowcaseItem({
-    required this.title,
-    required this.builder,
+  /// The initial theme instance for the playground page.
+  final PlaygroundTheme initialTheme;
+
+  /// A function that builds the widget to be displayed.
+  final WidgetBuilderWithTheme widgetBuilder;
+
+  final String defaultCode;
+
+  // In the future, this will be used to build the playground page.
+  // final Widget Function() playgroundBuilder;
+
+  ShowcaseItem({
+    required this.name,
+    required this.category,
+    required this.widgetBuilder,
+    required this.initialTheme,
+    required this.defaultCode,
   });
 }

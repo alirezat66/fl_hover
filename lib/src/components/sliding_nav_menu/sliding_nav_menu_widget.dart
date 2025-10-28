@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'models/sliding_nav_menu_item.dart';
 import 'models/sliding_nav_menu_theme.dart';
+import 'models/fill_direction.dart';
 
 /// A vertical navigation menu where items reveal a colored background that
 /// slides in from a specified direction on hover.
@@ -65,25 +66,16 @@ class __SlidingNavMenuItemWidgetState extends State<_SlidingNavMenuItemWidget> {
   }
 
   Alignment _getAlignment() {
-    switch (widget.theme.slideDirection) {
-      case AxisDirection.right:
-        return Alignment.centerRight;
-      case AxisDirection.up:
-        return Alignment.topCenter;
-      case AxisDirection.down:
-        return Alignment.bottomCenter;
-      case AxisDirection.left:
-      default:
-        return Alignment.centerLeft;
-    }
+    return widget.theme.fillDirection.alignment;
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = widget.theme;
     final highlightColor = widget.item.highlightColor;
-    final isHorizontal = theme.slideDirection == AxisDirection.left ||
-        theme.slideDirection == AxisDirection.right;
+    final fillDirection = theme.fillDirection;
+    final isHorizontal = fillDirection.isHorizontal;
+    final isVertical = fillDirection.isVertical;
 
     return MouseRegion(
       onEnter: (_) => _onHover(true),
@@ -101,11 +93,11 @@ class __SlidingNavMenuItemWidgetState extends State<_SlidingNavMenuItemWidget> {
               LayoutBuilder(builder: (context, constraints) {
                 return AnimatedContainer(
                   duration: theme.animationDuration,
-                  curve: Curves.easeOut,
+                  curve: theme.animationCurve,
                   width: isHorizontal
                       ? (_isHovering ? constraints.maxWidth : theme.peekSize)
                       : null,
-                  height: !isHorizontal
+                  height: isVertical
                       ? (_isHovering ? constraints.maxHeight : theme.peekSize)
                       : null,
                   color: highlightColor,
