@@ -6,6 +6,8 @@ A comprehensive Flutter package providing beautiful hover effects and animations
 
 Check out the live demo: [fl_hover Demo](https://alirezat66.github.io/fl_hover/)
 
+**Successfully Published on pub.dev**: 🎉 Your package is now available at [pub.dev/packages/fl_hover](https://pub.dev/packages/fl_hover)
+
 ## Features
 
 - 🎨 **A rich collection of hover effects**: Cards, navigation menus, icons, buttons, and more.
@@ -34,7 +36,7 @@ Here is a list of the available widgets in this package:
 
 Creates a stunning holographic appearance with animated gradients and shimmer effects.
 
-![Holographic Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/holographic_effect.gif?raw=true)
+![Holographic Card](https://github.com/alirezat66/fl_hover/blob/main/assets/holographic_effect.gif?raw=true)
 
 **Use Cases:**
 - Product showcase cards for tech items
@@ -93,7 +95,7 @@ HolographicCard(
 
 A card that flips on hover to reveal content on the back.
 
-![Flip Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/flip_card.gif?raw=true)
+![Flip Card](https://github.com/alirezat66/fl_hover/blob/main/assets/flip_card.gif?raw=true)
 
 **Use Cases:**
 - Playing cards (Poker, Blackjack, Solitaire)
@@ -176,7 +178,7 @@ FlipCard(
 
 A card with a top face that moves on hover to reveal the content underneath.
 
-![Card Face](https://github.com/alirezat66/fl_hover/blob/develop/assets/card_face.gif?raw=true)
+![Card Face](https://github.com/alirezat66/fl_hover/blob/main/assets/card_face.gif?raw=true)
 
 **Use Cases:**
 - Product cards with image and details (e-commerce)
@@ -259,7 +261,7 @@ CardFace(
 
 A card where the top image slides up on hover, revealing text content below.
 
-![Card Slide](https://github.com/alirezat66/fl_hover/blob/develop/assets/card_slide.gif?raw=true)
+![Card Slide](https://github.com/alirezat66/fl_hover/blob/main/assets/card_slide.gif?raw=true)
 
 **Use Cases:**
 - Team member cards (photo + bio)
@@ -345,7 +347,7 @@ CardSlide(
 
 A card with a hover effect that includes a category, title, author, and time.
 
-![Card Hover](https://github.com/alirezat66/fl_hover/blob/develop/assets/card_hover.gif?raw=true)
+![Card Hover](https://github.com/alirezat66/fl_hover/blob/main/assets/card_hover.gif?raw=true)
 
 **Use Cases:**
 - Recipe cards (photo + ingredients + cooking time)
@@ -376,7 +378,7 @@ CardHover(
 
 A grid of cards with a paper-like unfolding effect on hover.
 
-![Paper Card Grid](https://github.com/alirezat66/fl_hover/blob/develop/assets/paper_card_grid.gif?raw=true)
+![Paper Card Grid](https://github.com/alirezat66/fl_hover/blob/main/assets/paper_card_grid.gif?raw=true)
 
 **Use Cases:**
 - Tutorial/documentation grid
@@ -406,7 +408,7 @@ PaperCardGrid(
 
 A card that emits a glow effect from the borders on hover.
 
-![Glow Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/glow_card.gif?raw=true)
+![Glow Card](https://github.com/alirezat66/fl_hover/blob/main/assets/glow_card.gif?raw=true)
 
 **Use Cases:**
 - Premium feature highlights
@@ -433,7 +435,7 @@ GlowCard(
 
 A card with a liquid-like, distorted glass effect on hover.
 
-![Liquid Glass Card](https://github.com/alirezat66/fl_hover/blob/develop/assets/liquid_glass.gif?raw=true)
+![Liquid Glass Card](https://github.com/alirezat66/fl_hover/blob/main/assets/liquid_glass.gif?raw=true)
 
 **Use Cases:**
 - Interactive portfolio cards
@@ -462,7 +464,7 @@ LiquidGlassCard(
 
 A navigation menu with items that animate with a gradient on hover.
 
-![Animated Nav Menu](https://github.com/alirezat66/fl_hover/blob/develop/assets/animated_nav_menu.gif?raw=true)
+![Animated Nav Menu](https://github.com/alirezat66/fl_hover/blob/main/assets/animated_nav_menu.gif?raw=true)
 
 **Use Cases:**
 - Main website navigation
@@ -491,7 +493,7 @@ AnimatedNavMenu(
 
 A navigation menu with a sliding highlight that moves to the hovered item.
 
-![Sliding Nav Menu](https://github.com/alirezat66/fl_hover/blob/develop/assets/sliding_nav_menu.gif?raw=true)
+![Sliding Nav Menu](https://github.com/alirezat66/fl_hover/blob/main/assets/sliding_nav_menu.gif?raw=true)
 
 **Use Cases:**
 - Tab navigation
@@ -522,7 +524,7 @@ SlidingNavMenu(
 
 A set of icons that fill with color on hover.
 
-![Animated Fill Icon](https://github.com/alirezat66/fl_hover/blob/develop/assets/animated_fill_icon.gif?raw=true)
+![Animated Fill Icon](https://github.com/alirezat66/fl_hover/blob/main/assets/animated_fill_icon.gif?raw=true)
 
 **Use Cases:**
 - Social media share buttons
@@ -551,7 +553,7 @@ AnimatedFillIcon(
 
 A set of icons that perform a jump and color change animation on hover.
 
-![Animated Hover Icons](https://github.com/alirezat66/fl_hover/blob/develop/assets/animated_hover_icon.gif?raw=true)
+![Animated Hover Icons](https://github.com/alirezat66/fl_hover/blob/main/assets/animated_hover_icon.gif?raw=true)
 
 **Use Cases:**
 - Toolbar icons
@@ -580,7 +582,7 @@ AnimatedHoverIcons(
 
 A widget (text or icon) that gets an animated underline on hover.
 
-![Hover Underline](https://github.com/alirezat66/fl_hover/blob/develop/assets/hover_under_line.gif?raw=true)
+![Hover Underline](https://github.com/alirezat66/fl_hover/blob/main/assets/hover_under_line.gif?raw=true)
 
 **Use Cases:**
 - Navigation links
@@ -607,7 +609,7 @@ HoverUnderline(
 
 A button with a liquid morphing effect on hover.
 
-![Liquid Morph](https://github.com/alirezat66/fl_hover/blob/develop/assets/liquid_morph.gif?raw=true)
+![Liquid Morph](https://github.com/alirezat66/fl_hover/blob/main/assets/liquid_morph.gif?raw=true)
 
 **Use Cases:**
 - Call-to-action buttons
@@ -634,7 +636,7 @@ LiquidMorph(
 
 A button with an arrow that animates on hover.
 
-![Animated Arrow Button](https://github.com/alirezat66/fl_hover/blob/develop/assets/animated_arrow_button.gif?raw=true)
+![Animated Arrow Button](https://github.com/alirezat66/fl_hover/blob/main/assets/animated_arrow_button.gif?raw=true)
 
 **Use Cases:**
 - Continue/Next buttons
