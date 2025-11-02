@@ -4,8 +4,8 @@ A comprehensive Flutter package providing beautiful hover effects and animations
 
 ## Demo
 
-Check out the live demo: [fl_hover Demo](flhover.taghizadeh.dev)
-You can also watch many of these hovers in [My Personal website](taghizadeh.dev)
+Check out the live demo: [fl_hover Demo](https://flhover.taghizadeh.dev/)
+You can also watch many of these hovers in [My Personal website](https://taghizadeh.dev/)
 **Successfully Published on pub.dev**: 🎉 Your package is now available at [pub.dev/packages/fl_hover](https://pub.dev/packages/fl_hover)
 
 ## Features
