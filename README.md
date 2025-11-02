@@ -21,7 +21,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  fl_hover: ^1.0.0 # Replace with the latest version
+  fl_hover: ^1.1.2 # Replace with the latest version
 ```
 
 Then run: `flutter pub get`
