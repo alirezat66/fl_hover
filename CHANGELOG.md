@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2024-12-XX
+
+### Fixed
+- Fixed widget test error in example app (changed from MyApp to HoverEffectsShowcaseApp)
+- Fixed missing import for SystemMouseCursor in widget extensions
+- Fixed documentation inconsistency in changeWidgetOnHover method (removed SvgPicture reference)
+
+### Added
+- Added full customization options to `increaseSizeOnHover()` extension:
+  - `curve` parameter for custom animation curves
+  - `alignment` parameter for transform alignment
+  - `cursor` parameter for custom mouse cursor
+- Added full customization options to `changeWidgetOnHover()` extension:
+  - `transitionBuilder` parameter for custom transition animations
+  - `cursor` parameter for custom mouse cursor
+
+### Improved
+- Enhanced extension methods with complete customization support
+- Updated documentation to reflect all available customization options
+- Improved code organization and consistency
+
 ## [1.1.1] - 2024-12-XX
 
 ### Changed

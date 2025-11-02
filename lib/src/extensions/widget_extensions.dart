@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// Extension that adds hover effects to widgets
 extension IncreaseHoverExt on Widget {
@@ -15,12 +16,15 @@ extension IncreaseHoverExt on Widget {
   Widget increaseSizeOnHover(
     double scaleFactor, {
     Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeInOut,
+    AlignmentGeometry alignment = Alignment.center,
+    SystemMouseCursor cursor = SystemMouseCursors.click,
   }) {
     bool isHovered = false;
     return StatefulBuilder(
       builder: (context, setState) {
         return MouseRegion(
-          cursor: SystemMouseCursors.click,
+          cursor: cursor,
           onEnter: (event) {
             setState(() {
               isHovered = true;
@@ -33,8 +37,8 @@ extension IncreaseHoverExt on Widget {
           },
           child: AnimatedContainer(
             duration: duration,
-            curve: Curves.easeInOut,
-            transformAlignment: Alignment.center,
+            curve: curve,
+            transformAlignment: alignment,
             transform: isHovered
                 ? Matrix4.diagonal3Values(scaleFactor, scaleFactor, 1.0)
                 : Matrix4.diagonal3Values(1.0, 1.0, 1.0),
@@ -47,7 +51,7 @@ extension IncreaseHoverExt on Widget {
 
   /// Changes the widget to a different widget on hover
   ///
-  /// This extension only works with Image or SvgPicture widgets
+  /// This extension only works with Image widgets
   ///
   /// [hoverWidget] - The widget to show when hovering
   /// [duration] - The duration of the fade transition
@@ -60,11 +64,13 @@ extension IncreaseHoverExt on Widget {
   Widget changeWidgetOnHover(
     Widget hoverWidget, {
     Duration duration = const Duration(milliseconds: 300),
+    AnimatedSwitcherTransitionBuilder? transitionBuilder,
+    SystemMouseCursor cursor = SystemMouseCursors.click,
   }) {
-    // Validate that this widget is either SvgPicture or Image
+    // Validate that this widget is Image
     assert(
       this is Image,
-      'changeWidgetOnHover can only be used with SvgPicture or Image widgets. '
+      'changeWidgetOnHover can only be used with Image widgets. '
       'Current widget type: $runtimeType',
     );
 
@@ -72,7 +78,7 @@ extension IncreaseHoverExt on Widget {
     return StatefulBuilder(
       builder: (context, setState) {
         return MouseRegion(
-          cursor: SystemMouseCursors.click,
+          cursor: cursor,
           onEnter: (event) {
             setState(() {
               isHovered = true;
@@ -85,12 +91,13 @@ extension IncreaseHoverExt on Widget {
           },
           child: AnimatedSwitcher(
             duration: duration,
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return FadeTransition(
-                opacity: animation,
-                child: child,
-              );
-            },
+            transitionBuilder: transitionBuilder ??
+                (Widget child, Animation<double> animation) {
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
             child: isHovered
                 ? KeyedSubtree(
                     key: const ValueKey('hover'),
