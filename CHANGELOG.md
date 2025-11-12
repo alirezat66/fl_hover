@@ -20,11 +20,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added full customization options to `changeWidgetOnHover()` extension:
   - `transitionBuilder` parameter for custom transition animations
   - `cursor` parameter for custom mouse cursor
+- Added new `GlitchImage` component and Image Effects category in the example app
 
 ### Improved
 - Enhanced extension methods with complete customization support
 - Updated documentation to reflect all available customization options
 - Improved code organization and consistency
+- Rebuilt `GlitchImage` to faithfully reproduce the original CSS glitch animation
 
 ## [1.1.1] - 2024-12-XX
 

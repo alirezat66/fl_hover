@@ -1127,8 +1127,25 @@ CursorShowcase(
       initialTheme: const CursorShowcaseTheme(),
     ),
     ShowcaseItem(
+      name: 'GlitchImage',
+      category: ShowcaseCategory.imageEffect,
+      widgetBuilder: (theme) => Center(
+        child: GlitchImage(
+          theme: theme as GlitchImageTheme,
+          image: const AssetImage('assets/images/me.png'),
+        ),
+      ),
+      defaultCode: """
+GlitchImage(
+  theme: const GlitchImageTheme(),
+  image: const AssetImage('assets/images/profile_image.png'),
+)
+""",
+      initialTheme: const GlitchImageTheme(),
+    ),
+    ShowcaseItem(
       name: 'SplitImage',
-      category: ShowcaseCategory.effect,
+      category: ShowcaseCategory.imageEffect,
       widgetBuilder: (theme) => SizedBox(
         height: 700,
         child: Center(

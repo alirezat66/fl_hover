@@ -1362,7 +1362,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                   : property.label == 'Animation Duration (ms)'
                       ? 100.0
                       : property.label == 'Width' || property.label == 'Height'
-                          ? 50.0
+                          ? (property.min ?? 0.0)
                           : property.min ?? 0.0),
           max: property.label == 'Scale Factor'
               ? 2.0
@@ -1372,7 +1372,7 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
                   : property.label == 'Animation Duration (ms)'
                       ? 2000.0
                       : property.label == 'Width' || property.label == 'Height'
-                          ? 500.0
+                          ? (property.max ?? 100.0)
                           : property.max ?? 100.0),
           onChanged: (newValue) {
             // Create a wrapper function to handle the type conversion

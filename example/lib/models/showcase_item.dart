@@ -10,6 +10,7 @@ enum ShowcaseCategory {
   social,
   list,
   extension,
+  imageEffect,
 }
 
 /// A data model to hold the necessary information for each showcase item.

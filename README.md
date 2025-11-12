@@ -682,6 +682,8 @@ CursorShowcase()
 
 ---
 
+### Image Effects
+
 #### Split Image
 
 An image that splits into multiple pieces on hover.
@@ -708,6 +710,34 @@ SplitImage(
 | `animationCurve` | `Curve` | `Curves.easeInOut` | Animation curve |
 | `cursorBehavior` | `CursorBehavior` | `CursorBehavior.pointer` | Mouse cursor when hovering |
 | `cellAnimations` | `Map<int, CellAnimation>` | Custom | Configuration for each column's animation |
+
+---
+
+#### Glitch Image
+
+A dynamic glitch-style image effect inspired by modern CSS implementations.
+
+![Glitch Image](https://github.com/alirezat66/fl_hover/blob/main/assets/change_extension.gif?raw=true)
+
+**Use Cases:**
+- Hero sections with animated imagery
+- Cyberpunk or neon-themed designs
+- Promotional banners with attention-grabbing visuals
+- Interactive gallery items
+
+**Simple Usage:**
+```dart
+GlitchImage(
+  theme: const GlitchImageTheme(),
+  image: const AssetImage('assets/images/profile_image.png'),
+)
+```
+
+**Customizable Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `width` | `double` | `600` | Width of the widget |
+| `height` | `double` | `400` | Height of the widget |
 
 ---
 
