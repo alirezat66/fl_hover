@@ -862,7 +862,7 @@ A perspective hover card with animated tilt and depth, perfect for travel storie
 **Simple Usage:**
 ```dart
 TravelStoryCard(
-  theme: const TravelStoryCardTheme(width: 280, height: 460),
+  theme: const TravelStoryCardTheme(),
   // Requires flutter_svg package
   topChild: SvgPicture.asset('assets/svg/pyramids.svg'),
   bottomChild: Padding(
@@ -894,8 +894,15 @@ TravelStoryCard(
 **Customizable Properties:**
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `width` | `double` | `300` | Width of the card |
+| `width` | `double` | `280` | Width of the card |
 | `height` | `double` | `460` | Height of the card |
+| `borderRadius` | `double` | `18` | Corner radius applied to the card |
+| `topSectionRatio` | `double` | `0.45` | Portion of the card reserved for the illustration |
+| `initialTiltDegrees` | `double` | `-60` | Starting tilt angle (leans toward the image) |
+| `animationDuration` | `Duration` | `550ms` | Duration of the hover animation |
+| `animationCurve` | `Curve` | `Curves.easeOut` | Curve used for the hover animation |
+| `topGradientStart/End` | `Color` | `Color(0xFFeba65b)` / `Color(0xFFd99267)` | Gradient colors for the illustration panel |
+| `bottomGradientStart/End` | `Color` | `Color(0xFFeba65b)` / `Color(0xFFd99267)` | Gradient colors for the story panel |
 
 ---
 

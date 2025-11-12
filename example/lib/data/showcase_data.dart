@@ -385,67 +385,61 @@ CardSlide(
       name: 'TravelStoryCard',
       previewWidth: 3 * 280 + 100,
       category: ShowcaseCategory.card,
-      widgetBuilder: (theme) => SizedBox(
-        height: 520,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            TravelStoryCard(
-              theme: const TravelStoryCardTheme(
-                width: 280,
-                height: 460,
-                topGradientStart: Color(0xffeba65b),
-                topGradientEnd: Color(0xffd99267),
-                bottomGradientStart: Color(0xffeba65b),
-                bottomGradientEnd: Color(0xffd99267),
+      widgetBuilder: (theme) {
+        final travelTheme = theme is TravelStoryCardTheme
+            ? theme
+            : const TravelStoryCardTheme();
+        return SizedBox(
+          height: travelTheme.height,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              TravelStoryCard(
+                theme: travelTheme,
+                topChild: _buildTravelTop('assets/svg/pyramids.svg'),
+                bottomChild: _buildStorySection(
+                  title: 'Pyramids',
+                  description:
+                      'Built when Egypt was among the richest civilizations. Massive monuments symbolising the pharaoh\'s power.',
+                ),
               ),
-              topChild: _buildTravelTop('assets/svg/pyramids.svg'),
-              bottomChild: _buildStorySection(
-                title: 'Pyramids',
-                description:
-                    'Built when Egypt was among the richest civilizations. Massive monuments symbolising the pharaoh\'s power.',
+              const SizedBox(width: 16),
+              TravelStoryCard(
+                theme: travelTheme.copyWith(
+                  topGradientStart: const Color(0xff59476f),
+                  topGradientEnd: const Color(0xff7b88d1),
+                  bottomGradientStart: const Color(0xff5b62a2),
+                  bottomGradientEnd: const Color(0xff7b88d1),
+                ),
+                topChild: _buildTravelTop('assets/svg/stonehenge.svg'),
+                bottomChild: _buildStorySection(
+                  title: 'Stonehenge',
+                  description:
+                      'A prehistoric monument in Wiltshire, England, constructed between 3000 and 1500 BC.',
+                ),
               ),
-            ),
-            const SizedBox(width: 16),
-            TravelStoryCard(
-              theme: const TravelStoryCardTheme(
-                width: 280,
-                height: 460,
-                topGradientStart: Color(0xff59476f),
-                topGradientEnd: Color(0xff7b88d1),
-                bottomGradientStart: Color(0xff5b62a2),
-                bottomGradientEnd: Color(0xff7b88d1),
+              const SizedBox(width: 8),
+              TravelStoryCard(
+                theme: travelTheme.copyWith(
+                  topGradientStart: const Color(0xff59476f),
+                  topGradientEnd: const Color(0xff7b88d1),
+                  bottomGradientStart: const Color(0xff5b62a2),
+                  bottomGradientEnd: const Color(0xff7b88d1),
+                ),
+                topChild: _buildTravelTop('assets/svg/pisa.svg'),
+                bottomChild: _buildStorySection(
+                  title: 'Tower of Pisa',
+                  description:
+                      'The iconic leaning campanile of Pisa\'s cathedral, famous for its unintended tilt.',
+                ),
               ),
-              topChild: _buildTravelTop('assets/svg/stonehenge.svg'),
-              bottomChild: _buildStorySection(
-                title: 'Stonehenge',
-                description:
-                    'A prehistoric monument in Wiltshire, England, constructed between 3000 and 1500 BC.',
-              ),
-            ),
-            const SizedBox(width: 8),
-            TravelStoryCard(
-              theme: const TravelStoryCardTheme(
-                width: 280,
-                height: 460,
-                topGradientStart: Color(0xff59476f),
-                topGradientEnd: Color(0xff7b88d1),
-                bottomGradientStart: Color(0xff5b62a2),
-                bottomGradientEnd: Color(0xff7b88d1),
-              ),
-              topChild: _buildTravelTop('assets/svg/pisa.svg'),
-              bottomChild: _buildStorySection(
-                title: 'Tower of Pisa',
-                description:
-                    'The iconic leaning campanile of Pisa\'s cathedral, famous for its unintended tilt.',
-              ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },
       defaultCode: """
 TravelStoryCard(
-  theme: const TravelStoryCardTheme(width: 280, height: 460),
+  theme: const TravelStoryCardTheme(),
   topChild: SvgPicture.asset(
     'assets/svg/pyramids.svg',
     fit: BoxFit.contain,

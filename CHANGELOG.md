@@ -27,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated documentation to reflect all available customization options
 - Improved code organization and consistency
 - Rebuilt `GlitchImage` to faithfully reproduce the original CSS glitch animation
-- Added `TravelStoryCard` hover component inspired by CSS travel cards
+- Added `TravelStoryCard` hover component inspired by CSS travel cards with configurable width, tilt, and animation speed/curve
 
 ## [1.1.1] - 2024-12-XX
 
