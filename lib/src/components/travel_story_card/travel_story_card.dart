@@ -108,12 +108,10 @@ class _TravelStoryCardState extends State<TravelStoryCard>
                     child: Container(
                       decoration: BoxDecoration(
                         boxShadow: [shadow],
-                        borderRadius:
-                            BorderRadius.circular(theme.borderRadius),
+                        borderRadius: BorderRadius.circular(theme.borderRadius),
                       ),
                       child: ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(theme.borderRadius),
+                        borderRadius: BorderRadius.circular(theme.borderRadius),
                         child: Column(
                           children: [
                             Expanded(
