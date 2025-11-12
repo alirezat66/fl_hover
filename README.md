@@ -851,6 +851,54 @@ ClipRRect(
 
 ---
 
+#### Travel Story Card
+A perspective hover card with animated tilt and depth, perfect for travel stories or featured destinations.
+
+**Use Cases:**
+- Travel destination highlights
+- Featured product or article cards
+- Portfolio spotlights
+
+**Simple Usage:**
+```dart
+TravelStoryCard(
+  theme: const TravelStoryCardTheme(width: 280, height: 460),
+  // Requires flutter_svg package
+  topChild: SvgPicture.asset('assets/svg/pyramids.svg'),
+  bottomChild: Padding(
+    padding: EdgeInsets.all(24),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Text(
+          'Pyramids',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            letterSpacing: 2,
+          ),
+        ),
+        SizedBox(height: 12),
+        Text(
+          'Built when Egypt was among the richest civilizations.',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white70),
+        ),
+      ],
+    ),
+  ),
+)
+```
+
+**Customizable Properties:**
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `width` | `double` | `300` | Width of the card |
+| `height` | `double` | `460` | Height of the card |
+
+---
+
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 

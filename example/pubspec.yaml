@@ -14,6 +14,7 @@ dependencies:
     path: ../
   flutter_colorpicker: ^1.1.0
   go_router: ^16.2.2
+  flutter_svg: ^2.0.9
 
 dev_dependencies:
   flutter_test:
@@ -25,3 +26,4 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/svg/

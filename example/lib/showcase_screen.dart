@@ -55,7 +55,7 @@ class _ShowcasePageState extends State<ShowcasePage> {
         children: [
           // Sidebar
           Container(
-            width: 320,
+            width:  320,
             decoration: const BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -338,7 +338,7 @@ class _MainContentArea extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${selectedItem.category.name} Effect Widget',
+                        '${selectedItem.category.name} Effect',
                         style: const TextStyle(
                           fontSize: 14,
                           color: Color(0xFF6B7280),
@@ -440,8 +440,8 @@ class _MainContentArea extends StatelessWidget {
                   child: Center(
                     child: Container(
                       constraints: BoxConstraints(
-                        maxWidth: isMobile ? double.infinity : 600,
-                        maxHeight: isMobile ? 300 : 400,
+                        maxWidth: isMobile ? double.infinity : selectedItem.previewWidth ?? 600,
+                        maxHeight: isMobile ? 300 : selectedItem.previewHeight ?? 400,
                       ),
                       child:
                           selectedItem.widgetBuilder(selectedItem.initialTheme),

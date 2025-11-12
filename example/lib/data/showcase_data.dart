@@ -1,6 +1,7 @@
 import 'package:example/models/showcase_item.dart';
 import 'package:example/widgets/note_book_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fl_hover/fl_hover.dart';
 
 /// A centralized data provider for all showcase items.
@@ -379,6 +380,103 @@ CardSlide(
         cardHeight: 250.0,
         cardOffset: 40.0,
       ),
+    ),
+    ShowcaseItem(
+      name: 'TravelStoryCard',
+      previewWidth: 3 * 280 + 100,
+      category: ShowcaseCategory.card,
+      widgetBuilder: (theme) => SizedBox(
+        height: 520,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            TravelStoryCard(
+              theme: const TravelStoryCardTheme(
+                width: 280,
+                height: 460,
+                topGradientStart: Color(0xffeba65b),
+                topGradientEnd: Color(0xffd99267),
+                bottomGradientStart: Color(0xffeba65b),
+                bottomGradientEnd: Color(0xffd99267),
+              ),
+              topChild: _buildTravelTop('assets/svg/pyramids.svg'),
+              bottomChild: _buildStorySection(
+                title: 'Pyramids',
+                description:
+                    'Built when Egypt was among the richest civilizations. Massive monuments symbolising the pharaoh\'s power.',
+              ),
+            ),
+            const SizedBox(width: 16),
+            TravelStoryCard(
+              theme: const TravelStoryCardTheme(
+                width: 280,
+                height: 460,
+                topGradientStart: Color(0xff59476f),
+                topGradientEnd: Color(0xff7b88d1),
+                bottomGradientStart: Color(0xff5b62a2),
+                bottomGradientEnd: Color(0xff7b88d1),
+              ),
+              topChild: _buildTravelTop('assets/svg/stonehenge.svg'),
+              bottomChild: _buildStorySection(
+                title: 'Stonehenge',
+                description:
+                    'A prehistoric monument in Wiltshire, England, constructed between 3000 and 1500 BC.',
+              ),
+            ),
+            const SizedBox(width: 8),
+            TravelStoryCard(
+              theme: const TravelStoryCardTheme(
+                width: 280,
+                height: 460,
+                topGradientStart: Color(0xff59476f),
+                topGradientEnd: Color(0xff7b88d1),
+                bottomGradientStart: Color(0xff5b62a2),
+                bottomGradientEnd: Color(0xff7b88d1),
+              ),
+              topChild: _buildTravelTop('assets/svg/pisa.svg'),
+              bottomChild: _buildStorySection(
+                title: 'Tower of Pisa',
+                description:
+                    'The iconic leaning campanile of Pisa\'s cathedral, famous for its unintended tilt.',
+              ),
+            ),
+          ],
+        ),
+      ),
+      defaultCode: """
+TravelStoryCard(
+  theme: const TravelStoryCardTheme(width: 280, height: 460),
+  topChild: SvgPicture.asset(
+    'assets/svg/pyramids.svg',
+    fit: BoxFit.contain,
+  ),
+  bottomChild: Padding(
+    padding: EdgeInsets.all(24.0),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        Text(
+          'Pyramids',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 24,
+            letterSpacing: 2,
+          ),
+        ),
+        SizedBox(height: 12),
+        Text(
+          'Built when Egypt was among the richest civilizations.',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Colors.white70, fontSize: 14),
+        ),
+      ],
+    ),
+  ),
+)
+""",
+      initialTheme: const TravelStoryCardTheme(),
     ),
     ShowcaseItem(
       name: 'CardHover',
@@ -1228,4 +1326,52 @@ Icon(Icons.favorite, size: 80)
       initialTheme: const HolographicEffectTheme(),
     ),
   ];
+
+  static Widget _buildTravelTop(String assetName) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Center(
+        child: SvgPicture.asset(
+          assetName,
+          fit: BoxFit.contain,
+        ),
+      ),
+    );
+  }
+
+  static Widget _buildStorySection({
+    required String title,
+    required String description,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+              letterSpacing: 2,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            description,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+              height: 1.5,
+              letterSpacing: 1,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

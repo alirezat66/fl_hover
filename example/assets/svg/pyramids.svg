@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 225">
+  <style>
+    .sun { fill: #f8c56f; opacity: 0.4; }
+    .sun-core { fill: #f8c56f; }
+    .mountain-main { fill: #cd775c; }
+    .mountain-side { fill: #a25a62; }
+    .line { fill: none; stroke: #a25a62; stroke-width: 2; stroke-miterlimit: 10; }
+    .star { fill: #ffffff; opacity: 0.3; }
+  </style>
+  <ellipse class="sun" cx="170.5" cy="124.75" rx="37.5" ry="37.5"/>
+  <ellipse class="sun-core" cx="170.5" cy="124.75" rx="27.5" ry="27.5"/>
+  <polygon class="mountain-main" points="-0.301,224.5 74.849,149.5 150,224.5"/>
+  <polygon class="mountain-side" points="108,224.5 74.849,149.5 150,224.5"/>
+  <polygon class="mountain-main" points="207.256,225.5 253.849,179 300.443,225.5"/>
+  <polygon class="mountain-side" points="274.403,225.5 253.849,179 300.443,225.5"/>
+  <line class="line" x1="179" y1="202" x2="179" y2="226"/>
+  <line class="line" x1="179" y1="207" x2="190" y2="207"/>
+  <line class="line" x1="172" y1="214" x2="180" y2="214"/>
+  <line class="line" x1="190" y1="202" x2="190" y2="207"/>
+  <line class="line" x1="172" y1="207" x2="172" y2="214"/>
+  <circle class="star" cx="87.5" cy="98.5" r="1.5"/>
+  <circle class="star" cx="24.5" cy="68.5" r="2.5"/>
+  <circle class="star" cx="219.5" cy="18.5" r="1.5"/>
+  <circle class="star" cx="272.5" cy="3.5" r="2"/>
+  <circle class="star" cx="144.5" cy="12.5" r="1"/>
+  <circle class="star" cx="19.5" cy="128.5" r="1.5"/>
+  <circle class="star" cx="72.5" cy="113.5" r="2"/>
+  <circle class="star" cx="174.5" cy="92.5" r="1"/>
+</svg>

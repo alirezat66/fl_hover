@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_svg: ^2.0.9
   # liquid_glass_renderer: ^0.1.1-dev.10  # Temporarily removed for stable release
 
 dev_dependencies:

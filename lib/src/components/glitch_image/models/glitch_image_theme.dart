@@ -1,3 +1,5 @@
+import 'dart:ui' show lerpDouble;
+
 import 'package:flutter/material.dart';
 import 'package:fl_hover/src/playground/playground_property.dart';
 import 'package:fl_hover/src/playground/playground_theme.dart';
@@ -58,9 +60,4 @@ class GlitchImageTheme extends ThemeExtension<GlitchImageTheme>
       ),
     ];
   }
-}
-
-double? lerpDouble(double? a, double? b, double t) {
-  if (a == null || b == null) return t < 0.5 ? a : b;
-  return a + (b - a) * t;
 }

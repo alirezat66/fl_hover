@@ -30,6 +30,9 @@ class ShowcaseItem {
 
   final String defaultCode;
 
+  final double? previewWidth;
+  final double? previewHeight;
+
   // In the future, this will be used to build the playground page.
   // final Widget Function() playgroundBuilder;
 
@@ -39,5 +42,7 @@ class ShowcaseItem {
     required this.widgetBuilder,
     required this.initialTheme,
     required this.defaultCode,
+    this.previewWidth,
+    this.previewHeight,
   });
 }
