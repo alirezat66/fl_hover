@@ -5,10 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.4] - 2024-12-XX
+
+### Changed
+- Renamed `TravelStoryCard` to `StandUpEffect` with matching `StandUpEffectTheme` to better reflect the animation.
+
+### Added
+- Included `stand_up.gif` and `glitch.gif` previews in the README.
+
+### Improved
+- Stand Up effect documentation and example now showcase theme-driven animation speed and easing controls.
+
 ## [1.1.3] - 2024-12-XX
 
 ### Fixed
-- Wired `TravelStoryCard` to consume the active theme so animation duration and curve updates apply immediately.
+- Wired `StandUpEffect` (formerly `TravelStoryCard`) to consume the active theme so animation duration and curve updates apply immediately.
 
 ### Improved
 - Simplified Travel Story playground controls to focus on animation speed and easing, ensuring changes preview live.
@@ -35,7 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated documentation to reflect all available customization options
 - Improved code organization and consistency
 - Rebuilt `GlitchImage` to faithfully reproduce the original CSS glitch animation
-- Added `TravelStoryCard` hover component inspired by CSS travel cards with configurable width, tilt, and animation speed/curve
+- Added `StandUpEffect` hover component (previously `TravelStoryCard`) inspired by CSS travel cards with configurable width, tilt, and animation speed/curve
 
 ## [1.1.1] - 2024-12-XX
 

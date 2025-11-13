@@ -21,7 +21,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  fl_hover: ^1.1.2 # Replace with the latest version
+  fl_hover: ^1.1.4 # Replace with the latest version
 ```
 
 Then run: `flutter pub get`
@@ -717,7 +717,7 @@ SplitImage(
 
 A dynamic glitch-style image effect inspired by modern CSS implementations.
 
-![Glitch Image](https://github.com/alirezat66/fl_hover/blob/main/assets/change_extension.gif?raw=true)
+![Glitch Image](https://github.com/alirezat66/fl_hover/blob/main/assets/glitch.gif?raw=true)
 
 **Use Cases:**
 - Hero sections with animated imagery
@@ -851,18 +851,20 @@ ClipRRect(
 
 ---
 
-#### Travel Story Card
-A perspective hover card with animated tilt and depth, perfect for travel stories or featured destinations.
+#### Stand Up Effect
+A perspective hover card that “stands up” on hover, revealing depth and energy—perfect for destinations, hero stories, and featured profiles.
+
+![Stand Up Effect](https://github.com/alirezat66/fl_hover/blob/main/assets/stand_up.gif?raw=true)
 
 **Use Cases:**
 - Travel destination highlights
 - Featured product or article cards
-- Portfolio spotlights
+- Portfolio spotlights and hero sections
 
 **Simple Usage:**
 ```dart
-TravelStoryCard(
-  theme: const TravelStoryCardTheme(),
+StandUpEffect(
+  theme: const StandUpEffectTheme(),
   // Requires flutter_svg package
   topChild: SvgPicture.asset('assets/svg/pyramids.svg'),
   bottomChild: Padding(
@@ -894,15 +896,17 @@ TravelStoryCard(
 **Customizable Properties:**
 | Property | Type | Default | Description |
 |----------|------|---------|-------------|
-| `width` | `double` | `280` | Width of the card |
-| `height` | `double` | `460` | Height of the card |
+| `width` | `double` | `280` | Width of the effect panel |
+| `height` | `double` | `460` | Height of the effect panel |
 | `borderRadius` | `double` | `18` | Corner radius applied to the card |
 | `topSectionRatio` | `double` | `0.45` | Portion of the card reserved for the illustration |
-| `initialTiltDegrees` | `double` | `-60` | Starting tilt angle (leans toward the image) |
+| `initialTiltDegrees` | `double` | `-60` | Starting tilt angle (leans toward the illustration) |
 | `animationDuration` | `Duration` | `550ms` | Duration of the hover animation |
 | `animationCurve` | `Curve` | `Curves.easeOut` | Curve used for the hover animation |
 | `topGradientStart/End` | `Color` | `Color(0xFFeba65b)` / `Color(0xFFd99267)` | Gradient colors for the illustration panel |
 | `bottomGradientStart/End` | `Color` | `Color(0xFFeba65b)` / `Color(0xFFd99267)` | Gradient colors for the story panel |
+
+*Tip: In the playground, tweak `animationDuration` and `animationCurve` to instantly preview the stand-up motion.*
 
 ---
 

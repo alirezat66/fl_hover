@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fl_hover/src/playground/playground_property.dart';
 import 'package:fl_hover/src/playground/playground_theme.dart';
 
-class TravelStoryCardTheme extends ThemeExtension<TravelStoryCardTheme>
+class StandUpEffectTheme extends ThemeExtension<StandUpEffectTheme>
     implements PlaygroundTheme {
   final double width;
   final double height;
@@ -18,7 +18,7 @@ class TravelStoryCardTheme extends ThemeExtension<TravelStoryCardTheme>
   final Color bottomGradientStart;
   final Color bottomGradientEnd;
 
-  const TravelStoryCardTheme({
+  const StandUpEffectTheme({
     this.width = 280,
     this.height = 460,
     this.borderRadius = 18,
@@ -33,7 +33,7 @@ class TravelStoryCardTheme extends ThemeExtension<TravelStoryCardTheme>
   });
 
   @override
-  TravelStoryCardTheme copyWith({
+  StandUpEffectTheme copyWith({
     double? width,
     double? height,
     double? borderRadius,
@@ -46,7 +46,7 @@ class TravelStoryCardTheme extends ThemeExtension<TravelStoryCardTheme>
     Color? bottomGradientStart,
     Color? bottomGradientEnd,
   }) {
-    return TravelStoryCardTheme(
+    return StandUpEffectTheme(
       width: width ?? this.width,
       height: height ?? this.height,
       borderRadius: borderRadius ?? this.borderRadius,
@@ -62,10 +62,10 @@ class TravelStoryCardTheme extends ThemeExtension<TravelStoryCardTheme>
   }
 
   @override
-  TravelStoryCardTheme lerp(
-      ThemeExtension<TravelStoryCardTheme>? other, double t) {
-    if (other is! TravelStoryCardTheme) return this;
-    return TravelStoryCardTheme(
+  StandUpEffectTheme lerp(
+      ThemeExtension<StandUpEffectTheme>? other, double t) {
+    if (other is! StandUpEffectTheme) return this;
+    return StandUpEffectTheme(
       width: lerpDouble(width, other.width, t) ?? width,
       height: lerpDouble(height, other.height, t) ?? height,
       borderRadius:

@@ -2,10 +2,10 @@ import 'dart:math' as math;
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'models/travel_story_card_theme.dart';
+import 'models/stand_up_effect_theme.dart';
 
-class TravelStoryCard extends StatefulWidget {
-  const TravelStoryCard({
+class StandUpEffect extends StatefulWidget {
+  const StandUpEffect({
     super.key,
     required this.theme,
     required this.topChild,
@@ -13,16 +13,16 @@ class TravelStoryCard extends StatefulWidget {
     this.onTap,
   });
 
-  final TravelStoryCardTheme theme;
+  final StandUpEffectTheme theme;
   final Widget topChild;
   final Widget bottomChild;
   final VoidCallback? onTap;
 
   @override
-  State<TravelStoryCard> createState() => _TravelStoryCardState();
+  State<StandUpEffect> createState() => _StandUpEffectState();
 }
 
-class _TravelStoryCardState extends State<TravelStoryCard>
+class _StandUpEffectState extends State<StandUpEffect>
     with SingleTickerProviderStateMixin {
   static const double _defaultScale = 0.72;
   static const double _hoverLift = -26;
@@ -45,10 +45,9 @@ class _TravelStoryCardState extends State<TravelStoryCard>
   }
 
   @override
-  void didUpdateWidget(covariant TravelStoryCard oldWidget) {
+  void didUpdateWidget(covariant StandUpEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
     final newTheme = widget.theme;
-    print('newTheme: ${newTheme.animationDuration}');
     if (_controller.duration != newTheme.animationDuration) {
       _controller.duration = newTheme.animationDuration;
     }
@@ -139,10 +138,12 @@ class _TravelStoryCardState extends State<TravelStoryCard>
                     child: Container(
                       decoration: BoxDecoration(
                         boxShadow: [shadow],
-                        borderRadius: BorderRadius.circular(theme.borderRadius),
+                        borderRadius:
+                            BorderRadius.circular(theme.borderRadius),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(theme.borderRadius),
+                        borderRadius:
+                            BorderRadius.circular(theme.borderRadius),
                         child: Column(
                           children: [
                             Expanded(

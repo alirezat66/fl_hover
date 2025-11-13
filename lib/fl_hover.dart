@@ -91,9 +91,9 @@ export 'src/models/cursor_behavior.dart';
 export 'src/components/cursor_showcase/cursor_showcase_widget.dart';
 export 'src/components/cursor_showcase/models/cursor_showcase_theme.dart';
 
-// Export the Travel Story Card component
-export 'src/components/travel_story_card/travel_story_card.dart';
-export 'src/components/travel_story_card/models/travel_story_card_theme.dart';
+// Export the Stand Up Effect component
+export 'src/components/stand_up_effect/stand_up_effect.dart';
+export 'src/components/stand_up_effect/models/stand_up_effect_theme.dart';
 
 // Export the Glitch Image component
 export 'src/components/glitch_image/glitch_image_widget.dart';

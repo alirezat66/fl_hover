@@ -297,6 +297,78 @@ class _PlaygroundPageState extends State<PlaygroundPage> {
       code.writeln('  onAuthorTap: () {},');
       code.writeln('  onLikeTap: () {},');
       code.writeln(')');
+    } else if (_currentTheme is StandUpEffectTheme) {
+      final theme = _currentTheme as StandUpEffectTheme;
+      code.writeln('StandUpEffect(');
+      code.writeln('  theme: StandUpEffectTheme(');
+      if (theme.width != 280) {
+        code.writeln('    width: ${theme.width},');
+      }
+      if (theme.height != 460) {
+        code.writeln('    height: ${theme.height},');
+      }
+      if (theme.borderRadius != 18) {
+        code.writeln('    borderRadius: ${theme.borderRadius},');
+      }
+      if (theme.topSectionRatio != 0.45) {
+        code.writeln('    topSectionRatio: ${theme.topSectionRatio},');
+      }
+      if (theme.initialTiltDegrees != -60) {
+        code.writeln('    initialTiltDegrees: ${theme.initialTiltDegrees},');
+      }
+      if (theme.animationDuration != const Duration(milliseconds: 550)) {
+        code.writeln(
+            '    animationDuration: ${_durationToString(theme.animationDuration)},');
+      }
+      if (theme.animationCurve != Curves.easeOut) {
+        code.writeln(
+            '    animationCurve: ${_curveToString(theme.animationCurve)},');
+      }
+      if (theme.topGradientStart != const Color(0xffeba65b)) {
+        code.writeln(
+            '    topGradientStart: ${_colorToString(theme.topGradientStart)},');
+      }
+      if (theme.topGradientEnd != const Color(0xffd99267)) {
+        code.writeln(
+            '    topGradientEnd: ${_colorToString(theme.topGradientEnd)},');
+      }
+      if (theme.bottomGradientStart != const Color(0xffeba65b)) {
+        code.writeln(
+            '    bottomGradientStart: ${_colorToString(theme.bottomGradientStart)},');
+      }
+      if (theme.bottomGradientEnd != const Color(0xffd99267)) {
+        code.writeln(
+            '    bottomGradientEnd: ${_colorToString(theme.bottomGradientEnd)},');
+      }
+      code.writeln('  ),');
+      code.writeln('  topChild: SvgPicture.asset(');
+      code.writeln('    "assets/svg/pyramids.svg",');
+      code.writeln('    fit: BoxFit.contain,');
+      code.writeln('  ),');
+      code.writeln('  bottomChild: Padding(');
+      code.writeln('    padding: const EdgeInsets.all(24.0),');
+      code.writeln('    child: Column(');
+      code.writeln('      mainAxisAlignment: MainAxisAlignment.center,');
+      code.writeln('      crossAxisAlignment: CrossAxisAlignment.center,');
+      code.writeln('      children: const [');
+      code.writeln('        Text(');
+      code.writeln('          "Pyramids",');
+      code.writeln('          style: TextStyle(');
+      code.writeln('            color: Colors.white,');
+      code.writeln('            fontWeight: FontWeight.bold,');
+      code.writeln('            fontSize: 24,');
+      code.writeln('          ),');
+      code.writeln('        ),');
+      code.writeln('        SizedBox(height: 12),');
+      code.writeln('        Text(');
+      code.writeln('          "Built when Egypt was among the richest civilizations.",');
+      code.writeln('          textAlign: TextAlign.center,');
+      code.writeln('          style: TextStyle(color: Colors.white70, fontSize: 14),');
+      code.writeln('        ),');
+      code.writeln('      ],');
+      code.writeln('    ),');
+      code.writeln('  ),');
+      code.writeln(')');
     } else if (_currentTheme is AnimatedNavMenuTheme) {
       final theme = _currentTheme as AnimatedNavMenuTheme;
       code.writeln('AnimatedNavMenu(');

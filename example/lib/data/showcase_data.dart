@@ -382,52 +382,52 @@ CardSlide(
       ),
     ),
     ShowcaseItem(
-      name: 'TravelStoryCard',
+      name: 'StandUpEffect',
       previewWidth: 3 * 280 + 100,
       category: ShowcaseCategory.card,
       widgetBuilder: (theme) {
-        final travelTheme = theme is TravelStoryCardTheme
-            ? theme
-            : const TravelStoryCardTheme();
+        final standUpTheme =
+            theme is StandUpEffectTheme ? theme : const StandUpEffectTheme();
         return SizedBox(
-          height: travelTheme.height,
+          height: standUpTheme.height,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              TravelStoryCard(
-                theme: travelTheme,
-                topChild: _buildTravelTop('assets/svg/pyramids.svg'),
-                bottomChild: _buildStorySection(
+              StandUpEffect(
+                theme: standUpTheme,
+                topChild: _buildStandUpIllustration('assets/svg/pyramids.svg'),
+                bottomChild: _buildStandUpStory(
                   title: 'Pyramids',
                   description:
                       'Built when Egypt was among the richest civilizations. Massive monuments symbolising the pharaoh\'s power.',
                 ),
               ),
               const SizedBox(width: 16),
-              TravelStoryCard(
-                theme: travelTheme.copyWith(
+              StandUpEffect(
+                theme: standUpTheme.copyWith(
                   topGradientStart: const Color(0xff59476f),
                   topGradientEnd: const Color(0xff7b88d1),
                   bottomGradientStart: const Color(0xff5b62a2),
                   bottomGradientEnd: const Color(0xff7b88d1),
                 ),
-                topChild: _buildTravelTop('assets/svg/stonehenge.svg'),
-                bottomChild: _buildStorySection(
+                topChild:
+                    _buildStandUpIllustration('assets/svg/stonehenge.svg'),
+                bottomChild: _buildStandUpStory(
                   title: 'Stonehenge',
                   description:
                       'A prehistoric monument in Wiltshire, England, constructed between 3000 and 1500 BC.',
                 ),
               ),
               const SizedBox(width: 8),
-              TravelStoryCard(
-                theme: travelTheme.copyWith(
+              StandUpEffect(
+                theme: standUpTheme.copyWith(
                   topGradientStart: const Color(0xff59476f),
                   topGradientEnd: const Color(0xff7b88d1),
                   bottomGradientStart: const Color(0xff5b62a2),
                   bottomGradientEnd: const Color(0xff7b88d1),
                 ),
-                topChild: _buildTravelTop('assets/svg/pisa.svg'),
-                bottomChild: _buildStorySection(
+                topChild: _buildStandUpIllustration('assets/svg/pisa.svg'),
+                bottomChild: _buildStandUpStory(
                   title: 'Tower of Pisa',
                   description:
                       'The iconic leaning campanile of Pisa\'s cathedral, famous for its unintended tilt.',
@@ -438,8 +438,8 @@ CardSlide(
         );
       },
       defaultCode: """
-TravelStoryCard(
-  theme: const TravelStoryCardTheme(),
+StandUpEffect(
+  theme: const StandUpEffectTheme(),
   topChild: SvgPicture.asset(
     'assets/svg/pyramids.svg',
     fit: BoxFit.contain,
@@ -470,7 +470,7 @@ TravelStoryCard(
   ),
 )
 """,
-      initialTheme: const TravelStoryCardTheme(),
+      initialTheme: const StandUpEffectTheme(),
     ),
     ShowcaseItem(
       name: 'CardHover',
@@ -1321,7 +1321,7 @@ Icon(Icons.favorite, size: 80)
     ),
   ];
 
-  static Widget _buildTravelTop(String assetName) {
+  static Widget _buildStandUpIllustration(String assetName) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Center(
@@ -1333,7 +1333,7 @@ Icon(Icons.favorite, size: 80)
     );
   }
 
-  static Widget _buildStorySection({
+  static Widget _buildStandUpStory({
     required String title,
     required String description,
   }) {
